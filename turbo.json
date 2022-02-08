@@ -1,0 +1,52 @@
+{
+    "pipeline": {
+      "deploy": {
+        "dependsOn": [
+          "^build:prod"
+        ],
+        "outputs": [
+          "build/**",
+          "dist/**"
+        ],
+        "cache": false
+      },
+      "build:prod": {
+        "dependsOn": [
+          "^build:prod"
+        ],
+        "outputs": [
+          "build/**",
+          "dist/**"
+        ],
+        "cache": false
+      },
+      "build": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": [
+          "build/**",
+          "dist/**"
+        ],
+        "cache": false
+      },
+      "format": {
+        "cache": false
+      },
+      "dev": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": [
+          "dist/**"
+        ],
+        "cache": false
+      },
+      "demo": {
+        "dependsOn": [
+          "^build"
+        ],
+        "cache": false
+      }
+    }
+  }

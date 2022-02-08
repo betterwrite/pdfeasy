@@ -1,0 +1,15 @@
+{
+  "name": "pdfeasy-vite-demo",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "demo": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "pdfeasy": "*",
+    "typescript": "^4.5.5",
+    "vite": "^2.7.13"
+  }
+}

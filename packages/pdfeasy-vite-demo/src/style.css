@@ -1,0 +1,11 @@
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss02" on, "ss01" on;
+  text-align: center;
+  color: black;
+  margin-top: 60px;
+  padding: 0;
+  margin: 0;
+}

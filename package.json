@@ -1,0 +1,28 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn deploy",
+    "bootstrap": "lerna bootstrap --use-workspaces",
+    "test": "lerna run --scope pdfeasy test",
+    "test:script": "yarn build:prod && lerna run --scope pdfeasy node:script",
+    "docs": "yarn build:prod && lerna run --scope pdfeasy-docs dev:docs",
+    "build:prod": "lerna run --scope pdfeasy build:prod",
+    "build": "lerna run --scope pdfeasy build",
+    "demo": "turbo run demo",
+    "format": "turbo run format",
+    "deploy": "yarn bootstrap && turbo run deploy",
+    "version:patch": "generi log patch",
+    "version:minor": "generi log minor",
+    "version:major": "generi log major"
+  },
+  "devDependencies": {
+    "generi": "0.3.0",
+    "turbo": "1.1.2",
+    "lerna": "4.0.0"
+  },
+  "packageManager": "yarn@1.22.17"
+}

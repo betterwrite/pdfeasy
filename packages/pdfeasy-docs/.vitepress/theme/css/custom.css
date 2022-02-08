@@ -1,0 +1,43 @@
+:root {
+  --c-white: rgb(31, 41, 55);
+  --c-white-dark: rgb(20, 31, 45);
+  --c-black: #000000;
+
+  --c-divider: black;
+  --c-divider-light: black;
+  --c-divider-dark: black;
+
+  --c-text-light-1: #f0f0f0;
+  --c-text-light-2: #e9e9e9;
+  --c-text-light-3: #e4e4e4;
+
+  --c-brand: rgb(92, 180, 248);
+  --c-brand-light: rgb(92, 180, 248);
+
+  --code-bg-color: rgba(0, 0, 0, 0.05);
+  --code-bg-color-hover: rgba(92, 180, 248, 0.2);
+
+  --list-background: rgb(255, 255, 255, 0.01);
+
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Raleway', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  --font-family-mono: source-code-pro, Menlo, Monaco, Consolas, 'Raleway',
+    monospace;
+}
+
+pre code {
+  color: var('--c-text-light-1') !important
+}
+
+pre code:hover {
+  background-color: var('--code-bg-color-hover') !important
+}
+
+.item a {
+  color: var('--c-text-light-1') !important;
+}
+
+ul li {
+  background-color: var(--list-background) !important;
+}
