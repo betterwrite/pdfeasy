@@ -1,6 +1,6 @@
 {
   "name": "pdfeasy-docs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "dev:docs": "vitepress dev",
     "build:docs": "vitepress build",
@@ -9,7 +9,7 @@
     "deploy": "vite build"
   },
   "dependencies": {
-    "pdfeasy": "^0.1.1",
+    "pdfeasy": "^0.1.2",
     "windicss": "^3.4.3"
   },
   "devDependencies": {

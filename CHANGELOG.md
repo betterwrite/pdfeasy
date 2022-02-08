@@ -2,6 +2,10 @@
 
 Changelog was created by [Generi](https://github.com/Novout/generi). Any questions, consult the documentation.
 
+### v0.1.2
+
+* **fix(plugin):** supports empty options in runner [890c823]
+
 ### v0.1.1
 
 * **fix:** typo [6f36258]
