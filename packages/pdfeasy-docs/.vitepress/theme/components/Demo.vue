@@ -27,8 +27,6 @@
 
     await pdfeasy.add(parse)
 
-    console.log('here?')
-
     pdfeasy
       .run({
         client: {
