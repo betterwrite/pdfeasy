@@ -150,13 +150,14 @@ export const resolveContent = async (
       style.y || undefined,
       !style.size
         ? {
-            width: app.page.width - app.page.margins.left - app.page.margins.right,
+            width:
+              app.page.width - app.page.margins.left - app.page.margins.right,
           }
         : {
-          width: style.size?.width || undefined,
-          height: style.size?.height || undefined,
-          scale: style.size?.scale || 1,
-        }
+            width: style.size?.width || undefined,
+            height: style.size?.height || undefined,
+            scale: style.size?.scale || 1,
+          }
     )
   }
 

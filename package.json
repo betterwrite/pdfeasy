@@ -10,6 +10,7 @@
     "test": "lerna run --scope pdfeasy test",
     "test:script": "yarn build:prod && lerna run --scope pdfeasy node:script",
     "docs": "yarn build:prod && lerna run --scope pdfeasy-docs dev:docs",
+    "docs:build": "yarn build:prod && lerna run --scope pdfeasy-docs build:docs",
     "build:prod": "lerna run --scope pdfeasy build:prod",
     "build": "lerna run --scope pdfeasy build",
     "demo": "turbo run demo",
