@@ -21,9 +21,13 @@
 
     __RENDERING__.value = true
 
-    pdfeasy.new()
+    pdfeasy.new({
+      plugins: [],
+    })
 
     await pdfeasy.add(parse)
+
+    console.log('here?')
 
     pdfeasy
       .run({
@@ -32,6 +36,7 @@
         },
       })
       .then((blob) => {
+        console.log('here?')
         iframe.value.src = blob
       })
       .catch((res) => {
