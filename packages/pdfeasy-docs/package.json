@@ -1,6 +1,6 @@
 {
   "name": "pdfeasy-docs",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "dev:docs": "vitepress dev",
     "build:docs": "vitepress build",
@@ -9,16 +9,16 @@
     "deploy": "vite build"
   },
   "dependencies": {
-    "pdfeasy": "*",
+    "pdfeasy": "^0.1.0",
     "windicss": "^3.4.3"
   },
   "devDependencies": {
     "unplugin-vue-components": "^0.17.16",
-    "vitepress": "^0.21.6",
     "vite": "^2.7.13",
     "vite-plugin-fonts": "^0.2.2",
     "vite-plugin-restart": "^0.1.1",
     "vite-plugin-windicss": "^1.6.3",
+    "vitepress": "^0.21.6",
     "vue-tsc": "^0.31.1"
   }
 }
