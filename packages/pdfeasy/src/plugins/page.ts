@@ -148,6 +148,11 @@ export const pageHandler = (instance: pdfeasy): Promise<void> => {
       return
     }
 
+    if (!instance.options?.plugins) {
+      response()
+      return
+    }
+
     const range = doc.bufferedPageRange()
 
     let actually: number, total: number

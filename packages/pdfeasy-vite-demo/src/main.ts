@@ -16,31 +16,6 @@ pdfeasy.new({
       right: 80
     }
   },
-  plugins: [
-    {
-      page: [ // render callback in every page before finish contents insert.
-        // simple counter footer
-        ({ Text, Image }, context, current, total) => {
-          // render in every page
-          Text(`${current}/${total}`, { fontSize: 20 }, {
-            x: context.width / 2,
-            y: context.height - context.margins.bottom
-          })
-
-          // Image('https://i.imgur.com/J3JXhsl.png', {}, {})
-        },
-        // simple header
-        ({ Text }, context, current, total) => {
-          // render in every page
-          Text('A Simple Header', {}, {
-            x: context.width / 2,
-            // negative number (-30 in case) ignore default margins
-            y: context.margins.top - 20
-          })
-        }
-      ]
-    }
-  ]
 })
 
 pdfeasy.add([

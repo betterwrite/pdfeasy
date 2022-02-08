@@ -34,7 +34,7 @@ It's simple!
 ### NPM
 
 ```shell
-npm install pdfeasy
+npm i pdfeasy
 ```
 
 ### YARN
