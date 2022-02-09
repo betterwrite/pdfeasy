@@ -6996,7 +6996,7 @@ typedarray@^0.0.6:
   resolved "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@4.5.5, typescript@^4.5.5:
+typescript@4.5.5:
   version "4.5.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.5.5.tgz#d8c953832d28924a9e3d37c73d729c846c5896f3"
   integrity sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==
@@ -7092,7 +7092,7 @@ universalify@^2.0.0:
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-2.0.0.tgz#75a4984efedc4b08975c5aeb73f530d02df25717"
   integrity sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==
 
-unplugin-vue-components@^0.17.16:
+unplugin-vue-components@0.17.16:
   version "0.17.16"
   resolved "https://registry.yarnpkg.com/unplugin-vue-components/-/unplugin-vue-components-0.17.16.tgz#219500210a786be9d14414cadf53d9160541cd6d"
   integrity sha512-WGQdPAZ6uzx00gRQuhTVxY91dxVz6VD5CpeBjVSrzwghki4fShk3l6h3N/jWQDWCi1ej+JnjYOwND4SLoujDGg==
@@ -7197,19 +7197,19 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite-plugin-fonts@^0.2.2:
+vite-plugin-fonts@0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/vite-plugin-fonts/-/vite-plugin-fonts-0.2.2.tgz#48cda78f5ad36907f3de497fa418ffd2b8f2ca83"
   integrity sha512-fhzhsrTiuzlDjSO6g5sV5EVIIvbb8lmsaIY6eUTBM4lcF55x40UBpHrcyvNwIhQG211g0lu83XC7oZlkmvdkMA==
 
-vite-plugin-restart@^0.1.1:
+vite-plugin-restart@0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/vite-plugin-restart/-/vite-plugin-restart-0.1.1.tgz#2a926442d9ba675f2a29477c113f53bf464da02d"
   integrity sha512-kBxOqRrdbjVmC0PiT2KNXZogpgqA2epMkny//VjWnOS2k9NV/vXA7PYgf8/1lmBCZsC+iMj1C1ODuAR/9Sig4A==
   dependencies:
     micromatch "^4.0.4"
 
-vite-plugin-windicss@^1.6.3:
+vite-plugin-windicss@1.6.3:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/vite-plugin-windicss/-/vite-plugin-windicss-1.6.3.tgz#64afa460eaff610a376e320c450ec79d0b6f6330"
   integrity sha512-D4fEUcAPoLRLdDZMee8NrHZHmn0Qj7AjSg1xNGBnZsMTwRPj93NKZk0fIIUoiKTEh1KrdQejW8g6cg0SgGKTww==
@@ -7219,7 +7219,7 @@ vite-plugin-windicss@^1.6.3:
     kolorist "^1.5.1"
     windicss "^3.4.3"
 
-vite@>=2.7.13, vite@^2.7.12, vite@^2.7.13:
+vite@2.7.13, vite@>=2.7.13, vite@^2.7.12:
   version "2.7.13"
   resolved "https://registry.yarnpkg.com/vite/-/vite-2.7.13.tgz#99b56e27dfb1e4399e407cf94648f5c7fb9d77f5"
   integrity sha512-Mq8et7f3aK0SgSxjDNfOAimZGW9XryfHRa/uV0jseQSilg+KhYDSoNb9h1rknOy6SuMkvNDLKCYAYYUMCE+IgQ==
@@ -7231,7 +7231,7 @@ vite@>=2.7.13, vite@^2.7.12, vite@^2.7.13:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vitepress@^0.21.6:
+vitepress@0.21.6:
   version "0.21.6"
   resolved "https://registry.yarnpkg.com/vitepress/-/vitepress-0.21.6.tgz#aa9e7a597efad607a08a79a020417771bec081c7"
   integrity sha512-OzwD2cTfvoK5VKV0UWSqu4XvUOz4vWFJ4Bdi0z8GoVkTFXkfmbFawEDVXAZwzu0Hn4/VLopgmEyooc91iGKFlg==
@@ -7389,7 +7389,7 @@ vscode-vue-languageservice@0.31.1:
     vscode-pug-languageservice "0.31.1"
     vscode-typescript-languageservice "0.31.1"
 
-vue-tsc@^0.31.1:
+vue-tsc@0.31.1:
   version "0.31.1"
   resolved "https://registry.yarnpkg.com/vue-tsc/-/vue-tsc-0.31.1.tgz#01125d95d3be064940a70cd6081eef708eb2d1f4"
   integrity sha512-pyLQG1fCA02is6NAL0uY5SKxDfjJRI167x89iRz0gWOB0tUng6NjJZicE+Oh+3ZuN/LJ3J/wKfdW7O+hnfhxdg==
@@ -7496,7 +7496,7 @@ wide-align@^1.1.0:
   dependencies:
     string-width "^1.0.2 || 2 || 3 || 4"
 
-windicss@^3.4.3:
+windicss@3.4.3, windicss@^3.4.3:
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/windicss/-/windicss-3.4.3.tgz#347d09fee8eb6b3fc5e6e68b435c76ccb24a748c"
   integrity sha512-UnugThsvEgy8RsPm4/B5DYMCAqvZzD6yWU7Anh+f07t5RSJ8zvmAylGLbXrHPJEmCKzo2Mf+fOUvISH7IJqM3A==
