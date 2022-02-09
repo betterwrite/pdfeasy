@@ -2,6 +2,10 @@
 
 Changelog was created by [Generi](https://github.com/Novout/generi). Any questions, consult the documentation.
 
+### v0.1.4
+
+* **chore(repo):** turbo deploy command [1b18c15]
+
 ### v0.1.3
 
 * **chore:** add readme for package tracking in npm [a89cb2d]

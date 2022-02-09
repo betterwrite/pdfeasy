@@ -1,6 +1,6 @@
 {
   "name": "pdfeasy-vite-demo",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "scripts": {
     "dev": "vite",
     "demo": "vite",
@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "pdfeasy": "^0.1.3",
+    "pdfeasy": "^0.1.4",
     "typescript": "^4.5.5",
     "vite": "^2.7.13"
   }
