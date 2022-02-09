@@ -72,7 +72,7 @@ pdfeasy.new({
             y: context.height - context.margins.bottom
           })
 
-          // Image('https://i.imgur.com/J3JXhsl.png', {}, {})
+          // Image('https://i.imgur.com/to/path.png', {}, {})
         },
         // simple header
         ({ Text }, context, current, total) => {

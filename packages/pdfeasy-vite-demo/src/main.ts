@@ -21,7 +21,6 @@ pdfeasy.new({
 pdfeasy.add([
   ...Utils.content(), // Utils for debug
   { raw: 'Hello PDFEasy!', text: { font: 'Roboto' }}, // custom font,
-  { raw: 'https://i.imgur.com/GbmBw3N.png', image: {}}, // external image
   { stack: [ // stack for paragraph's
     { raw: 'A ', text: {}},
     { raw: 'Simple', text: { bold: true, italic: true }},
