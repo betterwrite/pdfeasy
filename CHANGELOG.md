@@ -2,9 +2,14 @@
 
 Changelog was created by [Generi](https://github.com/Novout/generi). Any questions, consult the documentation.
 
+### v0.1.3
+
+* **chore:** add readme for package tracking in npm [a89cb2d]
+
 ### v0.1.2
 
 * **fix(plugin):** supports empty options in runner [890c823]
+* **chore:** license [6f55593]
 
 ### v0.1.1
 
