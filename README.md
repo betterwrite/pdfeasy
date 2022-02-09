@@ -52,6 +52,11 @@ pnpm add pdfeasy
 ## Simple Example
 
 ```ts
+import pdfeasy, { Utils } from 'pdfeasy'
+// import pdfeasy, { Utils } from 'pdfeasy/dist/client.cjs.js'
+// import pdfeasy, { Utils } from 'pdfeasy/dist/node.esm.js'
+// import pdfeasy, { Utils } from 'pdfeasy/dist/node.cjs.js'
+
 pdfeasy.new({
   document: { // PDFKit options
     margins: {
