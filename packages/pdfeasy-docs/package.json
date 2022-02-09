@@ -5,8 +5,7 @@
     "dev:docs": "vitepress dev",
     "build:docs": "vitepress build",
     "serve:docs": "yarn build:docs && vitepress serve",
-    "format": "prettier **/**/*.md **/**/*.vue --write",
-    "deploy": "vite build"
+    "format": "prettier **/**/*.md **/**/*.vue --write"
   },
   "dependencies": {
     "pdfeasy": "^0.1.3",
