@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "pdfeasy": "^0.1.4",
-    "windicss": "^3.4.3"
+    "windicss": "3.5.1"
   },
   "devDependencies": {
     "unplugin-vue-components": "^0.17.16",
