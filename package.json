@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "generi": "0.3.0",
-    "turbo": "1.1.2",
+    "turbo": "1.1.10",
     "lerna": "4.0.0"
   },
   "packageManager": "yarn@1.22.17"
