@@ -18,6 +18,6 @@
     "vite-plugin-restart": "^0.1.1",
     "vite-plugin-windicss": "^1.6.3",
     "vitepress": "^0.21.6",
-    "vue-tsc": "^0.31.1"
+    "vue-tsc": "0.33.9"
   }
 }
