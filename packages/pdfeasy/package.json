@@ -57,7 +57,7 @@
     "@types/svg-to-pdfkit": "0.1.0",
     "c8": "7.11.0",
     "cross-env": "7.0.3",
-    "esbuild": "0.14.20",
+    "esbuild": "0.14.28",
     "esbuild-plugin-alias": "0.2.1",
     "esbuild-plugin-d.ts": "1.1.0",
     "esbuild-plugin-fileloc": "0.0.6",
