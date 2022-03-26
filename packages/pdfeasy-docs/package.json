@@ -12,7 +12,7 @@
     "windicss": "^3.4.3"
   },
   "devDependencies": {
-    "unplugin-vue-components": "^0.17.16",
+    "unplugin-vue-components": "0.18.5",
     "vite": "^2.7.13",
     "vite-plugin-fonts": "^0.2.2",
     "vite-plugin-restart": "^0.1.1",
