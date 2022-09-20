@@ -1,9 +1,8 @@
-import { PDFEasyDefaults, regex } from '../utils/defines'
+import { PDFEasyDefaults } from '../utils/defines'
 import { getDataUri } from '../utils/request'
 import { Fonts, TextAlign } from '../utils/types'
-import SVGtoPDF from 'svg-to-pdfkit'
 import { getCorrectFontFamily } from './transform'
-import { getImageRaw } from '../content/image'
+import { getImageRaw, SvgToPNG } from '../content/image'
 
 export interface ContentText {
   fontSize?: number
@@ -136,11 +135,11 @@ export const resolveContent = async (
   }
 
   const addImage = async () => {
-    const style = content.image as ContentImage
+    const style = content.svg ? content.svg : content.image as ContentImage
 
     if (!content.raw) return
 
-    const { raw } = await getImageRaw(content.raw)
+    const { raw } = content.svg ? await SvgToPNG(content.raw) : await getImageRaw(content.raw)
 
     app.image(
       raw,
@@ -159,44 +158,6 @@ export const resolveContent = async (
     )
   }
 
-  const addSvg = async () => {
-    const style = content.svg as ContentSVG
-
-    if (!content.raw) return
-
-    const make = async (value: string) => {
-      await SVGtoPDF(
-        app,
-        value,
-        style.x || undefined,
-        style.y || undefined,
-        style.size
-          ? {
-              width: style.size?.width || undefined,
-              height: style.size?.height || undefined,
-            }
-          : {}
-      )
-    }
-
-    // svg recording
-    if (
-      content.raw.match(
-        /<svg\b[^>]*?(?:viewBox=\"(\b[^"]*)\")?>([\s\S]*?)<\/svg>/g
-      )
-    ) {
-      make(content.raw)
-
-      return
-    }
-
-    if (content.raw.match(/https?:\/\//g)) {
-      await getDataUri(content.raw).then((data: string) => {
-        make(data)
-      })
-    }
-  }
-
   if (!content.stack && !content.text && !content.image && !content.svg) {
     addSimpleText()
     return
@@ -204,6 +165,5 @@ export const resolveContent = async (
 
   if (content.stack) await addStack()
   if (content.text) await addText()
-  if (content.image) await addImage()
-  if (content.svg) await addSvg()
+  if (content.image || content.svg) await addImage()
 }

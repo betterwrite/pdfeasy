@@ -45,8 +45,7 @@
     "file-saver": "2.0.5",
     "mitt": "3.0.0",
     "ohmyfetch": "0.4.15",
-    "pdfkit": "0.13.0",
-    "svg-to-pdfkit": "0.1.8"
+    "pdfkit": "0.13.0"
   },
   "devDependencies": {
     "@types/blob-stream": "0.1.30",

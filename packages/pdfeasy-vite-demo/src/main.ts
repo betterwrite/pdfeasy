@@ -19,7 +19,6 @@ pdfeasy.new({
 })
 
 pdfeasy.add([
-  ...Utils.content(), // Utils for debug
   { raw: 'Hello PDFEasy!', text: { font: 'Roboto' }}, // custom font,
   { stack: [ // stack for paragraph's
     { raw: 'A ', text: {}},
@@ -27,7 +26,10 @@ pdfeasy.add([
     { raw: ' Stack!', text: {}},
   ]},
   // not recommended use this
-  { raw: 'Text without option!' },
+  { raw: '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"><circle cx="25" cy="25" r="20"/></svg>', svg: {}},
+  //png
+  { raw: 'https://i.imgur.com/yvzMkqO.png', image: {} },
+  ...Utils.content(), // Utils for debug
 ])
 
 // or https://path/to/Roboto.ttf
