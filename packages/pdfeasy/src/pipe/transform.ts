@@ -1,4 +1,4 @@
-import { Fonts } from 'src/utils/types'
+import { Fonts } from '../utils/types'
 import { ContentText } from './factory'
 
 export const getCorrectFontFamily = (

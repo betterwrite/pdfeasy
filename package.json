@@ -7,7 +7,7 @@
   "scripts": {
     "prepublishOnly": "yarn deploy",
     "bootstrap": "lerna bootstrap --use-workspaces",
-    "test": "lerna run --scope pdfeasy test",
+    "test": "turbo run test",
     "test:script": "yarn build:prod && lerna run --scope pdfeasy node:script",
     "build:prod": "lerna run --scope pdfeasy build:prod",
     "build": "lerna run --scope pdfeasy build",

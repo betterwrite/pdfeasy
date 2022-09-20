@@ -1,4 +1,4 @@
-import { setBackground } from 'src/pipe/setter'
+import { setBackground } from '../pipe/setter'
 import pdfeasy from '../runner/pdfeasy'
 
 export const runPluginBackground = async (instance: pdfeasy) => {

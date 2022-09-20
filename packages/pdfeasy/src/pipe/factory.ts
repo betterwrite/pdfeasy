@@ -3,7 +3,7 @@ import { getDataUri } from '../utils/request'
 import { Fonts, TextAlign } from '../utils/types'
 import SVGtoPDF from 'svg-to-pdfkit'
 import { getCorrectFontFamily } from './transform'
-import { getImageRaw } from 'src/content/image'
+import { getImageRaw } from '../content/image'
 
 export interface ContentText {
   fontSize?: number
@@ -141,8 +141,6 @@ export const resolveContent = async (
     if (!content.raw) return
 
     const { raw } = await getImageRaw(content.raw)
-
-    console.log('HERE?')
 
     app.image(
       raw,

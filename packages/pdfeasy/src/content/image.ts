@@ -1,5 +1,5 @@
-import { regex } from 'src/utils/defines'
-import { getDataUri } from 'src/utils/request'
+import { regex } from '../utils/defines'
+import { getDataUri } from '../utils/request'
 
 export interface ImageRaw {
   raw: string

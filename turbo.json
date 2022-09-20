@@ -33,6 +33,9 @@
       "format": {
         "cache": false
       },
+      "test": {
+        "cache": false
+      },
       "dev": {
         "dependsOn": [
           "^build"

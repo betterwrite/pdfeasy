@@ -16,8 +16,8 @@ import { createWriteStream } from 'fs'
 import path from 'path'
 import { pageHandler } from '../plugins/page'
 import { Plugin, PluginBackgroundCallback } from '../plugins'
-import { onPageAdded } from 'src/pipe/emitter'
-import { runPluginBackground } from 'src/plugins/background'
+import { onPageAdded } from '../pipe/emitter'
+import { runPluginBackground } from '../plugins/background'
 
 export interface RunnerOptionsAdvanced {
   /**

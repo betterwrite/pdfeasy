@@ -1,5 +1,5 @@
-import { getImageRaw } from 'src/content/image'
-import { regex } from 'src/utils/defines'
+import { getImageRaw } from '../content/image'
+import { regex } from '../utils/defines'
 import pdfeasy from '../runner/pdfeasy'
 
 export const setBackground = async (instance: pdfeasy, str: string) => {

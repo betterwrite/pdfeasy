@@ -1,6 +1,5 @@
 import PDFDocument from 'pdfkit'
 import { RunnerOptions, RunOptions } from '../runner/pdfeasy'
-import { PluginGenerate } from '../plugins/page'
 
 export type DocBase = typeof PDFDocument | null
 

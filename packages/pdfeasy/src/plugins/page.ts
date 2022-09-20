@@ -1,9 +1,7 @@
 import pdfeasy from '../runner/pdfeasy'
 import { ContentImage, ContentText } from '../pipe/factory'
 import { getCorrectFontFamily } from '../pipe/transform'
-import { regex } from 'src/utils/defines'
-import { getDataUri } from 'src/utils/request'
-import { getImageRaw } from 'src/content/image'
+import { getImageRaw } from '../content/image'
 
 export interface PluginPageTextOptions {
   /**
