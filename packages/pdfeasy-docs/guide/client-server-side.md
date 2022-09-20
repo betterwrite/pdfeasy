@@ -1,3 +1,0 @@
-# Client-Server Side
-
-TODO

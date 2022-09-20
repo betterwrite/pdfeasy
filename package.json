@@ -9,8 +9,6 @@
     "bootstrap": "lerna bootstrap --use-workspaces",
     "test": "lerna run --scope pdfeasy test",
     "test:script": "yarn build:prod && lerna run --scope pdfeasy node:script",
-    "docs": "yarn build:prod && lerna run --scope pdfeasy-docs dev:docs",
-    "docs:build": "yarn build:prod && lerna run --scope pdfeasy-docs build:docs",
     "build:prod": "lerna run --scope pdfeasy build:prod",
     "build": "lerna run --scope pdfeasy build",
     "demo": "turbo run demo",
@@ -22,8 +20,8 @@
   },
   "devDependencies": {
     "generi": "0.3.0",
-    "turbo": "1.1.2",
-    "lerna": "4.0.0"
+    "turbo": "1.4.7",
+    "lerna": "5.5.1"
   },
-  "packageManager": "yarn@1.22.17"
+  "packageManager": "yarn@1.22.19"
 }

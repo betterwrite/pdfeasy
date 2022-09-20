@@ -25,8 +25,6 @@ Client/Server Side PDF-Generator based in PDFKit
 - **✅ Custom Fonts && Purge Unused Fonts**
 - **✅ Plugins Ready!**
 
-> [Documentation](https://pdfeasy.vercel.app/) is under construction!
-
 ## Installation
 
 It's simple!
