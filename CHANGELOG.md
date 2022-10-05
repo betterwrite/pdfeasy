@@ -1,6 +1,18 @@
-# Changelog (08/02/2022)
+# Changelog (05/10/2022)
 
 Changelog was created by [Generi](https://github.com/Novout/generi). Any questions, consult the documentation.
+
+### v0.2.0
+
+* **refactor(runner):** new default options [0264f71]
+* **fix:** typos [c7df2c6]
+* **fix(test):** mock fs break build [4beb5b2]
+* **chore:** remove svg-to-pdfkit to a native implementation [dc2cabf]
+* **chore:** upgrade vitest [ed9d226]
+* **chore:** remove docs [d6541bc]
+* **fix:** typo [2c9eb25]
+* **chore:** import in example [92c6791]
+* **fix:** typo [a8d320b]
 
 ### v0.1.4
 
