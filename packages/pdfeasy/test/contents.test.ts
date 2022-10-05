@@ -134,19 +134,3 @@ describe('Contents - image', () => {
     })).resolves.toBeTruthy()
   })
 })
-
-describe('Contents - svg', () => {
-  it('should render inline svg', () => {
-    pdfeasy.new()
-
-    pdfeasy.add([
-      { raw: '<svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /></svg>', svg: {} },
-    ])
-
-    return expect(pdfeasy.run({
-      client: {
-        emit: 'none'
-      }
-    })).resolves.toBeTruthy()
-  })
-})

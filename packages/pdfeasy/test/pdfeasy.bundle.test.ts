@@ -1,7 +1,6 @@
-import fs from 'fs';
-import { it, expect, describe, vi, beforeEach, afterEach } from 'vitest';
+import { it, expect, describe } from 'vitest';
 import client, { Utils as ClientUtils } from '../dist/client.esm'
-import server, { Utils as ServerUtils } from '../dist/node.esm'
+// import server, { Utils as ServerUtils } from '../dist/node.esm'
 
 describe("PDFEasy Bundle - Client", () => {
   it("should pdfeasy exists", () => {
@@ -38,11 +37,16 @@ describe("PDFEasy Bundle - Client", () => {
   })
 });
 
+/* See https://github.com/vitest-dev/vitest/issues/1988
 describe("PDFEasy Bundle - Server", () => {
-  // TODO: vitest future mock-fs support for not write pdf in local development
   beforeEach(() => {
-    vi.spyOn(fs, 'writeFile').mockImplementation((a: any, b: any) => {});
-    vi.spyOn(fs, 'writeFileSync').mockImplementation((a: any, b: any) => {});
+    vi.mock('node:fs', () => {
+      return {
+        writeFile: vi.fn().mockImplementation((a: any, b: any) => {}),
+        writeFileSync: vi.fn().mockImplementation((a: any, b: any) => {}),
+        existsSync: vi.fn().mockImplementation((a: any, b: any) => {}),
+      };
+    });
   })
 
   afterEach(() => {
@@ -82,3 +86,4 @@ describe("PDFEasy Bundle - Server", () => {
     }})).rejects.toBeTruthy()
   })
 });
+*/
