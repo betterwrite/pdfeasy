@@ -135,11 +135,13 @@ export const resolveContent = async (
   }
 
   const addImage = async () => {
-    const style = content.svg ? content.svg : content.image as ContentImage
+    const style = content.svg ? content.svg : (content.image as ContentImage)
 
     if (!content.raw) return
 
-    const { raw } = content.svg ? await SvgToPNG(content.raw) : await getImageRaw(content.raw)
+    const { raw } = content.svg
+      ? await SvgToPNG(content.raw)
+      : await getImageRaw(content.raw)
 
     app.image(
       raw,

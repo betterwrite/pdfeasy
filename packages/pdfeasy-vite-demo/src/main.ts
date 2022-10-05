@@ -25,10 +25,10 @@ pdfeasy.add([
     { raw: 'Simple', text: { bold: true, italic: true }},
     { raw: ' Stack!', text: {}},
   ]},
-  // not recommended use this
+  // svg
   { raw: '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"><circle cx="25" cy="25" r="20"/></svg>', svg: {}},
-  //png
-  { raw: 'https://i.imgur.com/yvzMkqO.png', image: {} },
+  // png (link or base64)
+  // { raw: 'https://i.imgur.com/image.png', image: {} },
   ...Utils.content(), // Utils for debug
 ])
 

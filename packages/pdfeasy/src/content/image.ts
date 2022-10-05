@@ -8,7 +8,9 @@ export interface ImageRaw {
 
 export const SvgToPNG = (raw: string): Promise<{ raw: string }> => {
   return new Promise((res, rej) => {
-    const set = !raw.includes('<svg xmlns="http://www.w3.org/2000/svg"') ? raw.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg"') : raw
+    const set = !raw.includes('<svg xmlns="http://www.w3.org/2000/svg"')
+      ? raw.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg"')
+      : raw
     // convert svg to png
     const blob = new Blob([set], {
       type: 'image/svg+xml;charset=utf-8',

@@ -1,7 +1,0 @@
-{
-  "extends": [
-    "config:base",
-    "group:monorepos",
-    "group:recommended"
-  ]
-}
