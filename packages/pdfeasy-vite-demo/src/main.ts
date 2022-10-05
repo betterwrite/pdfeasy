@@ -43,11 +43,7 @@ pdfeasy.addFonts([
   }
 ])
 
-pdfeasy.run({
-  client: {
-    emit: 'blob'
-  }
-}).then((blob: string) => {
+pdfeasy.run().then((blob: string) => {
   const iframe = document.querySelector('#pdf') as HTMLIFrameElement
 
   iframe.src = blob

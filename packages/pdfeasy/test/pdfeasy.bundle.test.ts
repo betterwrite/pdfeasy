@@ -16,9 +16,7 @@ describe("PDFEasy Bundle - Client", () => {
     ])
 
     return expect(client.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })).resolves.toBeTruthy()
   })
 
@@ -30,9 +28,7 @@ describe("PDFEasy Bundle - Client", () => {
     expect(client.contents.length).toBe(0)
 
     return expect(client.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })).rejects.toBeTruthy()
   })
 });

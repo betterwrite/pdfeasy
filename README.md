@@ -115,11 +115,7 @@ pdfeasy.addFonts([
   }
 ])
 
-pdfeasy.run({
-  client: {
-    emit: 'blob'
-  }
-}).then((blob: string) => {
+pdfeasy.run().then((blob: string) => {
   const iframe = document.querySelector('#pdf') as HTMLIFrameElement
 
   iframe.src = blob
@@ -136,7 +132,7 @@ See [scripts](./packages/pdfeasy/scripts/generate/) for server-side runner.
 
 ## Bundles
 
-> Uses standard minifications
+> Uses standard minification
 
 `pdfeasy/dist/client.cjs.sj`
 

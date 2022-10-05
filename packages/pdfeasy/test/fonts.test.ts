@@ -15,9 +15,7 @@ describe('Fonts - fontsPurge option', () => {
     ])
 
     await pdfeasy.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })
 
     expect(pdfeasy.fonts.length).toBe(0)
@@ -33,9 +31,7 @@ describe('Fonts - fontsPurge option', () => {
     pdfeasy.add(Utils.content())
 
     await pdfeasy.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })
 
     expect(pdfeasy.fonts.length).toBe(0)
@@ -62,9 +58,7 @@ describe('Fonts - fontsPurge option', () => {
     ])
 
     await pdfeasy.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })
 
     expect(pdfeasy.fonts.length).toBe(0)
@@ -93,9 +87,7 @@ describe('Fonts - Register', () => {
     ])
 
     await pdfeasy.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })
 
     expect(pdfeasy.fonts.length).toBe(1)

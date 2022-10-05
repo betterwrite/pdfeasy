@@ -1,5 +1,4 @@
 const { dtsPlugin } = require('esbuild-plugin-d.ts')
-const resolve = require('esbuild-plugin-resolve')
 const { build } = require('esbuild')
 const alias = require('esbuild-plugin-alias')
 const replace = require('esbuild-plugin-resolve')

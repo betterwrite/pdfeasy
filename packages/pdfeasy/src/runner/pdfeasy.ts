@@ -71,12 +71,22 @@ export interface RunnerOptions {
 }
 
 export interface RunOptions {
-  client?: {
-    emit: PDFRunEmitOption
-  }
-  server?: {
-    path: string
-  }
+  /**
+   *  Type runner
+   *  @default 'client'
+   */
+  type?: 'client' | 'server'
+  /**
+   *  Client type format emitter
+   *  @default 'blob'
+   */
+  clientEmit?: PDFRunEmitOption
+  /**
+   *  Server file destination
+   *
+   *  Required in {@link RunOptions} type: server
+   */
+  serverPath?: string
 }
 
 /**
@@ -303,8 +313,10 @@ export default class {
    *
    * @param emit - {@link PDFRunEmitOption}
    */
-  public run = ({ client, server }: RunOptions): Promise<string> => {
-    this.optionsRun = { client, server }
+  public run = (options?: RunOptions): Promise<string> => {
+    this.optionsRun = options || {}
+
+    const runType = options?.type || 'client'
 
     return new Promise(async (res, rej) => {
       if (!this.pdfkit) {
@@ -322,11 +334,12 @@ export default class {
         this.globals.__NEW_PAGE__ = true
       })
 
-      if (server) {
+      if (runType && options?.serverPath) {
         this.pdfkit?.pipe(
           createWriteStream(
             path.resolve(
-              server.path + `/${this.options?.exports?.name || 'New PDF'}.pdf`
+              options.serverPath +
+                `/${this.options?.exports?.name || 'New PDF'}.pdf`
             )
           )
         )
@@ -348,7 +361,7 @@ export default class {
         return
       }
 
-      if (client) {
+      if (runType === 'client') {
         const stream = this.pdfkit.pipe(blobStream())
 
         this.pipeline()
@@ -362,7 +375,7 @@ export default class {
           })
 
         stream.on('finish', (): void => {
-          switch (client?.emit) {
+          switch (options?.clientEmit || 'blob') {
             case 'blob':
               res(stream.toBlobURL('application/pdf') as string)
               break

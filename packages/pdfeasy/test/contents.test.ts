@@ -10,9 +10,7 @@ describe('Contents - text', () => {
     ])
 
     return expect(pdfeasy.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })).resolves.toBeTruthy()
   })
 
@@ -24,9 +22,7 @@ describe('Contents - text', () => {
     ])
 
     return expect(pdfeasy.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })).resolves.toBeTruthy()
   })
 
@@ -41,9 +37,7 @@ describe('Contents - text', () => {
     ])
 
     return expect(pdfeasy.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })).resolves.toBeTruthy()
   })
 
@@ -59,9 +53,7 @@ describe('Contents - text', () => {
     ])
 
     return expect(pdfeasy.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })).resolves.toBeTruthy()
   })
 
@@ -80,9 +72,7 @@ describe('Contents - text', () => {
     ])
 
     return expect(pdfeasy.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })).resolves.toBeTruthy()
   })
 })
@@ -98,9 +88,7 @@ describe('Contents - stack', () => {
     ])
 
     return expect(pdfeasy.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })).resolves.toBeTruthy()
   })
 })
@@ -114,9 +102,7 @@ describe('Contents - image', () => {
     ])
 
     return expect(pdfeasy.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })).resolves.toBeTruthy()
   })
 
@@ -128,9 +114,7 @@ describe('Contents - image', () => {
     ])
 
     return expect(pdfeasy.run({
-      client: {
-        emit: 'none'
-      }
+      clientEmit: 'none'
     })).resolves.toBeTruthy()
   })
 })

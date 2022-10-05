@@ -25,9 +25,8 @@ pdfeasy.addFonts([
 
 pdfeasy
   .run({
-    server: {
-      path: path.resolve(process.cwd() + '/examples'),
-    },
+    type: 'server',
+    serverPath: path.resolve(process.cwd() + '/examples'),
   })
   .then(() => {
     console.log('using-external-font-pdf.js ready!')
