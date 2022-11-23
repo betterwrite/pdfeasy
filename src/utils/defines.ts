@@ -1,8 +1,4 @@
-import { DefaultsText } from '../pipe/factory'
-
-export interface PDFEasyDefaults {
-  text: DefaultsText
-}
+import { PDFEasyDefaults } from 'src/types'
 
 export const pdfDefaults = (): PDFEasyDefaults => {
   return {

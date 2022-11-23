@@ -1,64 +1,6 @@
-import { PDFEasyDefaults } from '../utils/defines'
-import { getDataUri } from '../utils/request'
-import { Fonts, TextAlign } from '../utils/types'
+import { Content, ContentText, ContentImage, PDFEasyDefaults } from '../types'
 import { getCorrectFontFamily } from './transform'
 import { getImageRaw, SvgToPNG } from '../content/image'
-
-export interface ContentText {
-  fontSize?: number
-  font?: Fonts
-  color?: string
-  indent?: number
-  align?: TextAlign
-  paragraphMargin?: number
-  lineHeight?: number
-  opacity?: number
-  destination?: string
-  go?: string
-  bold?: boolean
-  italic?: boolean
-}
-
-export interface DefaultsText {
-  fontSize: number
-  font: Fonts
-  color: string
-  indent: number
-  align: TextAlign
-  paragraphMargin: number
-  lineHeight: number
-  opacity: number
-  destination: string | undefined
-  go: string | undefined
-  bold: boolean
-  italic: boolean
-}
-
-export interface ContentImage {
-  x?: number
-  y?: number
-  size?: {
-    width?: number
-    height?: number
-    scale?: number
-  }
-}
-
-export interface ContentSVG extends ContentImage {
-  size?: {
-    width?: number
-    height?: number
-    scale?: number
-  }
-}
-
-export interface Content {
-  raw?: string
-  stack?: Content[]
-  text?: ContentText
-  image?: ContentImage
-  svg?: ContentSVG
-}
 
 export const resolveContent = async (
   app: PDFKit.PDFDocument,

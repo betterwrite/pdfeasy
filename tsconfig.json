@@ -23,8 +23,7 @@
       "resolveJsonModule": true,
       "baseUrl": ".",
       "declaration": true,
-      "emitDeclarationOnly": true,
+      "emitDeclarationOnly": true
     },
-    "exclude": ["node_modules"],
     "include": ["src/**/*.ts"]
   }

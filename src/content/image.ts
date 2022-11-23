@@ -1,10 +1,6 @@
+import { ImageRaw } from 'src/types'
 import { regex } from '../utils/defines'
 import { getDataUri } from '../utils/request'
-
-export interface ImageRaw {
-  raw: string
-  type: 'base64' | 'http'
-}
 
 export const SvgToPNG = (raw: string): Promise<{ raw: string }> => {
   return new Promise((res, rej) => {

@@ -124,24 +124,24 @@ pdfeasy.run().then((blob: string) => {
 })
 ```
 
-See [source demo](./packages/pdfeasy-vite-demo/) for more explanations
+See [source demo](./demo) for more explanations
 
-See [examples](./packages/pdfeasy/examples/) for .pdf results.
+See [examples](./examples/) for .pdf results.
 
-See [scripts](./packages/pdfeasy/scripts/generate/) for server-side runner.
+See [scripts](./scripts/generate/) for server-side runner.
 
 ## Bundles
 
 > Uses standard minification
 
-`pdfeasy/dist/client.cjs.sj`
+`pdfeasy/dist/client.cjs.js`
 
-`pdfeasy/dist/client.esm.sj`
+`pdfeasy/dist/client.esm.js`
 
-`pdfeasy/dist/node.cjs.sj`
+`pdfeasy/dist/node.cjs.js`
 
-`pdfeasy/dist/node.esm.sj`
+`pdfeasy/dist/node.esm.js`
 
-`pdfeasy/dist/node.iife.sj`
+`pdfeasy/dist/node.iife.js`
 
 `pdfeasy/dist/index.d.ts`

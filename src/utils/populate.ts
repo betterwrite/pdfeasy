@@ -1,4 +1,4 @@
-import { Content } from '../pipe/factory'
+import { Content } from 'src/types'
 
 export const loremIpsum = () => {
   const paragraph = () => {

@@ -3,14 +3,6 @@ import path from 'path'
 import { getBase64ByURL } from '../utils/request'
 import { regex } from '../utils/defines'
 
-export interface ExternalFont {
-  name: string
-  normal: string
-  italic: string
-  bold: string
-  bolditalic: string
-}
-
 export const getFontCorrectName = (
   name: string,
   type: 'normal' | 'italic' | 'bold' | 'bolditalic'
@@ -53,7 +45,7 @@ export const setExternalFonts = async (instance: pdfeasy) => {
   }
 
   const isLocalServer = (font: string) =>
-    instance.optionsRun?.server && !regex().http(font)
+    instance.optionsRun?.type === 'server' && !regex().http(font)
 
   for (const font of instance.fonts) {
     const normal = await getBase64ByURL(

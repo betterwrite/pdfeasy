@@ -1,49 +1,13 @@
 import pdfeasy from '../runner/pdfeasy'
-import { ContentImage, ContentText } from '../pipe/factory'
 import { getCorrectFontFamily } from '../pipe/transform'
 import { getImageRaw } from '../content/image'
-
-export interface PluginPageTextOptions {
-  /**
-   * @default auto
-   */
-
-  x?: number
-  /**
-   * @default auto
-   */
-
-  y?: number
-
-  /**
-   * A Text height anchor point
-   *
-   * @default center
-   */
-  heightAnchor?: 'top' | 'center' | 'bottom'
-
-  /**
-   * A Text width anchor point
-   *
-   * @default center
-   */
-  widthAnchor?: 'left' | 'center' | 'right'
-}
-
-export interface PluginPageImageOptions {}
-
-export interface PluginGenerate {
-  Text: (
-    text: string,
-    style: ContentText,
-    options: PluginPageTextOptions
-  ) => void
-  Image: (
-    raw: string,
-    style: ContentImage,
-    options: PluginPageImageOptions
-  ) => Promise<void>
-}
+import {
+  ContentImage,
+  ContentText,
+  Plugin,
+  PluginGenerate,
+  PluginPageTextOptions,
+} from 'src/types'
 
 export const generate = (instance: pdfeasy): PluginGenerate => {
   const kit = instance.pdfkit as PDFKit.PDFDocument
@@ -114,7 +78,7 @@ export const generate = (instance: pdfeasy): PluginGenerate => {
   const Image = async (
     str: string,
     style: ContentImage,
-    options: PluginPageImageOptions
+    options: Plugin
   ): Promise<void> => {
     if (!str) return
 

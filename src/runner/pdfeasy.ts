@@ -2,92 +2,25 @@ import PDFDocument from 'pdfkit'
 import blobStream from 'blob-stream'
 import mitt from 'mitt'
 import { saveAs } from 'file-saver'
-import { Content, resolveContent } from '../pipe/factory'
-import { pdfDefaults, PDFEasyDefaults } from '../utils/defines'
+import { resolveContent } from '../pipe/factory'
+import { pdfDefaults } from '../utils/defines'
 import {
+  Content,
   DocBase,
   EmitterType,
   PDFRunEmitOption,
   RunnerBase,
   RunOptionsBase,
-} from '../utils/types'
-import { ExternalFont, setExternalFonts } from '../font/vfs'
+  ExternalFont,
+  PDFEasyDefaults,
+} from '../types'
+import { setExternalFonts } from '../font/vfs'
 import { createWriteStream } from 'fs'
 import path from 'path'
 import { pageHandler } from '../plugins/page'
-import { Plugin, PluginBackgroundCallback } from '../plugins'
+import { RunnerOptions, RunOptions } from '../types'
 import { onPageAdded } from '../pipe/emitter'
 import { runPluginBackground } from '../plugins/background'
-
-export interface RunnerOptionsAdvanced {
-  /**
-   * Insert fonts only in add() contents.
-   *
-   * Recommended to avoid loading fonts unnecessarily in rendering.
-   *
-   * @default true
-   */
-  fontsPurge?: boolean
-
-  /**
-   * Save base64 transform of {@link PluginBackgroundCallback} after http request for otimize other callbacks
-   *
-   * @default true
-   */
-  backgroundPurge?: boolean
-}
-
-export interface RunnerOptionsExports {
-  /**
-   * A name of .pdf
-   */
-  name?: string
-}
-
-export interface RunnerOptions {
-  /**
-   * Advanced PDF Easy Options
-   *
-   *  We don't recommend changing them if you're not sure what doing.
-   */
-  advanced?: RunnerOptionsAdvanced
-
-  /**
-   *  {@link PDFKit} document options
-   *
-   */
-  document?: PDFKit.PDFDocumentOptions
-
-  /**
-   *  Exports definitions to .pdf generate
-   *
-   */
-  exports?: RunnerOptionsExports
-
-  /**
-   *  A page handler callback's
-   */
-  plugins?: Plugin[]
-}
-
-export interface RunOptions {
-  /**
-   *  Type runner
-   *  @default 'client'
-   */
-  type?: 'client' | 'server'
-  /**
-   *  Client type format emitter
-   *  @default 'blob'
-   */
-  clientEmit?: PDFRunEmitOption
-  /**
-   *  Server file destination
-   *
-   *  Required in {@link RunOptions} type: server
-   */
-  serverPath?: string
-}
 
 /**
  *  A Base PDFEasy Runner
