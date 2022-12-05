@@ -9,6 +9,7 @@ const stdlib = require('node-stdlib-browser')
 const importPath = require('./esbuild-import-path')
 const correctSet = require('./esbuild-correct-set')
 const vendorSourceMap = require('./esbuild-vendor-sourcemap')
+const dirnameAndFilenameSupport = require('./esbuild-dirname-and-filename')
 
 const client = () => {
   const make = async (format) => {
@@ -45,6 +46,7 @@ const client = () => {
         importPath,
         correctSet,
         vendorSourceMap,
+        dirnameAndFilenameSupport
       ],
       external: ['fontkit-next'],
     })
@@ -79,6 +81,7 @@ const node = () => {
         importPath,
         correctSet,
         vendorSourceMap,
+        dirnameAndFilenameSupport
       ],
       external: ['fontkit-next', 'pdfkit'], // TODO: Remove external pdfkit
     })
