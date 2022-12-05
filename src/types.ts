@@ -193,6 +193,11 @@ export interface RunnerOptionsExports {
 
 export interface RunnerOptions {
   /**
+   * Cover URL or Base64
+   */
+  cover?: string
+
+  /**
    * Advanced PDF Easy Options
    *
    *  We don't recommend changing them if you're not sure what doing.

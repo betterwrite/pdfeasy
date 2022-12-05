@@ -2,7 +2,7 @@ import PDFDocument from 'pdfkit'
 import blobStream from 'blob-stream'
 import mitt from 'mitt'
 import { saveAs } from 'file-saver'
-import { resolveContent } from '../pipe/factory'
+import { resolveContent, resolveCover } from '../pipe/factory'
 import { pdfDefaults } from '../utils/defines'
 import {
   Content,
@@ -104,6 +104,10 @@ export default class {
    * @returns Promise<void>
    */
   private pipeline = async () => {
+    if (this.options?.cover) {
+      await resolveCover(this.pdfkit as typeof PDFDocument, this.options.cover)
+    }
+
     for (const content of this.contents) {
       await runPluginBackground(this)
 
@@ -156,6 +160,7 @@ export default class {
   public new = (options?: RunnerOptions) => {
     this.reset()
     this.options = {
+      cover: options?.cover,
       exports: options?.exports,
       advanced: {
         fontsPurge:

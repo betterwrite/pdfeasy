@@ -2,6 +2,17 @@ import { Content, ContentText, ContentImage, PDFEasyDefaults } from '../types'
 import { getCorrectFontFamily } from './transform'
 import { getImageRaw, SvgToPNG } from '../content/image'
 
+export const resolveCover = async (app: PDFKit.PDFDocument, based: string) => {
+  const { raw } = await getImageRaw(based)
+
+  app.image(raw, 0, 0, {
+    height: app.page.height,
+    width: app.page.width,
+  })
+
+  app.flushPages()
+}
+
 export const resolveContent = async (
   app: PDFKit.PDFDocument,
   defaults: PDFEasyDefaults,
