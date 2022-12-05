@@ -46,7 +46,7 @@ const client = () => {
         importPath,
         correctSet,
         vendorSourceMap,
-        dirnameAndFilenameSupport
+        dirnameAndFilenameSupport,
       ],
       external: ['fontkit-next'],
     })
@@ -81,7 +81,7 @@ const node = () => {
         importPath,
         correctSet,
         vendorSourceMap,
-        dirnameAndFilenameSupport
+        dirnameAndFilenameSupport,
       ],
       external: ['fontkit-next', 'pdfkit'], // TODO: Remove external pdfkit
     })

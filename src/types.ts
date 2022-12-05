@@ -146,7 +146,9 @@ export interface PluginGenerate {
 
 export interface Plugin {
   background?: PluginBackgroundCallback<string | false>
-  page?: PluginPageCallback<void>[]
+  page: PluginPageCallback<void>[]
+  onAfter?: () => void
+  onBefore?: () => void
 }
 
 export type PluginBackgroundCallback<T> = (context: PDFKit.PDFPage) => T

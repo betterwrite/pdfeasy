@@ -256,6 +256,8 @@ export default class {
 
     const runType = options?.type || 'client'
 
+    this.options?.plugins?.forEach(({ onBefore }) => onBefore && onBefore())
+
     return new Promise(async (res, rej) => {
       if (!this.pdfkit) {
         this.reset()
@@ -286,6 +288,10 @@ export default class {
           .then(async () => {
             await runPluginBackground(this)
 
+            this.options?.plugins?.forEach(
+              ({ onAfter }) => onAfter && onAfter()
+            )
+
             this.pdfkit?.end()
 
             pageHandler(this).then(() => {
@@ -305,6 +311,10 @@ export default class {
         this.pipeline()
           .then(() => {
             pageHandler(this).then(() => {
+              this.options?.plugins?.forEach(
+                ({ onAfter }) => onAfter && onAfter()
+              )
+
               this.pdfkit?.end()
             })
           })
