@@ -12,7 +12,6 @@ Client/Server Side PDF-Generator based in PDFKit
 <p align="center">
   <a><img src="https://img.shields.io/github/workflow/status/Novout/pdfeasy/Tests?style=for-the-badge&color=5cb4f8&"></a>
   <a><img src="https://img.shields.io/github/license/Novout/pdfeasy?style=for-the-badge&color=5cb4f8&label="></a>
-  <a><img src="https://img.shields.io/github/lerna-json/v/Novout/pdfeasy?style=for-the-badge&color=5cb4f8&label="></a>
 <p>
 
 <br>
