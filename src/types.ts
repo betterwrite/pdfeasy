@@ -138,7 +138,7 @@ export interface PluginGenerate {
     options: PluginPageTextOptions
   ) => void
   Image: (
-    raw: string,
+    str: string,
     style: ContentImage,
     options: PluginPageImageOptions
   ) => Promise<void>

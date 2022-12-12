@@ -4,7 +4,7 @@ import { getImageRaw } from '../content/image'
 import {
   ContentImage,
   ContentText,
-  Plugin,
+  PluginPageImageOptions,
   PluginGenerate,
   PluginPageTextOptions,
 } from 'src/types'
@@ -78,7 +78,7 @@ export const generate = (instance: pdfeasy): PluginGenerate => {
   const Image = async (
     str: string,
     style: ContentImage,
-    options: Plugin
+    options: PluginPageImageOptions
   ): Promise<void> => {
     if (!str) return
 
