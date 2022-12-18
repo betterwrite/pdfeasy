@@ -25,8 +25,6 @@ Client/Server Side PDF-Generator based in PDFKit
 
 ## Installation
 
-### NPM
-
 ```shell
 npm i pdfeasy
 ```
@@ -39,16 +37,7 @@ import pdfeasy, { Utils } from 'pdfeasy'
 // import pdfeasy, { Utils } from 'pdfeasy/dist/node.esm.js'
 // import pdfeasy, { Utils } from 'pdfeasy/dist/node.cjs.js'
 
-pdfeasy.new({
-  document: { // PDFKit options
-    margins: {
-      top: 40,
-      bottom: 40,
-      left: 80,
-      right: 80
-    }
-  }
-})
+pdfeasy.new()
 
 pdfeasy.add([
   { raw: 'Simple text!' },
