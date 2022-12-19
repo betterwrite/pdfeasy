@@ -23,6 +23,15 @@ Client/Server Side PDF-Generator based in PDFKit
 - **✅ Custom Fonts && Purge Unused Fonts**
 - **✅ Plugins Ready!**
 
+## TODO for v1
+
+- [x] Bold, italic and underline text;
+- [ ] Table, list, checkbox, line break and page break content;
+- [x] [Nuxt 3 plugin](https://github.com/betterwrite/nuxt-pdfeasy);
+- [ ] Vue 3 plugin;
+- [ ] 90% coverage;
+- [ ] `Client-Side` and `Server-Side` with same features.
+
 ## Installation
 
 ```shell
