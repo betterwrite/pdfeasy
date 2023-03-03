@@ -54,11 +54,11 @@
   "devDependencies": {
     "@types/blob-stream": "0.1.30",
     "@types/file-saver": "2.0.5",
-    "@types/node": "18.8.2",
-    "@types/pdfkit": "0.12.6",
-    "@vitest/coverage-c8": "0.25.3",
+    "@types/node": "18.14.5",
+    "@types/pdfkit": "0.12.8",
+    "@vitest/coverage-c8": "0.29.2",
     "cross-env": "7.0.3",
-    "esbuild": "0.15.15",
+    "esbuild": "0.17.10",
     "esbuild-plugin-alias": "0.2.1",
     "esbuild-plugin-d.ts": "1.1.0",
     "esbuild-plugin-fileloc": "0.0.6",
@@ -66,12 +66,12 @@
     "esbuild-plugin-resolve": "1.0.3",
     "esm": "3.2.25",
     "fontkit-next": "1.8.3",
-    "generi": "^0.4.0",
-    "prettier": "2.8.0",
+    "generi": "^0.5.2",
     "node-stdlib-browser": "1.2.0",
-    "rimraf": "3.0.2",
-    "typescript": "4.9.3",
-    "vite": "3.2.4",
-    "vitest": "0.25.3"
+    "prettier": "2.8.4",
+    "rimraf": "4.2.0",
+    "typescript": "4.9.5",
+    "vite": "4.1.4",
+    "vitest": "0.29.2"
   }
 }
