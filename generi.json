@@ -4,5 +4,5 @@
   "tag": true,
   "version": true,
   "push": true,
-  "publish": false
+  "publish": true
 }

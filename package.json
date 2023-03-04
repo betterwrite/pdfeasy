@@ -34,7 +34,8 @@
     "demo": "pnpm run build && vite --port 3000",
     "patch": "generi log patch",
     "minor": "generi log minor",
-    "major": "generi log major"
+    "major": "generi log major",
+    "prepublish": "pnpm run build:prod"
   },
   "files": [
     "dist/**/*",
