@@ -113,7 +113,30 @@ export const resolveContent = async (
     )
   }
 
-  if (!content.stack && !content.text && !content.image && !content.svg) {
+  const addLineBreak = async () => {
+    const lineGap = content.lineBreak?.spacing ?? defaults.lineBreak.spacing
+
+    await app.fontSize(defaults.text.fontSize).text(' ', {
+      lineGap,
+    })
+  }
+
+  const addPageBreak = async () => {
+    const maxPages = content.pageBreak?.pages ?? defaults.pageBreak.pages
+
+    for (let i = 1; i <= maxPages; i++) {
+      await app.addPage()
+    }
+  }
+
+  if (
+    !content.stack &&
+    !content.text &&
+    !content.image &&
+    !content.svg &&
+    content.lineBreak &&
+    content.pageBreak
+  ) {
     addSimpleText()
     return
   }
@@ -121,4 +144,6 @@ export const resolveContent = async (
   if (content.stack) await addStack()
   if (content.text) await addText()
   if (content.image || content.svg) await addImage()
+  if (content.lineBreak) await addLineBreak()
+  if (content.pageBreak) await addPageBreak()
 }

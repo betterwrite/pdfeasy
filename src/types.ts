@@ -90,16 +90,36 @@ export interface ContentSVG extends ContentImage {
   }
 }
 
+export interface ContentLineBreak {
+  spacing?: number
+}
+
+export interface ContentPageBreak {
+  pages?: number
+}
+
+export interface DefaultsLineBreak {
+  spacing: number
+}
+
+export interface DefaultsPageBreak {
+  pages: number
+}
+
 export interface Content {
   raw?: string
   stack?: Content[]
   text?: ContentText
   image?: ContentImage
   svg?: ContentSVG
+  lineBreak?: ContentLineBreak
+  pageBreak?: ContentPageBreak
 }
 
 export interface PDFEasyDefaults {
   text: DefaultsText
+  lineBreak: DefaultsLineBreak
+  pageBreak: DefaultsPageBreak
 }
 
 export interface PluginPageTextOptions {

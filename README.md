@@ -25,8 +25,9 @@ Client/Server Side PDF-Generator based in PDFKit
 
 ## TODO for v1
 
-- [x] Bold, italic and underline text;
-- [ ] Table, list, checkbox, line break and page break content;
+- [x] Bold, italic and underline text content;
+- [x] line break and page break content;
+- [ ] Table, list and checkbox content;
 - [x] [Nuxt 3 plugin](https://github.com/betterwrite/nuxt-pdfeasy);
 - [ ] Vue 3 plugin;
 - [ ] 90% coverage;

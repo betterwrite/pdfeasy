@@ -16,6 +16,12 @@ export const pdfDefaults = (): PDFEasyDefaults => {
       bold: false,
       italic: false,
     },
+    lineBreak: {
+      spacing: 5,
+    },
+    pageBreak: {
+      pages: 1,
+    },
   }
 }
 
