@@ -7,7 +7,6 @@ const browserPlugin = require('node-stdlib-browser/helpers/esbuild/plugin')
 const stdlib = require('node-stdlib-browser')
 
 const importPath = require('./esbuild-import-path')
-const correctSet = require('./esbuild-correct-set')
 const vendorSourceMap = require('./esbuild-vendor-sourcemap')
 const dirnameAndFilenameSupport = require('./esbuild-dirname-and-filename')
 
@@ -34,7 +33,6 @@ const client = () => {
       plugins: [
         dtsPlugin(),
         alias({
-          // TODO: not use standalone version in future __dirname esbuild support
           pdfkit: require.resolve('pdfkit/js/pdfkit.standalone.js'),
           fontkit: require.resolve('fontkit-next'),
         }),
@@ -44,7 +42,6 @@ const client = () => {
         }),
         browserPlugin(stdlib),
         importPath,
-        correctSet,
         vendorSourceMap,
         dirnameAndFilenameSupport,
       ],
@@ -79,7 +76,6 @@ const node = () => {
         }),
         dtsPlugin(),
         importPath,
-        correctSet,
         vendorSourceMap,
         dirnameAndFilenameSupport,
       ],
@@ -89,7 +85,6 @@ const node = () => {
 
   make('esm')
   make('cjs')
-  make('iife')
 }
 
 client()

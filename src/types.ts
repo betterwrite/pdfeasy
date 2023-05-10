@@ -21,6 +21,7 @@ export type LocalFonts =
   | 'Times-Italic'
   | 'Times-BoldItalic'
   | 'ZapfDingbats'
+  
 export type Fonts<T = string> = LocalFonts | T
 
 export type PDFRunEmitOption = 'save' | 'blob' | 'none'

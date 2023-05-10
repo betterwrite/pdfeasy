@@ -114,7 +114,9 @@ export const resolveContent = async (
   }
 
   const addLineBreak = async () => {
-    const lineGap = content.lineBreak?.spacing ? content.lineBreak.spacing : defaults.lineBreak.spacing
+    const lineGap = content.lineBreak?.spacing
+      ? content.lineBreak.spacing
+      : defaults.lineBreak.spacing
 
     await app.fontSize(defaults.text.fontSize).text(' ', {
       lineGap,
@@ -122,7 +124,9 @@ export const resolveContent = async (
   }
 
   const addPageBreak = async () => {
-    const maxPages = content.pageBreak?.pages ? content.pageBreak.pages : defaults.pageBreak.pages
+    const maxPages = content.pageBreak?.pages
+      ? content.pageBreak.pages
+      : defaults.pageBreak.pages
 
     for (let i = 1; i <= maxPages; i++) {
       await app.addPage()

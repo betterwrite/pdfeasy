@@ -178,5 +178,3 @@ See [scripts](./scripts/generate/) for server-side runner.
 `pdfeasy/dist/node.cjs.js`
 
 `pdfeasy/dist/node.esm.js`
-
-`pdfeasy/dist/node.iife.js`
