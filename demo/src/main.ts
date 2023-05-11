@@ -1,4 +1,4 @@
-import pdfeasy, { Utils } from 'pdfeasy'
+import pdfeasy from 'pdfeasy'
 import './style.css'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
@@ -24,6 +24,11 @@ pdfeasy.add([
   { raw: 'using...', text: {} },
   { pageBreak: {} },
   { raw: 'pdfeasy!', text: {} },
+  { raw: 'a checkbox...', checkbox: {} },
+  { raw: 'a first in list...', list: { style: 'counter' } },
+  { raw: 'a second in list...', list: { style: 'counter' } },
+  { raw: 'a third in list...', list: { style: 'counter' } },
+  { raw: 'a list with circle...', list: { style: 'circle' } },
 ])
 
 // or https://path/to/Roboto.ttf

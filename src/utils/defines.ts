@@ -22,6 +22,14 @@ export const pdfDefaults = (): PDFEasyDefaults => {
     pageBreak: {
       pages: 1,
     },
+    checkbox: {
+      borderColor: '#000',
+      backgroundColor: '#fff',
+      size: 10,
+    },
+    list: {
+      style: 'circle',
+    },
   }
 }
 

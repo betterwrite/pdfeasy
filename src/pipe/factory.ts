@@ -1,4 +1,10 @@
-import { Content, ContentText, ContentImage, PDFEasyDefaults } from '../types'
+import {
+  Content,
+  ContentText,
+  ContentImage,
+  PDFEasyDefaults,
+  InternalGlobals,
+} from '../types'
 import { getCorrectFontFamily } from './transform'
 import { getImageRaw, SvgToPNG } from '../content/image'
 
@@ -16,7 +22,8 @@ export const resolveCover = async (app: PDFKit.PDFDocument, based: string) => {
 export const resolveContent = async (
   app: PDFKit.PDFDocument,
   defaults: PDFEasyDefaults,
-  content: Content
+  content: Content,
+  globals: InternalGlobals
 ) => {
   const addStack = async () => {
     const stack = content.stack as Content[]
@@ -49,23 +56,25 @@ export const resolveContent = async (
     })
   }
 
-  const addText = async () => {
+  const addText = async (embed: boolean = false, raw?: string) => {
     const style = content.text as ContentText
 
     if (!content.raw) return
 
+    const data = embed ? ` ${raw ?? content.raw}` : raw ?? content.raw
+
     await app
-      .font(getCorrectFontFamily(style.font || defaults.text.font, style))
-      .fontSize(style.fontSize || defaults.text.fontSize)
-      .fillColor(style.color || defaults.text.color)
-      .fillOpacity(style.opacity || defaults.text.opacity)
-      .text(content.raw, {
-        indent: style.indent || defaults.text.indent,
-        align: style.align || defaults.text.align,
-        paragraphGap: style.paragraphMargin || defaults.text.paragraphMargin,
-        lineGap: style.lineHeight || defaults.text.lineHeight,
-        destination: style.destination || defaults.text.destination,
-        goTo: style.go || defaults.text.go,
+      .font(getCorrectFontFamily(style?.font || defaults.text.font, style))
+      .fontSize(style?.fontSize || defaults.text.fontSize)
+      .fillColor(style?.color || defaults.text.color)
+      .fillOpacity(style?.opacity || defaults.text.opacity)
+      .text(data, {
+        indent: style?.indent || defaults.text.indent,
+        align: style?.align || defaults.text.align,
+        paragraphGap: style?.paragraphMargin || defaults.text.paragraphMargin,
+        lineGap: style?.lineHeight || defaults.text.lineHeight,
+        destination: style?.destination || defaults.text.destination,
+        goTo: style?.go || defaults.text.go,
       })
   }
 
@@ -133,6 +142,42 @@ export const resolveContent = async (
     }
   }
 
+  const addCheckbox = async () => {
+    const backgroundColor =
+      content.checkbox?.backgroundColor ?? defaults.checkbox.backgroundColor
+    const borderColor =
+      content.checkbox?.borderColor ?? defaults.checkbox.borderColor
+    const size = content.checkbox?.size ?? defaults.checkbox.size
+
+    app.initForm()
+
+    app.formCheckbox('checked', app.x, app.y, size, size, {
+      backgroundColor,
+      borderColor,
+    })
+
+    await addText(true)
+  }
+
+  const addList = async () => {
+    const style = content.list?.style
+
+    if (style === 'counter') {
+      const [type, value] = globals.__LAST_TYPE__
+
+      await addText(false, `${type === 'list' ? value : 1}. ${content.raw}`)
+    } else {
+      app
+        .circle(app.x + 4, app.y + 6, 3)
+        .lineWidth(1)
+        .fill('#000')
+
+      await addText(false, `    ${content.raw}`)
+    }
+  }
+
+  const addTable = async () => {}
+
   if (
     !content.stack &&
     !content.text &&
@@ -150,4 +195,7 @@ export const resolveContent = async (
   if (content.image || content.svg) await addImage()
   if (content.lineBreak) await addLineBreak()
   if (content.pageBreak) await addPageBreak()
+  if (content.checkbox) await addCheckbox()
+  if (content.list) await addList()
+  if (content.table) await addTable()
 }

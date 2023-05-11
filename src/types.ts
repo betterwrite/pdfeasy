@@ -21,14 +21,24 @@ export type LocalFonts =
   | 'Times-Italic'
   | 'Times-BoldItalic'
   | 'ZapfDingbats'
-  
-export type Fonts<T = string> = LocalFonts | T
+
+export type Fonts<T extends string = string> = LocalFonts | T
+
+export type ItemType = 'paragraph' | 'image' | 'list' | 'checkbox' | 'table' | 'svg' | 'line-break' | 'page-break'
 
 export type PDFRunEmitOption = 'save' | 'blob' | 'none'
 
 export type TextAlign = 'start' | 'center' | 'end' | 'justify'
 
 export type EmitterType = {}
+
+export interface InternalGlobals {
+  __NEW_PAGE__: boolean,
+  PLUGIN: {
+    __BACKGROUND_RAW__: string,
+  },
+  __LAST_TYPE__: [ItemType, number]
+}
 
 export interface ImageRaw {
   raw: string
@@ -99,12 +109,36 @@ export interface ContentPageBreak {
   pages?: number
 }
 
+export interface ContentCheckbox {
+  borderColor?: string
+  backgroundColor?: string
+  size?: number
+}
+
+export interface ContentList {
+  style: 'circle' | 'counter'
+}
+
+export interface ContentTable {
+  
+}
+
 export interface DefaultsLineBreak {
   spacing: number
 }
 
 export interface DefaultsPageBreak {
   pages: number
+}
+
+export interface DefaultsCheckbox {
+  borderColor: string
+  backgroundColor: string
+  size: number
+}
+
+export interface DefaultsList {
+  style: 'circle' | 'counter'
 }
 
 export interface Content {
@@ -115,12 +149,17 @@ export interface Content {
   svg?: ContentSVG
   lineBreak?: ContentLineBreak
   pageBreak?: ContentPageBreak
+  checkbox?: ContentCheckbox
+  list?: ContentList
+  table?: ContentTable
 }
 
 export interface PDFEasyDefaults {
   text: DefaultsText
   lineBreak: DefaultsLineBreak
   pageBreak: DefaultsPageBreak
+  checkbox: DefaultsCheckbox
+  list: DefaultsList
 }
 
 export interface PluginPageTextOptions {

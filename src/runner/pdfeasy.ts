@@ -13,6 +13,8 @@ import {
   RunOptionsBase,
   ExternalFont,
   PDFEasyDefaults,
+  InternalGlobals,
+  ItemType,
 } from '../types'
 import { setExternalFonts } from '../font/vfs'
 import { createWriteStream } from 'fs'
@@ -91,11 +93,33 @@ export default class {
    *
    * @private
    */
-  public globals = {
+  public globals: InternalGlobals = {
     __NEW_PAGE__: true,
     PLUGIN: {
       __BACKGROUND_RAW__: '',
     },
+    __LAST_TYPE__: ['paragraph', 0],
+  }
+
+  private mutateLastType = (type: ItemType) => {
+    const isSameType = this.globals.__LAST_TYPE__[0] === type
+
+    this.globals.__LAST_TYPE__ = isSameType
+      ? [type, ++this.globals.__LAST_TYPE__[1]]
+      : [type, 1]
+  }
+
+  private getType = (content: Content): ItemType => {
+    if (content.checkbox) return 'checkbox'
+    if (content.list) return 'list'
+    if (content.lineBreak) return 'line-break'
+    if (content.pageBreak) return 'page-break'
+    if (content.svg) return 'svg'
+    if (content.table) return 'table'
+    if (content.image) return 'image'
+    if (content.text) return 'paragraph'
+
+    return 'paragraph'
   }
 
   /**
@@ -111,7 +135,14 @@ export default class {
     for (const content of this.contents) {
       await runPluginBackground(this)
 
-      await resolveContent(this.pdfkit as typeof PDFDocument, this.def, content)
+      this.mutateLastType(this.getType(content))
+
+      await resolveContent(
+        this.pdfkit as typeof PDFDocument,
+        this.def,
+        content,
+        this.globals
+      )
     }
   }
 
@@ -134,6 +165,7 @@ export default class {
       PLUGIN: {
         __BACKGROUND_RAW__: '',
       },
+      __LAST_TYPE__: ['paragraph', 1],
     }
   }
 
