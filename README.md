@@ -124,22 +124,38 @@ pdfeasy.new({
 
 ## Runner Options
 
+### Client-Side Setup
+
 ```ts
 pdfeasy.run({
   type: 'client',
-  clientEmit: 'save'
-}).then(() => {}).catch((err: any) => {
+  clientEmit: 'save',
+}).then(() => {}).catch((err) => {
   console.error(err)
 })
 ```
 
+### Server-Side Setup
+
 ```ts
 pdfeasy.run({
   type: 'server',
-  serverPath: path.resolve(process.cwd() + '/examples')
-}).then(() => {}).catch((err: any) => {
+  serverPath: path.resolve(process.cwd() + '/examples'),
+}).then(() => {}).catch((err) => {
   console.error(err)
 })
+```
+
+### Color Schema
+
+It is possible to define the color scheme used automatically:
+
+```ts
+// converts all hex color to cmyk
+pdfeasy.run({ colorSchema: 'CMYK' })
+
+// converts all hex color to rgb
+pdfeasy.run({ colorSchema: 'RBG' })
 ```
 
 ## Custom Fonts
@@ -168,8 +184,6 @@ See [examples](./examples/) for .pdf results.
 See [scripts](./scripts/generate/) for server-side runner.
 
 ## Bundles
-
-> **Attention!** Its recommended use explicit imports (*import pdfeasy from 'pdfeasy/dist/client.esm.js'*) in your projects.
 
 `pdfeasy/dist/client.cjs.js`
 

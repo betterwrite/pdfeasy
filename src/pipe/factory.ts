@@ -1,12 +1,19 @@
-import {
+import type {
   Content,
   ContentText,
   ContentImage,
   PDFEasyDefaults,
   InternalGlobals,
+  HexColor,
+  RunOptionsBase,
 } from '../types'
 import { getCorrectFontFamily } from './transform'
 import { getImageRaw, SvgToPNG } from '../content/image'
+import { HEXToCMYK } from 'src/schema/color'
+
+export const resolveColor = (color: HexColor, run: RunOptionsBase) => {
+  return run?.colorSchema === 'CMYK' ? HEXToCMYK(color) : color
+}
 
 export const resolveCover = async (app: PDFKit.PDFDocument, based: string) => {
   const { raw } = await getImageRaw(based)
@@ -23,7 +30,8 @@ export const resolveContent = async (
   app: PDFKit.PDFDocument,
   defaults: PDFEasyDefaults,
   content: Content,
-  globals: InternalGlobals
+  globals: InternalGlobals,
+  run: RunOptionsBase
 ) => {
   const addStack = async () => {
     const stack = content.stack as Content[]
@@ -41,7 +49,7 @@ export const resolveContent = async (
           )
         )
         .fontSize(entity.text.fontSize || defaults.text.fontSize)
-        .fillColor(entity.text.color || defaults.text.color)
+        .fillColor(resolveColor(entity.text.color || defaults.text.color, run))
         .fillOpacity(entity.text.opacity || defaults.text.opacity)
         .text(entity.raw, {
           continued: !isLast,
@@ -66,7 +74,7 @@ export const resolveContent = async (
     await app
       .font(getCorrectFontFamily(style?.font || defaults.text.font, style))
       .fontSize(style?.fontSize || defaults.text.fontSize)
-      .fillColor(style?.color || defaults.text.color)
+      .fillColor(resolveColor(style?.color || defaults.text.color, run))
       .fillOpacity(style?.opacity || defaults.text.opacity)
       .text(data, {
         indent: style?.indent || defaults.text.indent,
@@ -84,7 +92,7 @@ export const resolveContent = async (
     await app
       .font(getCorrectFontFamily(defaults.text.font, {}))
       .fontSize(defaults.text.fontSize)
-      .fillColor(defaults.text.color)
+      .fillColor(resolveColor(defaults.text.color, run))
       .fillOpacity(defaults.text.opacity)
       .text(content.raw, {
         indent: defaults.text.indent,
@@ -143,10 +151,14 @@ export const resolveContent = async (
   }
 
   const addCheckbox = async () => {
-    const backgroundColor =
-      content.checkbox?.backgroundColor ?? defaults.checkbox.backgroundColor
-    const borderColor =
-      content.checkbox?.borderColor ?? defaults.checkbox.borderColor
+    const backgroundColor = resolveColor(
+      content.checkbox?.backgroundColor ?? defaults.checkbox.backgroundColor,
+      run
+    )
+    const borderColor = resolveColor(
+      content.checkbox?.borderColor ?? defaults.checkbox.borderColor,
+      run
+    )
     const size = content.checkbox?.size ?? defaults.checkbox.size
 
     app.initForm()
@@ -170,7 +182,7 @@ export const resolveContent = async (
       app
         .circle(app.x + 4, app.y + 6, 3)
         .lineWidth(1)
-        .fill('#000')
+        .fill(resolveColor('#000000', run))
 
       await addText(false, `    ${content.raw}`)
     }

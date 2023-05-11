@@ -141,7 +141,8 @@ export default class {
         this.pdfkit as typeof PDFDocument,
         this.def,
         content,
-        this.globals
+        this.globals,
+        this.optionsRun
       )
     }
   }

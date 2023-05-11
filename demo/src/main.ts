@@ -42,7 +42,7 @@ pdfeasy.addFonts([
   }
 ])
 
-pdfeasy.run().then((blob: string) => {
+pdfeasy.run({ colorSchema: 'CMYK' }).then((blob: string) => {
   const iframe = document.querySelector('#pdf') as HTMLIFrameElement
 
   iframe.src = blob

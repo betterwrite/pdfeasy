@@ -30,6 +30,10 @@ export type PDFRunEmitOption = 'save' | 'blob' | 'none'
 
 export type TextAlign = 'start' | 'center' | 'end' | 'justify'
 
+export type ColorSchema = 'RGB' | 'CMYK'
+
+export type HexColor = string | `#${string}`
+
 export type EmitterType = {}
 
 export interface InternalGlobals {
@@ -301,4 +305,10 @@ export interface RunOptions {
    *  Required in {@link RunOptions} type: server
    */
   serverPath?: string
+  /**
+   *  Server file destination
+   *
+   *  @default 'rgb'
+   */
+  colorSchema?: ColorSchema
 }
