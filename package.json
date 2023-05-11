@@ -1,6 +1,6 @@
 {
   "name": "pdfeasy",
-  "version": "0.3.3",
+  "version": "1.0.0-beta.0",
   "description": "Client/Server Side PDF-Creator based in PDFKit",
   "author": "Novout <novout@hotmail.com>",
   "license": "MIT",
