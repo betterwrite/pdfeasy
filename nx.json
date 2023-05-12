@@ -1,0 +1,46 @@
+{
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "build:prod"
+        ]
+      }
+    }
+  },
+  "targetDefaults": {
+    "build:prod": {
+      "dependsOn": [
+        "^build:prod"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "dev": {
+      "dependsOn": [
+        "^build:prod"
+      ]
+    },
+    "demo": {
+      "dependsOn": [
+        "^build:prod"
+      ]
+    },
+    "node:script": {
+      "dependsOn": [
+        "^build:prod"
+      ]
+    }
+  }
+}

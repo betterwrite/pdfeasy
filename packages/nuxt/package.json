@@ -1,0 +1,61 @@
+{
+  "name": "nuxt-pdfeasy",
+  "sideEffects": false,
+  "author": {
+    "email": "novout@hotmail.com",
+    "name": "Novout",
+    "url": "https://github.com/Novout"
+  },
+  "version": "1.0.0",
+  "repository": "https://github.com/betterwrite/nuxt-pdfeasy",
+  "description": "A PDF document generator to your Nuxt application.",
+  "engines": {
+    "node": ">=14.16"
+  },
+  "bugs": {
+    "url": "https://github.com/betterwrite/nuxt-pdfeasy/issues"
+  },
+  "keywords": [
+    "pdfkit",
+    "pdf",
+    "typescript",
+    "javascript",
+    "printing",
+    "nuxt3"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "scripts": {
+    "build:prod": "pnpm run set",
+    "build": "pnpm run set",
+    "prepack": "pnpm run set",
+    "set": "nuxi prepare && nuxt-module-build && nuxi prepare playground",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.4.3",
+    "pdfeasy": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "@nuxt/module-builder": "^0.2.1",
+    "@nuxt/schema": "^3.4.3",
+    "@nuxtjs/eslint-config-typescript": "^12.0.0",
+    "eslint": "^8.27.0",
+    "nuxt": "^3.4.3"
+  }
+}

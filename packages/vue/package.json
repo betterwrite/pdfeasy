@@ -1,0 +1,61 @@
+{
+  "name": "vue-pdfeasy",
+  "author": "Novout",
+  "license": "MIT",
+  "version": "2.2.0",
+  "description": "A pdfeasy plugin for Vue 3",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/betterwrite/pdfeasy"
+  },
+  "scripts": {
+    "build": "tsup",
+    "build:prod": "tsup"
+  },
+  "keywords": [
+    "vue",
+    "pdfmake"
+  ],
+  "dependencies": {
+    "pdfeasy": "workspace:*",
+    "vue-demi": "latest"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": "^1.0.0-rc.1",
+    "vue": "^2.0.0 || >=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/jsdom": "^16.2.15",
+    "@types/node": "^14.18.36",
+    "@vitejs/plugin-vue": "^2.3.4",
+    "generi": "1.2.0",
+    "typescript": "^4.9.5",
+    "tsup": "6.7.0",
+    "vite": "4.1.1",
+    "vue": "^3.2.47"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ],
+  "engines": {
+    "node": ">= 14"
+  }
+}

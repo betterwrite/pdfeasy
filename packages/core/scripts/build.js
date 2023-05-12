@@ -1,4 +1,3 @@
-const { dtsPlugin } = require('esbuild-plugin-d.ts')
 const { build } = require('esbuild')
 const alias = require('esbuild-plugin-alias')
 const replace = require('esbuild-plugin-resolve')
@@ -31,7 +30,6 @@ const client = () => {
         Buffer: 'Buffer',
       },
       plugins: [
-        dtsPlugin(),
         alias({
           pdfkit: require.resolve('pdfkit/js/pdfkit.standalone.js'),
           fontkit: require.resolve('fontkit-next'),
@@ -58,7 +56,7 @@ const node = () => {
     await build({
       platform: 'node',
       format,
-      target: format === 'esm' ? ['es2020', 'node14'] : ['node14'],
+      target: ['node14'],
       color: true,
       logLevel: 'info',
       entryPoints: ['./src/index.ts'],
@@ -74,7 +72,6 @@ const node = () => {
         alias({
           fontkit: require.resolve('fontkit-next'),
         }),
-        dtsPlugin(),
         importPath,
         vendorSourceMap,
         dirnameAndFilenameSupport,

@@ -38,10 +38,10 @@ export const HEXToCMYK = (
   Y = Math.round(Y * 100)
   K = Math.round(K * 100)
 
-  C = Number(C.toFixed(0)) ?? 0
-  M = Number(M.toFixed(0)) ?? 0
-  Y = Number(Y.toFixed(0)) ?? 0
-  K = Number(K.toFixed(0)) ?? 0
+  C = Number(C.toFixed(0)) || 0
+  M = Number(M.toFixed(0)) || 0
+  Y = Number(Y.toFixed(0)) || 0
+  K = Number(K.toFixed(0)) || 0
 
   return [C, M, Y, K]
 }
