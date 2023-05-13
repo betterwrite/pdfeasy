@@ -69,7 +69,7 @@ export const resolveContent = async (
 
     if (!content.raw) return
 
-    const data = embed ? ` ${raw ?? content.raw}` : raw ?? content.raw
+    const data = embed ? ` ${raw || content.raw}` : raw || content.raw
 
     await app
       .font(getCorrectFontFamily(style?.font || defaults.text.font, style))
@@ -152,14 +152,14 @@ export const resolveContent = async (
 
   const addCheckbox = async () => {
     const backgroundColor = resolveColor(
-      content.checkbox?.backgroundColor ?? defaults.checkbox.backgroundColor,
+      content.checkbox?.backgroundColor || defaults.checkbox.backgroundColor,
       run
     )
     const borderColor = resolveColor(
-      content.checkbox?.borderColor ?? defaults.checkbox.borderColor,
+      content.checkbox?.borderColor || defaults.checkbox.borderColor,
       run
     )
-    const size = content.checkbox?.size ?? defaults.checkbox.size
+    const size = content.checkbox?.size || defaults.checkbox.size
 
     app.initForm()
 

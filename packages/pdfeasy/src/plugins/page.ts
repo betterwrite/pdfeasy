@@ -78,7 +78,7 @@ export const generate = (instance: pdfeasy): PluginGenerate => {
   const Image = async (
     str: string,
     style: ContentImage,
-    options: PluginPageImageOptions
+    _: PluginPageImageOptions
   ): Promise<void> => {
     if (!str) return
 

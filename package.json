@@ -13,7 +13,7 @@
     "patch": "generi log patch",
     "minor": "generi log minor",
     "major": "generi log major",
-    "prepublishOnly": "pnpm run build:prod"
+    "prepublishOnly": "pnpm run build:prod && pnpm run node:script"
   },
   "devDependencies": {
     "generi": "^1.2.1",

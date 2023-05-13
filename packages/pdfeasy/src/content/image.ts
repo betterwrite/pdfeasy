@@ -42,7 +42,7 @@ export const SvgToPNG = (raw: string): Promise<{ raw: string }> => {
 }
 
 export const getImageRaw = (raw: string): Promise<ImageRaw> => {
-  return new Promise(async (res, rej) => {
+  return new Promise(async (res) => {
     if (regex().base64(raw)) {
       res({
         raw,

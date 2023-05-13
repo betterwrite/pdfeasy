@@ -23,7 +23,8 @@
       "resolveJsonModule": true,
       "baseUrl": ".",
       "declaration": true,
-      "emitDeclarationOnly": true
+      "declarationMap": true,
+      "declarationDir": "./dist"
     },
     "include": ["src/**/*.ts"]
   }
