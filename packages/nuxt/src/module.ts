@@ -7,7 +7,10 @@ export interface ModuleOptions {}
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'nuxt-pdfeasy',
-    configKey: 'pdfeasy'
+    configKey: 'pdfeasy',
+    compatibility: {
+      nuxt: '^3.0.0',
+    },
   },
   setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
