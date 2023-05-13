@@ -6,7 +6,7 @@
     "name": "Novout",
     "url": "https://github.com/Novout"
   },
-  "version": "3.0.0-beta.0",
+  "version": "0.5.0",
   "repository": "https://github.com/betterwrite/nuxt-pdfeasy",
   "description": "A PDF document generator to your Nuxt application.",
   "engines": {
