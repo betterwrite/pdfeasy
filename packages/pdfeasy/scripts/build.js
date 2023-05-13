@@ -1,6 +1,7 @@
 const { build } = require('esbuild')
 const alias = require('esbuild-plugin-alias')
 const replace = require('esbuild-plugin-resolve')
+const { dtsPlugin } = require("esbuild-plugin-d.ts");
 
 const browserPlugin = require('node-stdlib-browser/helpers/esbuild/plugin')
 const stdlib = require('node-stdlib-browser')
@@ -30,6 +31,7 @@ const client = () => {
         Buffer: 'Buffer',
       },
       plugins: [
+        dtsPlugin(),
         alias({
           pdfkit: require.resolve('pdfkit/js/pdfkit.standalone.js'),
           fontkit: require.resolve('fontkit-next'),
@@ -65,6 +67,7 @@ const node = () => {
       sourcemap: process.env.NODE_ENV === 'production',
       minify: process.env.NODE_ENV === 'production',
       plugins: [
+        dtsPlugin(),
         replace({
           // See https://github.com/Pzixel/PDFKit-example/pull/1/files
           "var fs = _interopDefault(require('fs'));": "var fs = require('fs');",
