@@ -1,4 +1,4 @@
-import pdfeasy from 'pdfeasy'
+import pdfeasy, { Utils } from 'pdfeasy'
 import './style.css'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
@@ -24,10 +24,15 @@ pdfeasy.add([
   { raw: 'using...', text: {} },
   { pageBreak: {} },
   { raw: 'pdfeasy!', text: {} },
+  ...Utils.content(),
+  ...Utils.content(),
+  ...Utils.content(),
   { raw: 'a checkbox...', checkbox: {} },
   { raw: 'a first in list...', list: { style: 'counter' } },
   { raw: 'a second in list...', list: { style: 'counter' } },
   { raw: 'a third in list...', list: { style: 'counter' } },
+  ...Utils.content(),
+  ...Utils.content(),
   { raw: 'a list with circle...', list: { style: 'circle' } },
 ])
 

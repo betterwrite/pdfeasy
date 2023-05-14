@@ -31,11 +31,11 @@ export const loremIpsum = () => {
 export const content = (): Content[] => {
   return [
     { raw: loremIpsum().title() },
-    { raw: loremIpsum().paragraph(), text: { fontSize: 18 } },
+    { raw: loremIpsum().paragraph(), text: {} },
     {
       stack: [
-        { raw: loremIpsum().paragraph(), text: { lineHeight: 10 } },
-        { raw: loremIpsum().paragraph(), text: { lineHeight: 2 } },
+        { raw: loremIpsum().paragraph(), text: {} },
+        { raw: loremIpsum().paragraph(), text: {} },
       ],
     },
     { raw: loremIpsum().paragraph(), text: {} },

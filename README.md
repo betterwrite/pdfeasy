@@ -17,21 +17,10 @@ Client/Server Side PDF-Generator based in PDFKit
 <br>
 
 - **✅ Client/Server Side Support**
-- **✅ Write in Typescript**
-- **✅ Builded with [ESBuild](https://github.com/evanw/esbuild) and requests with [OhMyFetch](https://github.com/unjs/ohmyfetch)**
+- **✅ Write in Typescript and Builded with [ESBuild](https://github.com/evanw/esbuild)**
 - **✅ Browser STDLib**
 - **✅ Custom Fonts && Purge Unused Fonts**
 - **✅ Plugins Ready!**
-
-## TODO for v1
-
-- [x] Bold, italic and underline text content;
-- [x] line break and page break content;
-- [ ] Table, list and checkbox content;
-- [x] [Nuxt 3 plugin](https://github.com/betterwrite/nuxt-pdfeasy);
-- [ ] Vue 3 plugin;
-- [ ] 90% coverage;
-- [ ] `Client-Side` and `Server-Side` with same features.
 
 ## Installation
 
@@ -140,7 +129,7 @@ pdfeasy.run({
 ```ts
 pdfeasy.run({
   type: 'server',
-  serverPath: path.resolve(process.cwd() + '/examples'),
+  serverPath: '/examples',
 }).then(() => {}).catch((err) => {
   console.error(err)
 })
@@ -154,7 +143,7 @@ It is possible to define the color scheme used automatically:
 // converts all hex color to cmyk
 pdfeasy.run({ colorSchema: 'CMYK' })
 
-// converts all hex color to rgb
+// preserve hex colors (it's default)
 pdfeasy.run({ colorSchema: 'RBG' })
 ```
 
@@ -177,11 +166,11 @@ pdfeasy.addFonts([
 
 ## Resources
 
-See [source demo](./demo) for more explanations
+See [source demo](./packages/pdfeasy/demo) for more explanations
 
-See [examples](./examples/) for .pdf results.
+See [examples](./packages/pdfeasy/examples/) for .pdf results.
 
-See [scripts](./scripts/generate/) for server-side runner.
+See [scripts](./packages/pdfeasy/scripts/generate/) for server-side runner.
 
 ## Bundles
 
