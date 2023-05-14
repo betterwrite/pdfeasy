@@ -1,4 +1,4 @@
-# Vue PDFMake
+# Vue PDFEasy
 
 A PDFEasy plugin for Vue 3.x
 
@@ -9,6 +9,10 @@ A PDFEasy plugin for Vue 3.x
 ## Example
 
 ```ts
+<template>
+  <iframe id="pdf" />
+</template>
+
 <script setup lang="ts">
 import { usePDF } from 'vue-pdfeasy'
 
