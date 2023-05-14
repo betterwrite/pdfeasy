@@ -1,6 +1,6 @@
 {
   "name": "pdfeasy",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Client/Server Side PDF-Creator based in PDFKit",
   "author": "Novout <novout@hotmail.com>",
   "license": "MIT",
@@ -75,8 +75,8 @@
     "node-stdlib-browser": "1.2.0",
     "prettier": "2.8.8",
     "rimraf": "5.0.0",
-    "typescript": "5.0.4",
     "tsup": "6.7.0",
+    "typescript": "5.0.4",
     "vite": "4.3.5",
     "vitest": "0.31.0"
   }
