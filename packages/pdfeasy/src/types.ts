@@ -311,4 +311,10 @@ export interface RunOptions {
    *  @default 'rgb'
    */
   colorSchema?: ColorSchema
+  /**
+   *  CWD for Server-Side Setup
+   *
+   *  @default 'process.cwd()'
+   */
+  cwd?: ColorSchema
 }

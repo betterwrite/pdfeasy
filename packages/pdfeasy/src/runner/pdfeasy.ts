@@ -310,10 +310,8 @@ export default class {
       if (runType && options?.serverPath) {
         this.pdfkit?.pipe(
           createWriteStream(
-            path.resolve(
-              options.serverPath +
-                `/${this.options?.exports?.name || 'New PDF'}.pdf`
-            )
+            path.resolve((options?.cwd || process.cwd()) + options.serverPath) +
+              `/${this.options?.exports?.name || 'New PDF'}.pdf`
           )
         )
 

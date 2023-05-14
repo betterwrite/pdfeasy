@@ -1,6 +1,4 @@
 import pdfeasy from '../../dist/node.esm.js'
-import path from 'path'
-import process from 'process'
 
 pdfeasy.new({
   exports: {
@@ -13,7 +11,7 @@ pdfeasy.add([{ raw: 'A simple pdf!', text: {} }])
 pdfeasy
   .run({
     type: 'server',
-    serverPath: path.resolve(process.cwd() + '/examples'),
+    serverPath: '/examples',
   })
   .then(() => {
     console.log('simple-pdf.js ready!')

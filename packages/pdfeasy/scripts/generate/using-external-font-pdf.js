@@ -1,6 +1,4 @@
 import pdfeasy from '../../dist/node.esm.js'
-import path from 'path'
-import process from 'process'
 
 pdfeasy.new({
   exports: {
@@ -26,7 +24,7 @@ pdfeasy.addFonts([
 pdfeasy
   .run({
     type: 'server',
-    serverPath: path.resolve(process.cwd() + '/examples'),
+    serverPath: '/examples',
   })
   .then(() => {
     console.log('using-external-font-pdf.js ready!')
