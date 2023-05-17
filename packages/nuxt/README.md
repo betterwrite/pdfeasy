@@ -5,8 +5,6 @@
 ## Setup
 
 ```bash
-yarn add nuxt-pdfeasy
-// OR
 npm i nuxt-pdfeasy
 ```
 

@@ -20,26 +20,22 @@ Client/Server Side PDF-Generator based in PDFKit
 - **✅ Write in Typescript and Builded with [ESBuild](https://github.com/evanw/esbuild)**
 - **✅ Browser STDLib**
 - **✅ Custom Fonts && Purge Unused Fonts**
+- **✅ [Nuxt](./packages/nuxt) & [Vue](./packages/vue) Support**
 - **✅ Plugins Ready!**
 
-## Installation
+## Setup
 
 ```shell
 npm i pdfeasy
 ```
 
-## Simple Example
-
 ```ts
-import pdfeasy, { Utils } from 'pdfeasy'
-// import pdfeasy, { Utils } from 'pdfeasy/dist/client.cjs.js'
-// import pdfeasy, { Utils } from 'pdfeasy/dist/node.esm.js'
-// import pdfeasy, { Utils } from 'pdfeasy/dist/node.cjs.js'
+import pdfeasy from 'pdfeasy'
 
 pdfeasy.new()
 
 pdfeasy.add([
-  { raw: 'Simple text!' },
+  { raw: 'PDFEasy!' },
 ])
 
 pdfeasy.run({
@@ -49,9 +45,55 @@ pdfeasy.run({
   const iframe = document.querySelector('#pdf') as HTMLIFrameElement
 
   iframe.src = blob
-}).catch((err: any) => {
-  console.error(err)
+}).catch((err) => {
+  // ...
 })
+```
+
+### [Vue](./packages/vue)
+
+```shell
+npm i vue-pdfeasy
+```
+
+```ts
+import { PDFPlugin } from 'vue3-pdfeasy';
+
+const app = createApp(App);
+app.use(PDFPlugin);
+app.mount('#app');
+
+// ...
+
+<script setup>
+import { usePDF } from 'vue3-pdfeasy';
+
+const pdf = usePDF()
+
+// ...
+</script>
+```
+
+### [Nuxt](./packages/nuxt)
+
+```bash
+npm i nuxt-pdfeasy
+```
+
+```js
+// nuxt.config.ts
+modules: [
+  'nuxt-pdfeasy'
+]
+```
+
+```ts
+<script setup>
+import { useNuxtApp } from '#app';
+
+const { $pdf } = useNuxtApp()
+// ...
+</script>
 ```
 
 ## Content
@@ -59,13 +101,17 @@ pdfeasy.run({
 ```ts
 pdfeasy.add([
   ...Utils.content(), // Utils for debug
-  { raw: 'Hello PDFEasy!', text: { font: 'Roboto' }}, // text with custom font,
-  { raw: 'https://i.imgur.com/path.png', image: {}}, // external image
+  { raw: 'Hello PDFEasy!', text: { font: 'Roboto' } }, // text with custom font,
+  { raw: 'https://i.imgur.com/path.png', image: {} }, // external image
   { stack: [ // stack for paragraph's
-    { raw: 'A ', text: {}},
-    { raw: 'Simple', text: { bold: true, italic: true }},
-    { raw: ' Stack!', text: {}},
+    { raw: 'A ', text: {} },
+    { raw: 'Simple', text: { bold: true, italic: true } },
+    { raw: ' Stack!', text: {} },
   ]},
+  { pageBreak: {} }, // page break
+  { lineBreak: {} }, // line break
+  { raw: 'A checkbox!', checkbox: {} }, // checkbox
+  { raw: 'A list!', list: { style: 'circle' } }, // list
 ])
 ```
 
@@ -166,7 +212,7 @@ pdfeasy.addFonts([
 
 ## Resources
 
-See [source demo](./packages/pdfeasy/demo) for more explanations
+See [source demo](./demo) for more explanations
 
 See [examples](./packages/pdfeasy/examples/) for .pdf results.
 

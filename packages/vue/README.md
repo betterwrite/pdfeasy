@@ -9,6 +9,15 @@ A PDFEasy plugin for Vue 3.x
 ## Example
 
 ```ts
+//...
+import { PDFPlugin } from 'vue-pdfeasy';
+//...
+const app = createApp(App);
+app.use(PDFPlugin);
+app.mount('#app');
+
+// ...
+
 <template>
   <iframe id="pdf" />
 </template>
