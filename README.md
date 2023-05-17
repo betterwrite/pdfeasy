@@ -57,7 +57,7 @@ npm i vue-pdfeasy
 ```
 
 ```ts
-import { PDFPlugin } from 'vue3-pdfeasy';
+import { PDFPlugin } from 'vue-pdfeasy';
 
 const app = createApp(App);
 app.use(PDFPlugin);
@@ -66,7 +66,7 @@ app.mount('#app');
 // ...
 
 <script setup>
-import { usePDF } from 'vue3-pdfeasy';
+import { usePDF } from 'vue-pdfeasy';
 
 const pdf = usePDF()
 
