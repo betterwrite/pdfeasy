@@ -8,19 +8,15 @@
     "build": "lerna run build",
     "build:prod": "lerna run build:prod",
     "test": "lerna run test",
-    "node:script": "lerna run node:script",
+    "node:script": "lerna run build:prod && lerna run node:script",
     "demo": "lerna run build:prod && lerna run demo",
     "patch": "generi log patch",
     "minor": "generi log minor",
-    "major": "generi log major",
-    "prepublishOnly": "pnpm run build:prod && pnpm run node:script"
+    "major": "generi log major"
   },
   "devDependencies": {
     "generi": "^1.2.1",
     "lerna": "6.6.2"
   },
-  "packageManager": "pnpm@8.5.0",
-  "dependencies": {
-    "pdfkit-table": "^0.1.99"
-  }
+  "packageManager": "pnpm@8.5.0"
 }

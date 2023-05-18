@@ -3,10 +3,6 @@ lockfileVersion: '6.0'
 importers:
 
   .:
-    dependencies:
-      pdfkit-table:
-        specifier: ^0.1.99
-        version: 0.1.99
     devDependencies:
       generi:
         specifier: ^1.2.1
@@ -63,6 +59,9 @@ importers:
       pdfkit:
         specifier: 0.13.0
         version: 0.13.0
+      pdfkit-table:
+        specifier: ^0.1.99
+        version: 0.1.99
     devDependencies:
       '@types/blob-stream':
         specifier: 0.1.30

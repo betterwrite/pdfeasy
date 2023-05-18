@@ -190,7 +190,7 @@ export const resolveContent = async (
   }
 
   const addTable = async () => {
-    const options = content.table?.options ?? {}
+    const options = content.table?.options || {}
     const table = content.table?.body
 
     options.width =

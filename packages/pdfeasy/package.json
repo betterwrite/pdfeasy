@@ -57,7 +57,8 @@
     "fontkit-next": "1.8.3",
     "mitt": "3.0.0",
     "ohmyfetch": "0.4.21",
-    "pdfkit": "0.13.0"
+    "pdfkit": "0.13.0",
+    "pdfkit-table": "^0.1.99"
   },
   "devDependencies": {
     "@types/blob-stream": "0.1.30",
