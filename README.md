@@ -112,6 +112,22 @@ pdfeasy.add([
   { lineBreak: {} }, // line break
   { raw: 'A checkbox!', checkbox: {} }, // checkbox
   { raw: 'A list!', list: { style: 'circle' } }, // list
+  { table: { // table. Check pdfkit-table package for more explanations
+    body: {
+      title: "Title",
+      subtitle: "subtitle",
+      headers: [ "Item 1", "Item 2" ],
+      rows: [
+        [ "A", "100%" ],
+        [ "B", "50%" ],
+      ],
+    },
+    options: {}
+  }}
+  { form: [ // dynamic forms
+    { name: 'button-field', type: 'button', options: { label: 'Click here!'} },
+    { name: 'text-field', type: 'text', options: { value: '' }},
+  ]},
 ])
 ```
 

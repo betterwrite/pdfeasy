@@ -27,13 +27,28 @@ pdfeasy.add([
   ...Utils.content(),
   ...Utils.content(),
   ...Utils.content(),
-  { raw: 'a checkbox...', checkbox: {} },
   { raw: 'a first in list...', list: { style: 'counter' } },
   { raw: 'a second in list...', list: { style: 'counter' } },
   { raw: 'a third in list...', list: { style: 'counter' } },
   ...Utils.content(),
   ...Utils.content(),
   { raw: 'a list with circle...', list: { style: 'circle' } },
+  { table: {
+    body: {
+      title: "Countries",
+      subtitle: "A countries list of conversion rate",
+      headers: [ "Country", "Conversion rate", "Trend" ],
+      rows: [
+        [ "Switzerland", "12%", "+1.12%" ],
+        [ "France", "67%", "-0.98%" ],
+        [ "England", "33%", "+4.44%" ],
+      ],
+    }
+  }},
+  { form: [
+    { name: 'button-field', type: 'button', options: { label: 'Click here!'} },
+    { name: 'text-field', type: 'text', options: { value: '' }},
+  ]},
 ])
 
 // or https://path/to/Roboto.ttf
@@ -47,7 +62,7 @@ pdfeasy.addFonts([
   }
 ])
 
-pdfeasy.run({ colorSchema: 'CMYK' }).then((blob: string) => {
+pdfeasy.run().then((blob: string) => {
   const iframe = document.querySelector('#pdf') as HTMLIFrameElement
 
   iframe.src = blob

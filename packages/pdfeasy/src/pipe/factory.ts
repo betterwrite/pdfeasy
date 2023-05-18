@@ -4,14 +4,15 @@ import type {
   ContentImage,
   PDFEasyDefaults,
   InternalGlobals,
-  HexColor,
   RunOptionsBase,
+  Color,
 } from '../types'
 import { getCorrectFontFamily } from './transform'
 import { getImageRaw, SvgToPNG } from '../content/image'
 import { HEXToCMYK } from 'src/schema/color'
+import type PDFDocumentWithTables from 'pdfkit-table'
 
-export const resolveColor = (color: HexColor, run: RunOptionsBase) => {
+export const resolveColor = (color: Color, run: RunOptionsBase) => {
   return run?.colorSchema === 'CMYK' ? HEXToCMYK(color) : color
 }
 
@@ -27,7 +28,7 @@ export const resolveCover = async (app: PDFKit.PDFDocument, based: string) => {
 }
 
 export const resolveContent = async (
-  app: PDFKit.PDFDocument,
+  app: PDFDocumentWithTables,
   defaults: PDFEasyDefaults,
   content: Content,
   globals: InternalGlobals,
@@ -188,7 +189,90 @@ export const resolveContent = async (
     }
   }
 
-  const addTable = async () => {}
+  const addTable = async () => {
+    const options = content.table?.options ?? {}
+    const table = content.table?.body
+
+    options.width =
+      options?.width ||
+      app.page.width - (app.page.margins.left + app.page.margins.right)
+    table?.headers?.map((header) => {
+      if (typeof header === 'string') return header
+
+      return {
+        align: header.align,
+        headerAlign: header.headerAlign,
+        headerColor: resolveColor(header.headerColor || '#FFFFFF', run),
+        headerOpacity: header.headerOpacity,
+        columnColor: resolveColor(header.columnColor || '#000000', run),
+        columnOpacity: header.columnOpacity,
+        label: header.label,
+        property: header.property,
+        renderer: header.renderer,
+        valign: header.valign,
+        width: header.width,
+      }
+    })
+
+    if (!table) {
+      return
+    }
+
+    try {
+      await app.table(table, options)
+    } catch (e) {}
+  }
+
+  const addFormulary = async () => {
+    if (!content.form || content.form?.length === 0) return
+
+    console.warn(
+      "[PDFEASY]: Formulary block is under construction. Don't use this in production."
+    )
+
+    app.initForm()
+
+    for (const item of content.form) {
+      const width =
+        item.options?.width ||
+        app.page.width - (app.page.margins.left + app.page.margins.right)
+      const height = item.options?.height || 20
+
+      const opts = item.options || {}
+      opts.value = opts?.value || ''
+      opts.backgroundColor = resolveColor(
+        item.options?.backgroundColor || '#FFFFFF',
+        run
+      )
+      opts.borderColor = resolveColor(
+        content.checkbox?.borderColor || '#000000',
+        run
+      )
+
+      switch (item.type) {
+        case 'text': {
+          await app.formText(item.name, app.x, app.y, width, height, opts)
+
+          break
+        }
+        case 'combo': {
+          await app.formCombo(item.name, app.x, app.y, width, height, opts)
+
+          break
+        }
+        case 'list': {
+          await app.formList(item.name, app.x, app.y, width, height, opts)
+
+          break
+        }
+        case 'button': {
+          await app.formPushButton(item.name, app.x, app.y, width, height, opts)
+
+          break
+        }
+      }
+    }
+  }
 
   if (
     !content.stack &&
@@ -210,4 +294,5 @@ export const resolveContent = async (
   if (content.checkbox) await addCheckbox()
   if (content.list) await addList()
   if (content.table) await addTable()
+  if (content.form) await addFormulary()
 }

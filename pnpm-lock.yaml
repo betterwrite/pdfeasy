@@ -3,6 +3,10 @@ lockfileVersion: '6.0'
 importers:
 
   .:
+    dependencies:
+      pdfkit-table:
+        specifier: ^0.1.99
+        version: 0.1.99
     devDependencies:
       generi:
         specifier: ^1.2.1
@@ -128,7 +132,7 @@ importers:
         version: link:../pdfeasy
       vue-demi:
         specifier: latest
-        version: 0.14.1(@vue/composition-api@1.0.0-rc.1)(vue@3.3.1)
+        version: 0.14.4(@vue/composition-api@1.0.0-rc.1)(vue@3.3.1)
     devDependencies:
       '@types/jsdom':
         specifier: ^16.2.15
@@ -8297,6 +8301,12 @@ packages:
       sha.js: 2.4.11
     dev: true
 
+  /pdfkit-table@0.1.99:
+    resolution: {integrity: sha512-BaunFJ7cvKqIPONzX9FXUpeC/3iJeLo0v2nVNjCccAxdMXKvDMBjxyF4wZhKOYlmP+nYZcikf9ByVJeCzjNK6g==}
+    dependencies:
+      pdfkit: 0.13.0
+    dev: false
+
   /pdfkit@0.13.0:
     resolution: {integrity: sha512-AW79eHU5eLd2vgRDS9z3bSoi0FA+gYm+100LLosrQQMLUzOBGVOhG7ABcMFpJu7Bpg+MT74XYHi4k9EuU/9EZw==}
     dependencies:
@@ -10869,8 +10879,8 @@ packages:
       ufo: 1.1.2
     dev: true
 
-  /vue-demi@0.14.1(@vue/composition-api@1.0.0-rc.1)(vue@3.3.1):
-    resolution: {integrity: sha512-rt+yuCtXvscYot9SQQj3WKZJVSriPNqVkpVBNEHPzSgBv7QIYzsS410VqVgvx8f9AAPgjg+XPKvmV3vOqqkJQQ==}
+  /vue-demi@0.14.4(@vue/composition-api@1.0.0-rc.1)(vue@3.3.1):
+    resolution: {integrity: sha512-YR9bCmtIYgsqNVRG3MLLWlhbZ9tTNMuWHPd7yx0pHS3NDX17MeVNHgKTOClYE8pBjsfNe4CMaReP7zQtHDIbiA==}
     engines: {node: '>=12'}
     hasBin: true
     requiresBuild: true

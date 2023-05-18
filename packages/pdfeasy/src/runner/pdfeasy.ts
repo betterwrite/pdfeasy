@@ -1,4 +1,4 @@
-import PDFDocument from 'pdfkit'
+import PDFDocumentWithTables from 'pdfkit-table'
 import blobStream from 'blob-stream'
 import mitt from 'mitt'
 import { saveAs } from 'file-saver'
@@ -129,7 +129,9 @@ export default class {
    */
   private pipeline = async () => {
     if (this.options?.cover) {
-      await resolveCover(this.pdfkit as typeof PDFDocument, this.options.cover)
+      if (!this.pdfkit) return
+
+      await resolveCover(this.pdfkit, this.options.cover)
     }
 
     for (const content of this.contents) {
@@ -137,8 +139,10 @@ export default class {
 
       this.mutateLastType(this.getType(content))
 
+      if (!this.pdfkit) return
+
       await resolveContent(
-        this.pdfkit as typeof PDFDocument,
+        this.pdfkit,
         this.def,
         content,
         this.globals,
@@ -223,7 +227,7 @@ export default class {
         }
     })
 
-    this.pdfkit = new PDFDocument(this.options.document)
+    this.pdfkit = new PDFDocumentWithTables(this.options.document)
   }
 
   /**

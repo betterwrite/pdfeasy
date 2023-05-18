@@ -1,8 +1,8 @@
-import { HexColor } from 'src/types'
+import { Color } from 'src/types'
 
-export const HEXToCMYK = (
-  color: HexColor
-): [number, number, number, number] | HexColor => {
+export const HEXToCMYK = (color: Color): Color => {
+  if (Array.isArray(color)) return color
+
   let C = 0
   let M = 0
   let Y = 0

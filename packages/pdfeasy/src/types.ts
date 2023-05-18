@@ -1,6 +1,128 @@
-import PDFDocument from 'pdfkit'
+import type PDFDocumentWithTables from 'pdfkit-table'
 
-export type DocBase = typeof PDFDocument | null
+/* pdfkit-table */
+interface TableRect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+interface TableHeader {
+  label?: string;
+  property?: string;
+  width?: number;
+  align?: string; //default 'left'
+  valign?: string;
+  headerColor?: string; //default '#BEBEBE'
+  headerOpacity?: number; //default '0.5'
+  headerAlign?: string; //default 'left'
+  columnColor?: string;
+  columnOpacity?: number;
+  renderer?: (
+    value: any,
+    indexColumn?: number,
+    indexRow?: number,
+    row?: number,
+    rectRow?: TableRect,
+    rectCell?: TableRect
+  ) => string;
+}
+
+interface TableDataOptions {
+  fontSize: number;
+  fontFamily: string;
+  separation: boolean;
+}
+
+interface TableData {
+  [key: string]: string | { label: string; options?: TableDataOptions };
+}
+
+interface TableBody {
+  title?: string;
+  subtitle?: string;
+  headers?: (string | TableHeader)[];
+  datas?: TableData[];
+  rows?: string[][];
+}
+
+interface TableDividerOptions {
+  disabled?: boolean;
+  width?: number;
+  opacity?: number;
+}
+
+interface TableDivider {
+  header?: TableDividerOptions;
+  horizontal?: TableDividerOptions;
+}
+
+interface TableTitle 
+{
+  label: string;
+  fontSize?: number;
+  fontFamily?: string;
+  color?: string; 
+}
+
+interface TableOptions {
+  title?: string | TableTitle ;
+  subtitle?: string | TableTitle;
+  width?: number;
+  x?: number; //default doc.x
+  y?: number; //default doc.y
+  divider?: TableDivider;
+  columnsSize?: number[];
+  columnSpacing?: number; //default 5
+  padding?: number[]; 
+  addPage?: boolean; //default false
+  hideHeader?: boolean;
+  minRowHeight?: number;
+  prepareHeader?: () => PDFDocumentWithTables;
+  prepareRow?: (
+    row?: any,
+    indexColumn?: number,
+    indexRow?: number,
+    rectRow?: TableRect,
+    rectCell?: TableRect
+  ) => PDFDocumentWithTables;
+}
+
+export interface FormularyCommonOptions {
+  required?: boolean
+  noExport?: boolean
+  readOnly?: boolean
+  value?: number | string
+  defaultValue?: number | string
+  width?: number
+  height?: number
+  backgroundColor?: Color,
+  borderColor?: Color
+}
+
+export interface FormularyTextOptions extends FormularyCommonOptions {
+  align?: string
+  multiline?: boolean
+  password?: boolean
+  noSpell?: boolean
+  format?: Record<any, any>
+}
+
+export interface FormularyComboAndListOptions extends FormularyCommonOptions {
+  sort?: boolean
+  edit?: boolean
+  multiSelect?: boolean
+  noSpell?: boolean
+  select?: Array<any>
+}
+
+export interface FormularyButtonOptions extends FormularyCommonOptions {
+  /* Sets the label text. You can also set an icon, but for this you will need to 'expert-up' and dig deeper into the PDF Reference manual. */
+  label: string
+}
+
+export type DocBase = PDFDocumentWithTables | null
 
 export type RunnerBase = RunnerOptions | null
 
@@ -24,7 +146,7 @@ export type LocalFonts =
 
 export type Fonts<T extends string = string> = LocalFonts | T
 
-export type ItemType = 'paragraph' | 'image' | 'list' | 'checkbox' | 'table' | 'svg' | 'line-break' | 'page-break'
+export type ItemType = 'paragraph' | 'image' | 'list' | 'checkbox' | 'table' | 'svg' | 'line-break' | 'page-break' | 'form'
 
 export type PDFRunEmitOption = 'save' | 'blob' | 'none'
 
@@ -33,6 +155,8 @@ export type TextAlign = 'start' | 'center' | 'end' | 'justify'
 export type ColorSchema = 'RGB' | 'CMYK'
 
 export type HexColor = string | `#${string}`
+
+export type Color = HexColor | [number, number, number, number]
 
 export type EmitterType = {}
 
@@ -124,7 +248,8 @@ export interface ContentList {
 }
 
 export interface ContentTable {
-  
+  body: TableBody
+  options: TableOptions
 }
 
 export interface DefaultsLineBreak {
@@ -145,6 +270,18 @@ export interface DefaultsList {
   style: 'circle' | 'counter'
 }
 
+export type ContentFormularyType = 'text' | 'button' | 'combo' | 'list'
+
+export interface ContentFormulary<T extends ContentFormularyType> {
+  name: string
+  type: T
+  options?: T extends 'text' ? 
+    FormularyTextOptions : T extends 'button' ? 
+    FormularyButtonOptions : T extends 'combo' | 'list' ? 
+    FormularyComboAndListOptions : 
+    never
+}
+
 export interface Content {
   raw?: string
   stack?: Content[]
@@ -156,6 +293,7 @@ export interface Content {
   checkbox?: ContentCheckbox
   list?: ContentList
   table?: ContentTable
+  form?: ContentFormulary<ContentFormularyType>[]
 }
 
 export interface PDFEasyDefaults {
