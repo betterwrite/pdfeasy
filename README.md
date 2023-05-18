@@ -123,7 +123,7 @@ pdfeasy.add([
       ],
     },
     options: {}
-  }}
+  }},
   { form: [ // dynamic forms
     { name: 'button-field', type: 'button', options: { label: 'Click here!'} },
     { name: 'text-field', type: 'text', options: { value: '' }},
