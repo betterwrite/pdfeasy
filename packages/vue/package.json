@@ -29,7 +29,7 @@
     "pdfmake"
   ],
   "dependencies": {
-    "pdfeasy": "workspace:*",
+    "pdfeasy": "1.1.0",
     "vue-demi": "latest"
   },
   "peerDependencies": {
@@ -57,5 +57,6 @@
   ],
   "engines": {
     "node": ">= 14"
-  }
+  },
+  "gitHead": "a6046c00dc99c3140f6e6a72f0e271ee19507652"
 }
