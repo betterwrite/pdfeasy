@@ -6,7 +6,7 @@
     "name": "Novout",
     "url": "https://github.com/Novout"
   },
-  "version": "1.1.2",
+  "version": "1.2.0",
   "repository": "https://github.com/betterwrite/nuxt-pdfeasy",
   "description": "A PDF document generator to your Nuxt application.",
   "engines": {
@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.5.3",
-    "pdfeasy": "^1.1.2"
+    "pdfeasy": "^1.2.0"
   },
   "devDependencies": {
     "@nuxt/module-builder": "^0.4.0",
