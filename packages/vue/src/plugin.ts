@@ -5,7 +5,8 @@ interface PluginOptions {}
 
 export const PDFPlugin: Plugin = {
   install: (app: App, options: PluginOptions = {}) => {
-    app.config.globalProperties.$pdf = pdfeasy;
+    // @ts-expect-error
+    app.config.globalProperties.$pdf = pdfeasy.default;
   },
 };
 
