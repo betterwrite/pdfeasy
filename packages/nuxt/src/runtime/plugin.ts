@@ -1,7 +1,6 @@
 import { defineNuxtPlugin } from '#app'
-import PDFEASY from 'pdfeasy'
+import { PDFEasy } from 'pdfeasy'
 
 export default defineNuxtPlugin(({ provide }) => {
-  // @ts-expect-error
-  provide('pdf', PDFEASY.default as typeof PDFEASY)
+  provide('pdf', new PDFEasy())
 })

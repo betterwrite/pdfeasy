@@ -1,7 +1,7 @@
-import pdfeasy from 'pdfeasy';
+import { PDFEasy } from 'pdfeasy';
 import { getCurrentInstance, ComponentInternalInstance } from 'vue-demi';
 
-export const usePDF = (): typeof pdfeasy => {
+export const usePDF = (): PDFEasy => {
   const instance = getCurrentInstance();
 
   if (!instance) {

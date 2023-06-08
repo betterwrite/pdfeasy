@@ -30,7 +30,9 @@ npm i pdfeasy
 ```
 
 ```ts
-import pdfeasy from 'pdfeasy'
+import { PDFEasy } from 'pdfeasy'
+
+const pdfeasy = new PDFEasy()
 
 pdfeasy.new()
 

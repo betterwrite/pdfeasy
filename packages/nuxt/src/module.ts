@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'url'
 import { defineNuxtModule, addPlugin, createResolver } from '@nuxt/kit'
-import PDFEASY from 'pdfeasy'
+import { PDFEasy } from 'pdfeasy'
 
 export interface ModuleOptions {}
 
@@ -24,12 +24,12 @@ export default defineNuxtModule<ModuleOptions>({
 
 declare module '#app' {
   interface NuxtApp {
-    $pdf: typeof PDFEASY
+    $pdf: PDFEasy
   }
 }
 
 declare module 'vue' {
   interface ComponentCustomProperties {
-    $pdf: typeof PDFEASY
+    $pdf: PDFEasy
   }
 }

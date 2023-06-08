@@ -27,7 +27,7 @@ import { runPluginBackground } from '../plugins/background'
 /**
  *  A Base PDFEasy Runner
  */
-export default class {
+export class PDFEasy {
   /**
    * A internal emitter.
    *

@@ -1,4 +1,4 @@
-import pdfeasy, { Utils } from 'pdfeasy'
+import { PDFEasy, Utils } from 'pdfeasy'
 import './style.css'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
@@ -6,6 +6,8 @@ const app = document.querySelector<HTMLDivElement>('#app')!
 app.innerHTML = `
   <iframe id="pdf">
 `
+
+const pdfeasy = new PDFEasy()
 
 pdfeasy.new({
   document: {
