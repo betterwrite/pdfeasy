@@ -30,9 +30,7 @@ npm i pdfeasy
 ```
 
 ```ts
-import { PDFEasy } from 'pdfeasy'
-
-const pdfeasy = new PDFEasy()
+import pdfeasy from 'pdfeasy'
 
 pdfeasy.new()
 
@@ -226,7 +224,7 @@ pdfeasy.addFonts([
 ])
 ```
 
-> **Attention!** Client-Side version not support relative/absolute font paths at this time.
+> **Attention!** Server-Side version not support relative/absolute font paths at this time.
 
 ## Resources
 

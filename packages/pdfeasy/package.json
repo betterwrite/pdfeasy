@@ -23,7 +23,6 @@
   },
   "exports": {
     ".": {
-      "default": "./dist/client.cjs.js",
       "import": "./dist/client.esm.js",
       "require": "./dist/client.cjs.js",
       "node": "./dist/node.esm.js",
