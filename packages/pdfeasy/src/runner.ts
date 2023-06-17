@@ -321,9 +321,8 @@ export class PDFEasy {
       if (this.runOptions?.type === 'server') {
         this.pdfkit?.pipe(
           createWriteStream(
-            path.resolve(
-              (options?.cwd || process.cwd()) + this.runOptions.serverPath
-            ) + `/${this.options?.exports?.name || 'New PDF'}.pdf`
+            path.resolve(this.runOptions.cwd + this.runOptions.serverPath) +
+              `/${this.options?.exports?.name || 'New PDF'}.pdf`
           )
         )
 
@@ -366,7 +365,7 @@ export class PDFEasy {
           })
 
         stream.on('finish', (): void => {
-          switch (options?.clientEmit || 'blob') {
+          switch (this.runOptions?.clientEmit) {
             case 'blob':
               res(stream.toBlobURL('application/pdf') as string)
               break

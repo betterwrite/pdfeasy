@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   test: {
+    testTimeout: 10000,
     environment: 'happy-dom',
     coverage: {
       include: ['src'],

@@ -19,7 +19,7 @@ export const resolveRunnerOptions = (
 ): RunOptions => {
   return {
     type: options.type || isBrowser ? 'client' : 'server',
-    clientEmit: options.clientEmit || isBrowser ? 'blob' : 'none',
+    clientEmit: options.clientEmit || 'blob',
     serverPath: options.serverPath || '/',
     colorSchema: options.colorSchema || 'RGB',
     cwd: options?.cwd || !isBrowser ? process.cwd() : '/',
