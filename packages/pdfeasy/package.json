@@ -52,7 +52,6 @@
   },
   "dependencies": {
     "blob-stream": "0.1.3",
-    "defu": "6.1.2",
     "file-saver": "2.0.5",
     "fontkit-next": "1.8.3",
     "mitt": "3.0.0",
