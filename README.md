@@ -100,7 +100,6 @@ const { $pdf } = useNuxtApp()
 
 ```ts
 pdfeasy.add([
-  ...Utils.content(), // Utils for debug
   { raw: 'Hello PDFEasy!', text: { font: 'Roboto' } }, // text with custom font,
   { raw: 'https://i.imgur.com/path.png', image: {} }, // external image
   { stack: [ // stack for paragraph's
