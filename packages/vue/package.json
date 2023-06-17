@@ -2,7 +2,7 @@
   "name": "vue-pdfeasy",
   "author": "Novout",
   "license": "MIT",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "A pdfeasy plugin for Vue 3",
   "type": "module",
   "sideEffects": false,
@@ -29,7 +29,7 @@
     "pdfmake"
   ],
   "dependencies": {
-    "pdfeasy": "^1.2.2",
+    "pdfeasy": "^1.3.0",
     "vue-demi": "latest"
   },
   "peerDependencies": {
