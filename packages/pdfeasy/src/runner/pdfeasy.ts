@@ -99,6 +99,7 @@ export class PDFEasy {
       __BACKGROUND_RAW__: '',
     },
     __LAST_TYPE__: ['paragraph', 0],
+    __LAST_CONTENT__: {},
   }
 
   private mutateLastType = (type: ItemType) => {
@@ -107,6 +108,10 @@ export class PDFEasy {
     this.globals.__LAST_TYPE__ = isSameType
       ? [type, ++this.globals.__LAST_TYPE__[1]]
       : [type, 1]
+  }
+
+  private posUpdateContent = (content: Content) => {
+    this.globals.__LAST_CONTENT__ = content
   }
 
   private getType = (content: Content): ItemType => {
@@ -137,9 +142,9 @@ export class PDFEasy {
     for (const content of this.contents) {
       await runPluginBackground(this)
 
-      this.mutateLastType(this.getType(content))
-
       if (!this.pdfkit) return
+
+      this.mutateLastType(this.getType(content))
 
       await resolveContent(
         this.pdfkit,
@@ -148,6 +153,8 @@ export class PDFEasy {
         this.globals,
         this.optionsRun
       )
+
+      this.posUpdateContent(content)
     }
   }
 
@@ -171,6 +178,7 @@ export class PDFEasy {
         __BACKGROUND_RAW__: '',
       },
       __LAST_TYPE__: ['paragraph', 1],
+      __LAST_CONTENT__: {},
     }
   }
 
@@ -290,6 +298,7 @@ export class PDFEasy {
    */
   public run = (options?: RunOptions): Promise<string> => {
     this.optionsRun = options || {}
+    this.globals.__LAST_CONTENT__ = this.contents[0]
 
     const runType = options?.type || 'client'
 

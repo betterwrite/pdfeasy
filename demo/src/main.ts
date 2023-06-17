@@ -19,9 +19,10 @@ pdfeasy.new({
 })
 
 pdfeasy.add([
-  { raw: 'A simple pdf', text: {} },
+  { raw: 'A simple pdf', text: {}},
   { lineBreak: {} },
-  { raw: 'using...', text: {} },
+  { raw: 'using...', text: { position: { x: 250, y: 0 }} },
+  { raw: 'hm...', text: {} },
   { pageBreak: {} },
   { raw: 'pdfeasy!', text: {} },
   ...Utils.content(),

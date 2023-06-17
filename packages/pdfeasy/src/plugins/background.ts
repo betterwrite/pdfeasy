@@ -1,7 +1,7 @@
 import { setBackground } from '../pipe/setter'
-import pdfeasy from '../runner/pdfeasy'
+import { PDFEasy } from '../runner/pdfeasy'
 
-export const runPluginBackground = async (instance: pdfeasy) => {
+export const runPluginBackground = async (instance: PDFEasy) => {
   if (instance.options?.plugins) {
     for (const plugin of instance.options.plugins) {
       if (plugin.background && instance.globals.__NEW_PAGE__) {

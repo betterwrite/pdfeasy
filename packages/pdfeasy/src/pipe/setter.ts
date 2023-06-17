@@ -1,8 +1,8 @@
 import { getImageRaw } from '../content/image'
 import { regex } from '../utils/defines'
-import pdfeasy from '../runner/pdfeasy'
+import { PDFEasy } from '../runner/pdfeasy'
 
-export const setBackground = async (instance: pdfeasy, str: string) => {
+export const setBackground = async (instance: PDFEasy, str: string) => {
   if (!instance.pdfkit) return
 
   const kit = instance.pdfkit

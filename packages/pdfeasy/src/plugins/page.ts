@@ -1,4 +1,4 @@
-import pdfeasy from '../runner/pdfeasy'
+import { PDFEasy } from '../runner/pdfeasy'
 import { getCorrectFontFamily } from '../pipe/transform'
 import { getImageRaw } from '../content/image'
 import {
@@ -9,7 +9,7 @@ import {
   PluginPageTextOptions,
 } from 'src/types'
 
-export const generate = (instance: pdfeasy): PluginGenerate => {
+export const generate = (instance: PDFEasy): PluginGenerate => {
   const kit = instance.pdfkit as PDFKit.PDFDocument
 
   const defaults = instance.def
@@ -101,7 +101,7 @@ export const generate = (instance: pdfeasy): PluginGenerate => {
   return { Text, Image }
 }
 
-export const pageHandler = (instance: pdfeasy): Promise<void> => {
+export const pageHandler = (instance: PDFEasy): Promise<void> => {
   return new Promise(async (response, reject) => {
     const doc = instance.pdfkit
 

@@ -72,12 +72,22 @@ export const resolveContent = async (
 
     const data = embed ? ` ${raw || content.raw}` : raw || content.raw
 
+    const possibleLastPos = globals.__LAST_CONTENT__?.text?.position
+
+    let pos = style?.position
+      ? { x: app.x + style.position.x, y: app.y + style.position.y }
+      : { x: app.x, y: app.y }
+    if (possibleLastPos) {
+      pos.x -= possibleLastPos.x
+      pos.y -= possibleLastPos.y
+    }
+
     await app
       .font(getCorrectFontFamily(style?.font || defaults.text.font, style))
       .fontSize(style?.fontSize || defaults.text.fontSize)
       .fillColor(resolveColor(style?.color || defaults.text.color, run))
       .fillOpacity(style?.opacity || defaults.text.opacity)
-      .text(data, {
+      .text(data, pos.x, pos.y, {
         indent: style?.indent || defaults.text.indent,
         align: style?.align || defaults.text.align,
         paragraphGap: style?.paragraphMargin || defaults.text.paragraphMargin,

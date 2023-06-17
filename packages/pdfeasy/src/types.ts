@@ -166,6 +166,7 @@ export interface InternalGlobals {
     __BACKGROUND_RAW__: string,
   },
   __LAST_TYPE__: [ItemType, number]
+  __LAST_CONTENT__: Record<any, any>
 }
 
 export interface ImageRaw {
@@ -181,20 +182,7 @@ export interface ExternalFont {
   bolditalic: string
 }
 
-export interface ContentText {
-  fontSize?: number
-  font?: Fonts
-  color?: string
-  indent?: number
-  align?: TextAlign
-  paragraphMargin?: number
-  lineHeight?: number
-  opacity?: number
-  destination?: string
-  go?: string
-  bold?: boolean
-  italic?: boolean
-}
+export interface ContentText extends Partial<DefaultsText> {}
 
 export interface DefaultsText {
   fontSize: number
@@ -209,6 +197,7 @@ export interface DefaultsText {
   go: string | undefined
   bold: boolean
   italic: boolean
+  position: { x: number, y: number }
 }
 
 export interface ContentImage {

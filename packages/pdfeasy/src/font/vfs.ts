@@ -1,4 +1,4 @@
-import pdfeasy from '../runner/pdfeasy'
+import { PDFEasy } from '../runner/pdfeasy'
 import path from 'path'
 import { getBase64ByURL } from '../utils/request'
 import { regex } from '../utils/defines'
@@ -25,7 +25,7 @@ export const setServerPath = (p: string) => {
   return path.join(process.cwd() + `/${p}`)
 }
 
-export const setExternalFonts = async (instance: pdfeasy) => {
+export const setExternalFonts = async (instance: PDFEasy) => {
   if (instance.options?.advanced?.fontsPurge) {
     const allContentFonts: string[] = []
 
