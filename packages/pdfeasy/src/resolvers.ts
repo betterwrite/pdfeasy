@@ -9,6 +9,7 @@ import type {
   RunOptionsBase,
   Color,
   Fonts,
+  FontKey,
 } from './types'
 import type PDFDocumentWithTables from 'pdfkit-table'
 import { HEXToCMYK } from './schemas'
@@ -345,10 +346,7 @@ export const resolveFontFamily = (
   return font
 }
 
-export const resolveFontName = (
-  name: string,
-  type: 'normal' | 'italic' | 'bold' | 'bolditalic'
-) => {
+export const resolveFontName = (name: string, type: FontKey) => {
   switch (type) {
     case 'normal':
       return name

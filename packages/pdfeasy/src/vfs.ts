@@ -3,6 +3,7 @@ import { PDFEasy } from './runner'
 import path from 'path'
 import { regex } from './utils'
 import { resolveFontName } from './resolvers'
+import { FontKey } from './types'
 
 export const setExternalFonts = async (instance: PDFEasy) => {
   const fontTarget = (str: string) =>
@@ -30,40 +31,17 @@ export const setExternalFonts = async (instance: PDFEasy) => {
     instance.runOptions?.type === 'server' && !regex().http(font)
 
   for (const font of instance.fonts) {
-    const normal = await getBase64ByURL(
-      isLocalServer(font.normal) ? fontTarget(font.normal) : font.normal,
-      'arraybuffer'
-    )
-    const italic = await getBase64ByURL(
-      isLocalServer(font.italic) ? fontTarget(font.italic) : font.italic,
-      'arraybuffer'
-    )
-    const bold = await getBase64ByURL(
-      isLocalServer(font.bold) ? fontTarget(font.bold) : font.bold,
-      'arraybuffer'
-    )
-    const bolditalic = await getBase64ByURL(
-      isLocalServer(font.bolditalic)
-        ? fontTarget(font.bolditalic)
-        : font.bolditalic,
-      'arraybuffer'
-    )
+    const keys = ['normal', 'italic', 'bold', 'bolditalic'] as FontKey[]
 
-    await instance.pdfkit?.registerFont(
-      resolveFontName(font.name, 'normal'),
-      normal
-    )
-    await instance.pdfkit?.registerFont(
-      resolveFontName(font.name, 'italic'),
-      italic
-    )
-    await instance.pdfkit?.registerFont(
-      resolveFontName(font.name, 'bold'),
-      bold
-    )
-    await instance.pdfkit?.registerFont(
-      resolveFontName(font.name, 'bolditalic'),
-      bolditalic
-    )
+    for (const key of keys) {
+      const item = font[key]
+
+      const url = await getBase64ByURL(
+        isLocalServer(item) ? fontTarget(item) : item,
+        'arraybuffer'
+      )
+
+      await instance.pdfkit?.registerFont(resolveFontName(font.name, key), url)
+    }
   }
 }

@@ -145,6 +145,8 @@ export type LocalFonts =
 
 export type Fonts<T extends string = string> = LocalFonts | T
 
+export type FontKey = 'normal' | 'italic' | 'bold' | 'bolditalic'
+
 export type ItemType =
   | 'paragraph'
   | 'image'
