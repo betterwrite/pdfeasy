@@ -1,4 +1,4 @@
-import pdfeasy, { Utils } from 'pdfeasy'
+import pdfeasy from 'pdfeasy'
 import './style.css'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
@@ -19,20 +19,15 @@ pdfeasy.new({
 })
 
 pdfeasy.add([
-  { raw: 'A simple pdf', text: {}},
+  { raw: 'A simple pdf', text: { font: 'Roboto' }},
   { lineBreak: {} },
   { raw: 'using...', text: { position: { x: 250, y: 0 }} },
   { raw: 'hm...', text: {} },
   { pageBreak: {} },
   { raw: 'pdfeasy!', text: {} },
-  ...Utils.content(),
-  ...Utils.content(),
-  ...Utils.content(),
   { raw: 'a first in list...', list: { style: 'counter' } },
   { raw: 'a second in list...', list: { style: 'counter' } },
   { raw: 'a third in list...', list: { style: 'counter' } },
-  ...Utils.content(),
-  ...Utils.content(),
   { raw: 'a list with circle...', list: { style: 'circle' } },
   { table: {
     body: {

@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
-import pdfeasy, { Utils } from "../src/index";
-
+import pdfeasy from "../src/index";
 
 describe('Fonts - fontsPurge option', () => {
   it('should not inject fonts', async () => {
@@ -11,7 +10,7 @@ describe('Fonts - fontsPurge option', () => {
     })
 
     pdfeasy.add([
-      { raw: Utils.loremIpsum().paragraph(), text: {} }
+      { raw: 'XPTO', text: {} }
     ])
 
     await pdfeasy.run({
@@ -28,7 +27,7 @@ describe('Fonts - fontsPurge option', () => {
       }
     })
 
-    pdfeasy.add(Utils.content())
+    pdfeasy.add([{ raw: 'XPTO' }])
 
     await pdfeasy.run({
       clientEmit: 'none'
@@ -41,7 +40,7 @@ describe('Fonts - fontsPurge option', () => {
     pdfeasy.new()
 
     pdfeasy.add([
-      { raw: Utils.loremIpsum().paragraph(), text: {} }
+      { raw: 'XPTO', text: {} }
     ])
 
     pdfeasy.addFonts([
@@ -70,7 +69,7 @@ describe('Fonts - Register', () => {
     pdfeasy.new()
 
     pdfeasy.add([
-      { raw: Utils.loremIpsum().paragraph(), text: { font: 'Roboto' } }
+      { raw: 'XPTO', text: { font: 'Roboto' } }
     ])
 
     pdfeasy.addFonts([

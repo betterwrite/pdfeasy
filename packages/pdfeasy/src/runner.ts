@@ -2,8 +2,8 @@ import PDFDocumentWithTables from 'pdfkit-table'
 import blobStream from 'blob-stream'
 import mitt from 'mitt'
 import { saveAs } from 'file-saver'
-import { resolveContent, resolveCover } from '../pipe/factory'
-import { pdfDefaults } from '../utils/defines'
+import { resolveContent, resolveCover } from './resolvers'
+import { pdfDefaults } from './utils'
 import {
   Content,
   DocBase,
@@ -15,14 +15,14 @@ import {
   PDFEasyDefaults,
   InternalGlobals,
   ItemType,
-} from '../types'
-import { setExternalFonts } from '../font/vfs'
+} from './types'
+import { setExternalFonts } from './vfs'
 import { createWriteStream } from 'fs'
 import path from 'path'
-import { pageHandler } from '../plugins/page'
-import { RunnerOptions, RunOptions } from '../types'
-import { onPageAdded } from '../pipe/emitter'
-import { runPluginBackground } from '../plugins/background'
+import { RunnerOptions, RunOptions } from './types'
+import { onPageAdded } from './events'
+import { resolveRunnerOptions } from 'src/resolvers'
+import { pageHandler, runPluginBackground } from './plugins'
 
 /**
  *  A Base PDFEasy Runner
@@ -61,7 +61,7 @@ export class PDFEasy {
    *
    *  @public
    */
-  public optionsRun: RunOptionsBase = null
+  public runOptions: RunOptionsBase = null
 
   /**
    *  {@link PDFKit} document options
@@ -151,7 +151,7 @@ export class PDFEasy {
         this.def,
         content,
         this.globals,
-        this.optionsRun
+        this.runOptions
       )
 
       this.posUpdateContent(content)
@@ -168,7 +168,7 @@ export class PDFEasy {
 
     this.contents = []
     this.def = pdfDefaults()
-    this.optionsRun = null
+    this.runOptions = null
 
     this.fonts = []
 
@@ -296,11 +296,9 @@ export class PDFEasy {
    *
    * @param emit - {@link PDFRunEmitOption}
    */
-  public run = (options?: RunOptions): Promise<string> => {
-    this.optionsRun = options || {}
+  public run = (options?: Partial<RunOptions>): Promise<string> => {
+    this.runOptions = resolveRunnerOptions(options || {})
     this.globals.__LAST_CONTENT__ = this.contents[0]
-
-    const runType = options?.type || 'client'
 
     this.options?.plugins?.forEach(({ onBefore }) => onBefore && onBefore())
 
@@ -320,11 +318,12 @@ export class PDFEasy {
         this.globals.__NEW_PAGE__ = true
       })
 
-      if (runType && options?.serverPath) {
+      if (this.runOptions?.type === 'server') {
         this.pdfkit?.pipe(
           createWriteStream(
-            path.resolve((options?.cwd || process.cwd()) + options.serverPath) +
-              `/${this.options?.exports?.name || 'New PDF'}.pdf`
+            path.resolve(
+              (options?.cwd || process.cwd()) + this.runOptions.serverPath
+            ) + `/${this.options?.exports?.name || 'New PDF'}.pdf`
           )
         )
 
@@ -349,7 +348,7 @@ export class PDFEasy {
         return
       }
 
-      if (runType === 'client') {
+      if (this.runOptions?.type === 'client') {
         const stream = this.pdfkit.pipe(blobStream())
 
         this.pipeline()

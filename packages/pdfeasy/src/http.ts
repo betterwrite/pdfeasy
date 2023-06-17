@@ -1,4 +1,6 @@
 import { $fetch } from 'ohmyfetch'
+import { regex } from './utils'
+import { ImageRaw } from './types'
 
 export const getBase64ByURL = (
   data: string,
@@ -39,5 +41,31 @@ export const getDataUri = (url: string): Promise<string> => {
     }
 
     image.src = url
+  })
+}
+
+export const getRequestImageRaw = (raw: string): Promise<ImageRaw> => {
+  return new Promise(async (res) => {
+    if (regex().base64(raw)) {
+      res({
+        raw,
+        type: 'base64',
+      })
+    }
+
+    if (regex().http(raw)) {
+      await getDataUri(raw).then((data: string) => {
+        res({
+          raw: data,
+          type: 'http',
+        })
+      })
+    }
+
+    // TODO: getDataUri type
+    res({
+      raw,
+      type: 'base64',
+    })
   })
 }

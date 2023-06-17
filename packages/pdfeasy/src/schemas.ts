@@ -1,4 +1,4 @@
-import { Color } from 'src/types'
+import { Color } from './types'
 
 export const HEXToCMYK = (color: Color): Color => {
   if (Array.isArray(color)) return color

@@ -1,7 +1,6 @@
-import { PDFEasy } from './runner/pdfeasy'
+import { PDFEasy } from './runner'
 
 export default new PDFEasy()
-export * from './runner/pdfeasy'
+export * from './runner'
 
-export * as Utils from './utils'
 export * as Types from './types'

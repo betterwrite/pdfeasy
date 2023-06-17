@@ -1,3 +1,6 @@
+export const isBrowser =
+  typeof window === 'object' && typeof document === 'object'
+
 import { PDFEasyDefaults } from 'src/types'
 
 export const pdfDefaults = (): PDFEasyDefaults => {

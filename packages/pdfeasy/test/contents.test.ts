@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
-import pdfeasy, { Utils } from "../src/index";
+import pdfeasy from "../src/index";
 
 describe('Contents - text', () => {
   it('should run simple text', () => {
     pdfeasy.new()
 
     pdfeasy.add([
-      { raw: Utils.loremIpsum().paragraph(), text: {} }
+      { raw: 'XPTO', text: {} }
     ])
 
     return expect(pdfeasy.run({
@@ -18,7 +18,7 @@ describe('Contents - text', () => {
     pdfeasy.new()
 
     pdfeasy.add([
-      { raw: Utils.loremIpsum().paragraph() }
+      { raw: 'XPTO' }
     ])
 
     return expect(pdfeasy.run({
@@ -30,10 +30,10 @@ describe('Contents - text', () => {
     pdfeasy.new()
 
     pdfeasy.add([
-      { raw: Utils.loremIpsum().title(), text: {} },
-      { raw: Utils.loremIpsum().paragraph(), text: {} },
-      { raw: Utils.loremIpsum().paragraph(), text: {} },
-      { raw: Utils.loremIpsum().paragraph(), text: {} }
+      { raw: 'XPTO Title', text: {} },
+      { raw: 'XPTO', text: {} },
+      { raw: 'XPTO', text: {} },
+      { raw: 'XPTO', text: {} }
     ])
 
     return expect(pdfeasy.run({
@@ -45,11 +45,11 @@ describe('Contents - text', () => {
     pdfeasy.new()
 
     pdfeasy.add([
-      { raw: Utils.loremIpsum().title(), text: {} },
-      { raw: Utils.loremIpsum().paragraph(), text: { italic: true } },
-      { raw: Utils.loremIpsum().paragraph(), text: { bold: true } },
-      { raw: Utils.loremIpsum().paragraph(), text: { italic: true, bold: true } },
-      { raw: Utils.loremIpsum().paragraph(), text: {} }
+      { raw: 'XPTO Title', text: {} },
+      { raw: 'XPTO', text: { italic: true } },
+      { raw: 'XPTO', text: { bold: true } },
+      { raw: 'XPTO', text: { italic: true, bold: true } },
+      { raw: 'XPTO', text: {} }
     ])
 
     return expect(pdfeasy.run({
@@ -61,14 +61,14 @@ describe('Contents - text', () => {
     pdfeasy.new()
 
     pdfeasy.add([
-      { raw: Utils.loremIpsum().title(), text: { font: 'Helvetica' } },
-      { raw: Utils.loremIpsum().paragraph(), text: { font: 'Times-Roman', bold: true, italic: true } },
-      { raw: Utils.loremIpsum().paragraph(), text: { font: 'Courier', bold: true } },
-      { raw: Utils.loremIpsum().paragraph(), text: { font: 'Courier', italic: true, bold: true } },
-      { raw: Utils.loremIpsum().paragraph(), text: { font: 'Helvetica'} },
-      { raw: Utils.loremIpsum().paragraph(), text: { font: 'Helvetica', italic: true } },
-      { raw: Utils.loremIpsum().paragraph(), text: { font: 'Times-Roman', bold: true } },
-      { raw: Utils.loremIpsum().paragraph(), text: { font: 'Times-Roman', italic: true } },
+      { raw: 'XPTO Title', text: { font: 'Helvetica' } },
+      { raw: 'XPTO', text: { font: 'Times-Roman', bold: true, italic: true } },
+      { raw: 'XPTO', text: { font: 'Courier', bold: true } },
+      { raw: 'XPTO', text: { font: 'Courier', italic: true, bold: true } },
+      { raw: 'XPTO', text: { font: 'Helvetica'} },
+      { raw: 'XPTO', text: { font: 'Helvetica', italic: true } },
+      { raw: 'XPTO', text: { font: 'Times-Roman', bold: true } },
+      { raw: 'XPTO', text: { font: 'Times-Roman', italic: true } },
     ])
 
     return expect(pdfeasy.run({
@@ -82,9 +82,9 @@ describe('Contents - stack', () => {
     pdfeasy.new()
 
     pdfeasy.add([
-      { stack: [ { raw: Utils.loremIpsum().paragraph(), text: {}}]},
-      { raw: Utils.loremIpsum().paragraph(), text: {}},
-      { stack: [ { raw: Utils.loremIpsum().paragraph(), text: {}}]}
+      { stack: [ { raw: 'XPTO', text: {}}]},
+      { raw: 'XPTO', text: {}},
+      { stack: [ { raw: 'XPTO', text: {}}]}
     ])
 
     return expect(pdfeasy.run({

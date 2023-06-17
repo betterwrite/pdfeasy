@@ -1,3 +1,5 @@
+import { RunOptions } from './types'
+import { isBrowser } from './utils'
 import type {
   Content,
   ContentText,
@@ -6,18 +8,30 @@ import type {
   InternalGlobals,
   RunOptionsBase,
   Color,
-} from '../types'
-import { getCorrectFontFamily } from './transform'
-import { getImageRaw, SvgToPNG } from '../content/image'
-import { HEXToCMYK } from 'src/schema/color'
+  Fonts,
+} from './types'
 import type PDFDocumentWithTables from 'pdfkit-table'
+import { HEXToCMYK } from './schemas'
+import { getRequestImageRaw } from './http'
+
+export const resolveRunnerOptions = (
+  options: Partial<RunOptions>
+): RunOptions => {
+  return {
+    type: options.type || isBrowser ? 'client' : 'server',
+    clientEmit: options.clientEmit || isBrowser ? 'blob' : 'none',
+    serverPath: options.serverPath || '/',
+    colorSchema: options.colorSchema || 'RGB',
+    cwd: options?.cwd || !isBrowser ? process.cwd() : '/',
+  }
+}
 
 export const resolveColor = (color: Color, run: RunOptionsBase) => {
   return run?.colorSchema === 'CMYK' ? HEXToCMYK(color) : color
 }
 
 export const resolveCover = async (app: PDFKit.PDFDocument, based: string) => {
-  const { raw } = await getImageRaw(based)
+  const { raw } = await getRequestImageRaw(based)
 
   app.image(raw, 0, 0, {
     height: app.page.height,
@@ -44,10 +58,7 @@ export const resolveContent = async (
 
       app
         .font(
-          getCorrectFontFamily(
-            entity.text.font || defaults.text.font,
-            entity.text
-          )
+          resolveFontFamily(entity.text.font || defaults.text.font, entity.text)
         )
         .fontSize(entity.text.fontSize || defaults.text.fontSize)
         .fillColor(resolveColor(entity.text.color || defaults.text.color, run))
@@ -83,7 +94,7 @@ export const resolveContent = async (
     }
 
     await app
-      .font(getCorrectFontFamily(style?.font || defaults.text.font, style))
+      .font(resolveFontFamily(style?.font || defaults.text.font, style))
       .fontSize(style?.fontSize || defaults.text.fontSize)
       .fillColor(resolveColor(style?.color || defaults.text.color, run))
       .fillOpacity(style?.opacity || defaults.text.opacity)
@@ -101,7 +112,7 @@ export const resolveContent = async (
     if (!content.raw) return
 
     await app
-      .font(getCorrectFontFamily(defaults.text.font, {}))
+      .font(resolveFontFamily(defaults.text.font, {}))
       .fontSize(defaults.text.fontSize)
       .fillColor(resolveColor(defaults.text.color, run))
       .fillOpacity(defaults.text.opacity)
@@ -121,8 +132,8 @@ export const resolveContent = async (
     if (!content.raw) return
 
     const { raw } = content.svg
-      ? await SvgToPNG(content.raw)
-      : await getImageRaw(content.raw)
+      ? await resolveSvgToPNG(content.raw)
+      : await getRequestImageRaw(content.raw)
 
     app.image(
       raw,
@@ -305,4 +316,88 @@ export const resolveContent = async (
   if (content.list) await addList()
   if (content.table) await addTable()
   if (content.form) await addFormulary()
+}
+
+export const resolveFontFamily = (
+  font: Fonts,
+  options?: ContentText
+): Fonts => {
+  if (font === 'Symbol' || font === 'ZapfDingbats') return font
+
+  if (options?.italic && options?.bold) {
+    if (font === 'Times-Roman') return 'Times-BoldItalic'
+
+    return (font + '-BoldOblique') as Fonts
+  }
+
+  if (options?.italic) {
+    if (font === 'Times-Roman') return 'Times-Italic'
+
+    return (font + '-Oblique') as Fonts
+  }
+
+  if (options?.bold) {
+    if (font === 'Times-Roman') return 'Times-Bold'
+
+    return (font + '-Bold') as Fonts
+  }
+
+  return font
+}
+
+export const resolveFontName = (
+  name: string,
+  type: 'normal' | 'italic' | 'bold' | 'bolditalic'
+) => {
+  switch (type) {
+    case 'normal':
+      return name
+    case 'italic':
+      return name + '-Oblique'
+    case 'bold':
+      return name + '-Bold'
+    case 'bolditalic':
+      return name + '-BoldOblique'
+    default:
+      return name
+  }
+}
+
+export const resolveSvgToPNG = (raw: string): Promise<{ raw: string }> => {
+  return new Promise((res, rej) => {
+    const set = !raw.includes('<svg xmlns="http://www.w3.org/2000/svg"')
+      ? raw.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg"')
+      : raw
+
+    const blob = new Blob([set], {
+      type: 'image/svg+xml;charset=utf-8',
+    })
+
+    const URL = window.URL || window.webkitURL || window
+
+    const blobURL = URL.createObjectURL(blob)
+
+    const image = new Image()
+    image.setAttribute('crossOrigin', 'anonymous')
+    image.onload = () => {
+      const canvas = document.createElement('canvas')
+
+      canvas.width = 2000
+      canvas.height = 2000
+
+      const context = canvas.getContext('2d') as CanvasRenderingContext2D
+
+      context.drawImage(image, 0, 0, 2000, 2000)
+
+      const url = canvas.toDataURL('image/png')
+
+      res({ raw: url })
+    }
+    image.onerror = () => {
+      rej()
+    }
+
+    // TODO: other blob performatic method
+    image.src = blobURL
+  })
 }

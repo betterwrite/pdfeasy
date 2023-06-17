@@ -1,13 +1,28 @@
-import { PDFEasy } from '../runner/pdfeasy'
-import { getCorrectFontFamily } from '../pipe/transform'
-import { getImageRaw } from '../content/image'
+import { PDFEasy } from './runner'
 import {
   ContentImage,
   ContentText,
   PluginPageImageOptions,
   PluginGenerate,
   PluginPageTextOptions,
-} from 'src/types'
+} from './types'
+import { regex } from './utils'
+import { resolveFontFamily } from './resolvers'
+import { getRequestImageRaw } from './http'
+
+export const runPluginBackground = async (instance: PDFEasy) => {
+  if (instance.options?.plugins) {
+    for (const plugin of instance.options.plugins) {
+      if (plugin.background && instance.globals.__NEW_PAGE__) {
+        const res = plugin.background(instance.pdfkit!.page)
+
+        if (res) await setBackground(instance, res)
+      }
+    }
+  }
+
+  instance.globals.__NEW_PAGE__ = false
+}
 
 export const generate = (instance: PDFEasy): PluginGenerate => {
   const kit = instance.pdfkit as PDFKit.PDFDocument
@@ -33,7 +48,6 @@ export const generate = (instance: PDFEasy): PluginGenerate => {
         _anchorTextWidth = 0
         break
       default:
-        // default is center
         _anchorTextWidth = kit.widthOfString(text) / 2
         break
     }
@@ -49,13 +63,12 @@ export const generate = (instance: PDFEasy): PluginGenerate => {
         _anchorTextHeight = 0
         break
       default:
-        // default is center
         _anchorTextHeight = kit.heightOfString(text) / 2
         break
     }
 
     kit
-      .font(getCorrectFontFamily(style.font || defaults.text.font, style))
+      .font(resolveFontFamily(style.font || defaults.text.font, style))
       .fontSize(style.fontSize || defaults.text.fontSize)
       .fillColor(style.color || defaults.text.color)
       .fillOpacity(style.opacity || defaults.text.opacity)
@@ -82,7 +95,7 @@ export const generate = (instance: PDFEasy): PluginGenerate => {
   ): Promise<void> => {
     if (!str) return
 
-    const { raw } = await getImageRaw(str)
+    const { raw } = await getRequestImageRaw(str)
 
     kit.image(
       raw,
@@ -99,6 +112,37 @@ export const generate = (instance: PDFEasy): PluginGenerate => {
   }
 
   return { Text, Image }
+}
+
+export const setBackground = async (instance: PDFEasy, str: string) => {
+  if (!instance.pdfkit) return
+
+  const kit = instance.pdfkit
+
+  if (regex().hex(str)) {
+    kit.rect(0, 0, kit.page.width, kit.page.height).fill(str)
+
+    return
+  }
+
+  const backgroundPurge = instance.options?.advanced?.backgroundPurge
+  const globalRaw = instance.globals.PLUGIN.__BACKGROUND_RAW__
+
+  const { raw, type } = await getRequestImageRaw(
+    backgroundPurge ? globalRaw || str : str
+  )
+
+  kit.image(raw, 0, 0, { width: kit.page.width, height: kit.page.height })
+
+  if (backgroundPurge) {
+    // define base64 instead http request
+    instance.options?.plugins?.map((plugin) => {
+      if (!globalRaw && type !== 'base64')
+        instance.globals.PLUGIN.__BACKGROUND_RAW__ = raw
+
+      return plugin
+    })
+  }
 }
 
 export const pageHandler = (instance: PDFEasy): Promise<void> => {

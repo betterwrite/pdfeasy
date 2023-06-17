@@ -2,23 +2,23 @@ import type PDFDocumentWithTables from 'pdfkit-table'
 
 /* pdfkit-table */
 interface TableRect {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+  x: number
+  y: number
+  width: number
+  height: number
 }
 
 interface TableHeader {
-  label?: string;
-  property?: string;
-  width?: number;
-  align?: string; //default 'left'
-  valign?: string;
-  headerColor?: string; //default '#BEBEBE'
-  headerOpacity?: number; //default '0.5'
-  headerAlign?: string; //default 'left'
-  columnColor?: string;
-  columnOpacity?: number;
+  label?: string
+  property?: string
+  width?: number
+  align?: string //default 'left'
+  valign?: string
+  headerColor?: string //default '#BEBEBE'
+  headerOpacity?: number //default '0.5'
+  headerAlign?: string //default 'left'
+  columnColor?: string
+  columnOpacity?: number
   renderer?: (
     value: any,
     indexColumn?: number,
@@ -26,67 +26,66 @@ interface TableHeader {
     row?: number,
     rectRow?: TableRect,
     rectCell?: TableRect
-  ) => string;
+  ) => string
 }
 
 interface TableDataOptions {
-  fontSize: number;
-  fontFamily: string;
-  separation: boolean;
+  fontSize: number
+  fontFamily: string
+  separation: boolean
 }
 
 interface TableData {
-  [key: string]: string | { label: string; options?: TableDataOptions };
+  [key: string]: string | { label: string; options?: TableDataOptions }
 }
 
 interface TableBody {
-  title?: string;
-  subtitle?: string;
-  headers?: (string | TableHeader)[];
-  datas?: TableData[];
-  rows?: string[][];
+  title?: string
+  subtitle?: string
+  headers?: (string | TableHeader)[]
+  datas?: TableData[]
+  rows?: string[][]
 }
 
 interface TableDividerOptions {
-  disabled?: boolean;
-  width?: number;
-  opacity?: number;
+  disabled?: boolean
+  width?: number
+  opacity?: number
 }
 
 interface TableDivider {
-  header?: TableDividerOptions;
-  horizontal?: TableDividerOptions;
+  header?: TableDividerOptions
+  horizontal?: TableDividerOptions
 }
 
-interface TableTitle 
-{
-  label: string;
-  fontSize?: number;
-  fontFamily?: string;
-  color?: string; 
+interface TableTitle {
+  label: string
+  fontSize?: number
+  fontFamily?: string
+  color?: string
 }
 
 interface TableOptions {
-  title?: string | TableTitle ;
-  subtitle?: string | TableTitle;
-  width?: number;
-  x?: number; //default doc.x
-  y?: number; //default doc.y
-  divider?: TableDivider;
-  columnsSize?: number[];
-  columnSpacing?: number; //default 5
-  padding?: number[]; 
-  addPage?: boolean; //default false
-  hideHeader?: boolean;
-  minRowHeight?: number;
-  prepareHeader?: () => PDFDocumentWithTables;
+  title?: string | TableTitle
+  subtitle?: string | TableTitle
+  width?: number
+  x?: number //default doc.x
+  y?: number //default doc.y
+  divider?: TableDivider
+  columnsSize?: number[]
+  columnSpacing?: number //default 5
+  padding?: number[]
+  addPage?: boolean //default false
+  hideHeader?: boolean
+  minRowHeight?: number
+  prepareHeader?: () => PDFDocumentWithTables
   prepareRow?: (
     row?: any,
     indexColumn?: number,
     indexRow?: number,
     rectRow?: TableRect,
     rectCell?: TableRect
-  ) => PDFDocumentWithTables;
+  ) => PDFDocumentWithTables
 }
 
 export interface FormularyCommonOptions {
@@ -97,7 +96,7 @@ export interface FormularyCommonOptions {
   defaultValue?: number | string
   width?: number
   height?: number
-  backgroundColor?: Color,
+  backgroundColor?: Color
   borderColor?: Color
 }
 
@@ -146,7 +145,16 @@ export type LocalFonts =
 
 export type Fonts<T extends string = string> = LocalFonts | T
 
-export type ItemType = 'paragraph' | 'image' | 'list' | 'checkbox' | 'table' | 'svg' | 'line-break' | 'page-break' | 'form'
+export type ItemType =
+  | 'paragraph'
+  | 'image'
+  | 'list'
+  | 'checkbox'
+  | 'table'
+  | 'svg'
+  | 'line-break'
+  | 'page-break'
+  | 'form'
 
 export type PDFRunEmitOption = 'save' | 'blob' | 'none'
 
@@ -161,10 +169,10 @@ export type Color = HexColor | [number, number, number, number]
 export type EmitterType = {}
 
 export interface InternalGlobals {
-  __NEW_PAGE__: boolean,
+  __NEW_PAGE__: boolean
   PLUGIN: {
-    __BACKGROUND_RAW__: string,
-  },
+    __BACKGROUND_RAW__: string
+  }
   __LAST_TYPE__: [ItemType, number]
   __LAST_CONTENT__: Record<any, any>
 }
@@ -197,7 +205,7 @@ export interface DefaultsText {
   go: string | undefined
   bold: boolean
   italic: boolean
-  position: { x: number, y: number }
+  position: { x: number; y: number }
 }
 
 export interface ContentImage {
@@ -264,11 +272,13 @@ export type ContentFormularyType = 'text' | 'button' | 'combo' | 'list'
 export interface ContentFormulary<T extends ContentFormularyType> {
   name: string
   type: T
-  options?: T extends 'text' ? 
-    FormularyTextOptions : T extends 'button' ? 
-    FormularyButtonOptions : T extends 'combo' | 'list' ? 
-    FormularyComboAndListOptions : 
-    never
+  options?: T extends 'text'
+    ? FormularyTextOptions
+    : T extends 'button'
+    ? FormularyButtonOptions
+    : T extends 'combo' | 'list'
+    ? FormularyComboAndListOptions
+    : never
 }
 
 export interface Content {
@@ -420,28 +430,28 @@ export interface RunOptions {
    *  Type runner
    *  @default 'client'
    */
-  type?: 'client' | 'server'
+  type: 'client' | 'server' | 'auto'
   /**
    *  Client type format emitter
    *  @default 'blob'
    */
-  clientEmit?: PDFRunEmitOption
+  clientEmit: PDFRunEmitOption
   /**
    *  Server file destination
    *
    *  Required in {@link RunOptions} type: server
    */
-  serverPath?: string
+  serverPath: string
   /**
    *  Server file destination
    *
    *  @default 'rgb'
    */
-  colorSchema?: ColorSchema
+  colorSchema: ColorSchema
   /**
    *  CWD for Server-Side Setup
    *
    *  @default 'process.cwd()'
    */
-  cwd?: ColorSchema
+  cwd: string
 }

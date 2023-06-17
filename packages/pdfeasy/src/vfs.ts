@@ -1,31 +1,13 @@
-import { PDFEasy } from '../runner/pdfeasy'
+import { getBase64ByURL } from './http'
+import { PDFEasy } from './runner'
 import path from 'path'
-import { getBase64ByURL } from '../utils/request'
-import { regex } from '../utils/defines'
-
-export const getFontCorrectName = (
-  name: string,
-  type: 'normal' | 'italic' | 'bold' | 'bolditalic'
-) => {
-  switch (type) {
-    case 'normal':
-      return name
-    case 'italic':
-      return name + '-Oblique'
-    case 'bold':
-      return name + '-Bold'
-    case 'bolditalic':
-      return name + '-BoldOblique'
-    default:
-      return name
-  }
-}
-
-export const setServerPath = (p: string) => {
-  return path.join(process.cwd() + `/${p}`)
-}
+import { regex } from './utils'
+import { resolveFontName } from './resolvers'
 
 export const setExternalFonts = async (instance: PDFEasy) => {
+  const fontTarget = (str: string) =>
+    path.resolve(instance.runOptions?.cwd + `/${str}`)
+
   if (instance.options?.advanced?.fontsPurge) {
     const allContentFonts: string[] = []
 
@@ -45,42 +27,42 @@ export const setExternalFonts = async (instance: PDFEasy) => {
   }
 
   const isLocalServer = (font: string) =>
-    instance.optionsRun?.type === 'server' && !regex().http(font)
+    instance.runOptions?.type === 'server' && !regex().http(font)
 
   for (const font of instance.fonts) {
     const normal = await getBase64ByURL(
-      isLocalServer(font.normal) ? setServerPath(font.normal) : font.normal,
+      isLocalServer(font.normal) ? fontTarget(font.normal) : font.normal,
       'arraybuffer'
     )
     const italic = await getBase64ByURL(
-      isLocalServer(font.italic) ? setServerPath(font.italic) : font.italic,
+      isLocalServer(font.italic) ? fontTarget(font.italic) : font.italic,
       'arraybuffer'
     )
     const bold = await getBase64ByURL(
-      isLocalServer(font.bold) ? setServerPath(font.bold) : font.bold,
+      isLocalServer(font.bold) ? fontTarget(font.bold) : font.bold,
       'arraybuffer'
     )
     const bolditalic = await getBase64ByURL(
       isLocalServer(font.bolditalic)
-        ? setServerPath(font.bolditalic)
+        ? fontTarget(font.bolditalic)
         : font.bolditalic,
       'arraybuffer'
     )
 
     await instance.pdfkit?.registerFont(
-      getFontCorrectName(font.name, 'normal'),
+      resolveFontName(font.name, 'normal'),
       normal
     )
     await instance.pdfkit?.registerFont(
-      getFontCorrectName(font.name, 'italic'),
+      resolveFontName(font.name, 'italic'),
       italic
     )
     await instance.pdfkit?.registerFont(
-      getFontCorrectName(font.name, 'bold'),
+      resolveFontName(font.name, 'bold'),
       bold
     )
     await instance.pdfkit?.registerFont(
-      getFontCorrectName(font.name, 'bolditalic'),
+      resolveFontName(font.name, 'bolditalic'),
       bolditalic
     )
   }

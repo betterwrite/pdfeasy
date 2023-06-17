@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import pdfeasy, { Utils } from "../src/index";
+import pdfeasy from "../src/index";
 
 describe('Page - Text', () => {
   it('should run a simple footer and header callback', () => {
@@ -25,7 +25,7 @@ describe('Page - Text', () => {
     })
 
     pdfeasy.add([
-      { raw: Utils.loremIpsum().paragraph(), text: {} }
+      { raw: 'XPTO', text: {} }
     ])
     
     return expect(pdfeasy.run({
