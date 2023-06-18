@@ -10,8 +10,10 @@ import type {
   Color,
   Fonts,
   FontKey,
+  ContentQRCode,
 } from './types'
 import type PDFDocumentWithTables from 'pdfkit-table'
+import QRCode from 'qrcode'
 import { HEXToCMYK } from './schemas'
 import { getRequestImageRaw } from './http'
 
@@ -127,20 +129,26 @@ export const resolveContent = async (
       })
   }
 
-  const addImage = async () => {
-    const style = content.svg ? content.svg : (content.image as ContentImage)
+  const addImage = async (external?: string) => {
+    const style = content.svg
+      ? content.svg
+      : content.qrcode
+      ? (content.qrcode as ContentQRCode)
+      : (content.image as ContentImage)
 
-    if (!content.raw) return
+    const target = external || content.raw
+
+    if (!target) return
 
     const { raw } = content.svg
-      ? await resolveSvgToPNG(content.raw)
-      : await getRequestImageRaw(content.raw)
+      ? await resolveSvgToPNG(target)
+      : await getRequestImageRaw(target)
 
     app.image(
       raw,
-      style.x || undefined,
-      style.y || undefined,
-      !style.size
+      style?.x || undefined,
+      style?.y || undefined,
+      !style?.size
         ? {
             width:
               app.page.width - app.page.margins.left - app.page.margins.right,
@@ -296,6 +304,18 @@ export const resolveContent = async (
     }
   }
 
+  const addQRCode = async () => {
+    if (!content.raw) return
+
+    try {
+      const qrcode = await QRCode.toDataURL(content.raw)
+
+      await addImage(qrcode)
+    } catch (err) {
+      console.warn('[PDFEASY]: Unexpected QRCode gen.')
+    }
+  }
+
   if (
     !content.stack &&
     !content.text &&
@@ -317,6 +337,7 @@ export const resolveContent = async (
   if (content.list) await addList()
   if (content.table) await addTable()
   if (content.form) await addFormulary()
+  if (content.qrcode) await addQRCode()
 }
 
 export const resolveFontFamily = (

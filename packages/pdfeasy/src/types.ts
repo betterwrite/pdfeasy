@@ -157,6 +157,7 @@ export type ItemType =
   | 'line-break'
   | 'page-break'
   | 'form'
+  | 'qrcode'
 
 export type PDFRunEmitOption = 'save' | 'blob' | 'none'
 
@@ -251,6 +252,16 @@ export interface ContentTable {
   options: TableOptions
 }
 
+export interface ContentQRCode {
+  x?: number
+  y?: number
+  size?: {
+    width?: number
+    height?: number
+    scale?: number
+  }
+}
+
 export interface DefaultsLineBreak {
   spacing: number
 }
@@ -295,6 +306,7 @@ export interface Content {
   list?: ContentList
   table?: ContentTable
   form?: ContentFormulary<ContentFormularyType>[]
+  qrcode?: ContentQRCode
 }
 
 export interface PDFEasyDefaults {

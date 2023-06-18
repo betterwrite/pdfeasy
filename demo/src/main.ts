@@ -29,6 +29,7 @@ pdfeasy.add([
   { raw: 'a second in list...', list: { style: 'counter' } },
   { raw: 'a third in list...', list: { style: 'counter' } },
   { raw: 'a list with circle...', list: { style: 'circle' } },
+  { raw: 'test', qrcode: {} },
   { table: {
     body: {
       title: "Countries",
