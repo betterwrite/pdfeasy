@@ -178,6 +178,7 @@ export interface InternalGlobals {
   }
   __LAST_TYPE__: [ItemType, number]
   __LAST_CONTENT__: Record<any, any>
+  __LAST_POSITION__: { x: number; y: number } | null
 }
 
 export interface ImageRaw {
@@ -208,7 +209,6 @@ export interface DefaultsText {
   go: string | undefined
   bold: boolean
   italic: boolean
-  position: { x: number; y: number }
 }
 
 export interface ContentImage {
@@ -296,6 +296,7 @@ export interface ContentFormulary<T extends ContentFormularyType> {
 
 export interface Content {
   raw?: string
+  position?: { x: number; y: number }
   stack?: Content[]
   text?: ContentText
   image?: ContentImage

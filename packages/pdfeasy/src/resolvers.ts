@@ -51,6 +51,17 @@ export const resolveContent = async (
   globals: InternalGlobals,
   run: RunOptionsBase
 ) => {
+  const possibleLastPos = globals.__LAST_POSITION__
+
+  let position = content?.position
+    ? { x: app.x + content.position.x, y: app.y + content.position.y }
+    : { x: app.x, y: app.y }
+
+  if (possibleLastPos) {
+    position.x -= possibleLastPos.x
+    position.y -= possibleLastPos.y
+  }
+
   const addStack = async () => {
     const stack = content.stack as Content[]
 
@@ -66,7 +77,7 @@ export const resolveContent = async (
         .fontSize(entity.text.fontSize || defaults.text.fontSize)
         .fillColor(resolveColor(entity.text.color || defaults.text.color, run))
         .fillOpacity(entity.text.opacity || defaults.text.opacity)
-        .text(entity.raw, {
+        .text(entity.raw, position.x, position.y, {
           continued: !isLast,
           indent: entity.text.indent || defaults.text.indent,
           align: entity.text.align || defaults.text.align,
@@ -86,22 +97,12 @@ export const resolveContent = async (
 
     const data = embed ? ` ${raw || content.raw}` : raw || content.raw
 
-    const possibleLastPos = globals.__LAST_CONTENT__?.text?.position
-
-    let pos = style?.position
-      ? { x: app.x + style.position.x, y: app.y + style.position.y }
-      : { x: app.x, y: app.y }
-    if (possibleLastPos) {
-      pos.x -= possibleLastPos.x
-      pos.y -= possibleLastPos.y
-    }
-
     await app
       .font(resolveFontFamily(style?.font || defaults.text.font, style))
       .fontSize(style?.fontSize || defaults.text.fontSize)
       .fillColor(resolveColor(style?.color || defaults.text.color, run))
       .fillOpacity(style?.opacity || defaults.text.opacity)
-      .text(data, pos.x, pos.y, {
+      .text(data, position.x, position.y, {
         indent: style?.indent || defaults.text.indent,
         align: style?.align || defaults.text.align,
         paragraphGap: style?.paragraphMargin || defaults.text.paragraphMargin,
@@ -119,7 +120,7 @@ export const resolveContent = async (
       .fontSize(defaults.text.fontSize)
       .fillColor(resolveColor(defaults.text.color, run))
       .fillOpacity(defaults.text.opacity)
-      .text(content.raw, {
+      .text(content.raw, position.x, position.y, {
         indent: defaults.text.indent,
         align: defaults.text.align,
         paragraphGap: defaults.text.paragraphMargin,
@@ -146,8 +147,8 @@ export const resolveContent = async (
 
     app.image(
       raw,
-      style?.x || undefined,
-      style?.y || undefined,
+      style?.x || position.x || undefined,
+      style?.y || position.y || undefined,
       !style?.size
         ? {
             width:
@@ -211,7 +212,7 @@ export const resolveContent = async (
       await addText(false, `${type === 'list' ? value : 1}. ${content.raw}`)
     } else {
       app
-        .circle(app.x + 4, app.y + 6, 3)
+        .circle(position.x + 4, position.y + 6, 3)
         .lineWidth(1)
         .fill(resolveColor('#000000', run))
 
@@ -230,6 +231,8 @@ export const resolveContent = async (
       if (typeof header === 'string') return header
 
       return {
+        x: position.x,
+        y: position.y,
         align: header.align,
         headerAlign: header.headerAlign,
         headerColor: resolveColor(header.headerColor || '#FFFFFF', run),
@@ -281,22 +284,50 @@ export const resolveContent = async (
 
       switch (item.type) {
         case 'text': {
-          await app.formText(item.name, app.x, app.y, width, height, opts)
+          await app.formText(
+            item.name,
+            position.x,
+            position.y,
+            width,
+            height,
+            opts
+          )
 
           break
         }
         case 'combo': {
-          await app.formCombo(item.name, app.x, app.y, width, height, opts)
+          await app.formCombo(
+            item.name,
+            position.x,
+            position.y,
+            width,
+            height,
+            opts
+          )
 
           break
         }
         case 'list': {
-          await app.formList(item.name, app.x, app.y, width, height, opts)
+          await app.formList(
+            item.name,
+            position.x,
+            position.y,
+            width,
+            height,
+            opts
+          )
 
           break
         }
         case 'button': {
-          await app.formPushButton(item.name, app.x, app.y, width, height, opts)
+          await app.formPushButton(
+            item.name,
+            position.x,
+            position.y,
+            width,
+            height,
+            opts
+          )
 
           break
         }

@@ -21,7 +21,7 @@ pdfeasy.new({
 pdfeasy.add([
   { raw: 'A simple pdf', text: { font: 'Roboto' }},
   { lineBreak: {} },
-  { raw: 'using...', text: { position: { x: 250, y: 0 }} },
+  { raw: 'using...', text: {}, position: { x: 250, y: 0 } },
   { raw: 'hm...', text: {} },
   { pageBreak: {} },
   { raw: 'pdfeasy!', text: {} },

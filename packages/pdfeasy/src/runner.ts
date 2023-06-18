@@ -1,6 +1,7 @@
 import PDFDocumentWithTables from 'pdfkit-table'
 import blobStream from 'blob-stream'
 import mitt from 'mitt'
+import path from 'path'
 import { saveAs } from 'file-saver'
 import { resolveContent, resolveCover } from './resolvers'
 import { pdfDefaults } from './utils'
@@ -18,7 +19,6 @@ import {
 } from './types'
 import { setExternalFonts } from './vfs'
 import { createWriteStream } from 'fs'
-import path from 'path'
 import { RunnerOptions, RunOptions } from './types'
 import { onPageAdded } from './events'
 import { resolveRunnerOptions } from 'src/resolvers'
@@ -100,6 +100,7 @@ export class PDFEasy {
     },
     __LAST_TYPE__: ['paragraph', 0],
     __LAST_CONTENT__: {},
+    __LAST_POSITION__: null,
   }
 
   private mutateLastType = (type: ItemType) => {
@@ -112,6 +113,7 @@ export class PDFEasy {
 
   private posUpdateContent = (content: Content) => {
     this.globals.__LAST_CONTENT__ = content
+    this.globals.__LAST_POSITION__ = content.position || null
   }
 
   private getType = (content: Content): ItemType => {
@@ -179,6 +181,7 @@ export class PDFEasy {
       },
       __LAST_TYPE__: ['paragraph', 1],
       __LAST_CONTENT__: {},
+      __LAST_POSITION__: null,
     }
   }
 
@@ -299,6 +302,9 @@ export class PDFEasy {
   public run = (options?: Partial<RunOptions>): Promise<string> => {
     this.runOptions = resolveRunnerOptions(options || {})
     this.globals.__LAST_CONTENT__ = this.contents[0]
+    this.globals.__LAST_POSITION__ = this.contents[0]
+      ? this.contents[0].position || null
+      : null
 
     this.options?.plugins?.forEach(({ onBefore }) => onBefore && onBefore())
 
