@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "format": "lerna run format",
+    "play:dev": "lerna run play:dev",
     "build": "lerna run build",
     "build:prod": "lerna run build:prod",
     "test": "lerna run test",

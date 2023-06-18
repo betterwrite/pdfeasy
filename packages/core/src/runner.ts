@@ -309,7 +309,9 @@ export class PDFEasy {
     return new Promise(async (res, rej) => {
       if (!this.pdfkit) {
         this.reset()
-        rej('PDFKit not exists. Did you forget to call `new()` function before calling `run()`?')
+        rej(
+          'PDFKit not exists. Did you forget to call `new()` function before calling `run()`?'
+        )
         return
       }
 
