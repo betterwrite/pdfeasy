@@ -1,7 +1,7 @@
+import { PDFEasyDefaults } from 'src/types'
+
 export const isBrowser =
   typeof window === 'object' && typeof document === 'object'
-
-import { PDFEasyDefaults } from 'src/types'
 
 export const pdfDefaults = (): PDFEasyDefaults => {
   return {
@@ -18,7 +18,6 @@ export const pdfDefaults = (): PDFEasyDefaults => {
       go: undefined,
       bold: false,
       italic: false,
-      position: { x: 0, y: 0 },
     },
     lineBreak: {
       spacing: 5,

@@ -302,9 +302,7 @@ export class PDFEasy {
   public run = (options?: Partial<RunOptions>): Promise<string> => {
     this.runOptions = resolveRunnerOptions(options || {})
     this.globals.__LAST_CONTENT__ = this.contents[0]
-    this.globals.__LAST_POSITION__ = this.contents[0]
-      ? this.contents[0].position || null
-      : null
+    this.globals.__LAST_POSITION__ = null
 
     this.options?.plugins?.forEach(({ onBefore }) => onBefore && onBefore())
 
