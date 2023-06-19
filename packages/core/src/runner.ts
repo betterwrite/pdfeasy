@@ -214,8 +214,9 @@ export class PDFEasy {
    *
    * @param options - {@link RunnerOptions}
    */
-  public new = (options?: RunnerOptions) => {
-    this.reset()
+  public new = (options?: RunnerOptions, reset: boolean = true) => {
+    if (reset) this.reset()
+
     this.options = {
       cover: options?.cover,
       exports: options?.exports,
@@ -256,7 +257,7 @@ export class PDFEasy {
    * @example Inserting content
    *
    * ```ts
-   * pdfeasy.new([
+   * pdfeasy.add([
    *    { raw: 'hello', text: { fontSize: 20 }}
    * ])
    * ```
@@ -264,9 +265,7 @@ export class PDFEasy {
    * @param contents - {@link Content}
    */
   public add = (contents: Content[]) => {
-    if (!this.pdfkit) return
-
-    this.contents = [...this.contents, ...contents]
+    this.contents.push(...contents)
   }
 
   /**
@@ -295,14 +294,21 @@ export class PDFEasy {
    * @example Automatic save file option
    * ```ts
    * pdfeasy.run('save').then(() => {
-   *   // content here
+   *
+   * })
+   * ```
+   *
+   * * @example Open link in other window
+   * ```ts
+   * pdfeasy.run('open-link').then(() => {
+   *
    * })
    * ```
    *
    * @example Only run
    * ```ts
    * pdfeasy.run('none').then(() => {
-   *   // content here
+   *
    * })
    * ```
    *
@@ -317,10 +323,14 @@ export class PDFEasy {
 
     return new Promise(async (res, rej) => {
       if (!this.pdfkit) {
-        this.reset()
+        this.new(undefined, false)
+      }
+
+      if (!this.pdfkit) {
         rej(
           'PDFKit not exists. Did you forget to call `new()` function before calling `run()`?'
         )
+
         return
       }
 

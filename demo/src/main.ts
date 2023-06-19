@@ -7,17 +7,6 @@ app.innerHTML = `
   <iframe id="pdf">
 `
 
-pdfeasy.new({
-  document: {
-    margins: {
-      top: 80,
-      bottom: 80,
-      left: 80,
-      right: 80
-    }
-  },
-})
-
 pdfeasy.add([
   { raw: 'A simple pdf', text: { font: 'Roboto' }},
   { lineBreak: {} },

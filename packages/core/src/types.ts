@@ -460,7 +460,7 @@ export interface RunOptions {
    */
   serverPath: string
   /**
-   *  Server file destination
+   *  Color schema
    *
    *  @default 'rgb'
    */
