@@ -108,7 +108,7 @@ importers:
         specifier: ^3.5.3
         version: 3.5.3(rollup@3.21.6)
       pdfeasy:
-        specifier: ^1.3.0
+        specifier: ^1.4.0
         version: link:../core
     devDependencies:
       '@nuxt/module-builder':
@@ -161,7 +161,7 @@ importers:
         specifier: ^1.0.0-rc.1
         version: 1.0.0-rc.1(vue@3.3.1)
       pdfeasy:
-        specifier: ^1.3.0
+        specifier: ^1.4.0
         version: link:../core
       vue-demi:
         specifier: latest
