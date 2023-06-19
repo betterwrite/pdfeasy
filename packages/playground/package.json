@@ -4,7 +4,7 @@
   "scripts": {
     "build": "nuxt build",
     "play:dev": "nuxt dev",
-    "play:deploy": "nuxt generate && gh-pages --dotfiles -d .output/public",
+    "play:deploy": "nuxt generate && gh-pages --dotfiles -d .output/public -t true",
     "preview": "nuxt preview"
   },
   "dependencies": {
