@@ -11,7 +11,7 @@ pdfeasy.add([
   { raw: 'A simple pdf', text: { font: 'Roboto' }},
   { lineBreak: {} },
   { raw: 'using...', text: {}, position: { x: 250, y: 0 } },
-  { raw: 'hm...' },
+  { raw: 'https://i.imgur.com/myEASIr.png', image: {} },
   'aaaaa...',
   { pageBreak: {} },
   { raw: 'pdfeasy!', text: {} },

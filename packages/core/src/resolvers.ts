@@ -51,8 +51,22 @@ export const resolveContent = async (
   globals: InternalGlobals,
   run: RunOptionsBase
 ) => {
+  const possibleLastPos = globals.__LAST_POSITION__
+
+  let position =
+    typeof content !== 'string' && content?.position
+      ? { x: app.x + content.position.x, y: app.y + content.position.y }
+      : { x: app.x, y: app.y }
+
+  if (possibleLastPos) {
+    position.x -= possibleLastPos.x
+    position.y -= possibleLastPos.y
+
+    globals.__LAST_POSITION__ = null
+  }
+
   const addOnlyStringText = async (str: string) => {
-    await app.text(str, {
+    await app.text(str, position.x, position.y, {
       indent: defaults.text.indent,
       align: defaults.text.align,
       paragraphGap: defaults.text.paragraphMargin,
@@ -66,17 +80,6 @@ export const resolveContent = async (
     await addOnlyStringText(content)
 
     return
-  }
-
-  const possibleLastPos = globals.__LAST_POSITION__
-
-  let position = content?.position
-    ? { x: app.x + content.position.x, y: app.y + content.position.y }
-    : { x: app.x, y: app.y }
-
-  if (possibleLastPos) {
-    position.x -= possibleLastPos.x
-    position.y -= possibleLastPos.y
   }
 
   const addStack = async () => {
