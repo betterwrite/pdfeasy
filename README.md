@@ -41,10 +41,10 @@ pdfeasy.add([
 pdfeasy.run({
   type: 'client',
   clientEmit: 'blob'
-}).then((blob: string) => {
-  const iframe = document.querySelector('#pdf') as HTMLIFrameElement
+}).then(blobUrl) => {
+  const iframe = document.querySelector('#pdf')
 
-  iframe.src = blob
+  iframe.src = blobUrl
 }).catch((err) => {
   // ...
 })
@@ -70,6 +70,7 @@ import { usePDF } from 'vue-pdfeasy';
 
 const pdf = usePDF()
 
+pdf.new()
 // ...
 </script>
 ```
@@ -92,6 +93,8 @@ modules: [
 import { useNuxtApp } from '#app';
 
 const { $pdf } = useNuxtApp()
+
+$pdf.new()
 // ...
 </script>
 ```
@@ -136,9 +139,6 @@ pdfeasy.add([
 pdfeasy.new({
   plugins: [{
     cover: 'https://i.imgur.com/path.png', // cover image (it's ignore default explicit margins insert)
-    background: (page) => { // render custom background in pages
-      return 'https://i.imgur.com/path.png'
-    },
     onBefore: () => {
       // before contents transform
     },
@@ -179,6 +179,7 @@ pdfeasy.new({
 ```ts
 pdfeasy.run({
   type: 'client',
+  // 'blob' | 'save' | 'open-link' | 'none'
   clientEmit: 'save',
 }).then(() => {}).catch((err) => {
   console.error(err)
@@ -201,7 +202,7 @@ pdfeasy.run({
 It is possible to define the color scheme used automatically:
 
 ```ts
-// converts all hex color to cmyk
+// converts all hex color to CMYK
 pdfeasy.run({ colorSchema: 'CMYK' })
 
 // preserve hex colors (it's default)
