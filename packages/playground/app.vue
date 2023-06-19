@@ -58,9 +58,7 @@ onMounted(() => {
       const iframe = document.querySelector('#pdf')
 
       iframe.src = blob
-    }).catch((err) => {
-      console.error(err)
-    })`
+    }).catch(() => {})`
 
     try {
       eval(template)

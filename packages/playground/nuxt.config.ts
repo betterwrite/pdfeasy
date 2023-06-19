@@ -1,5 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: {
+    baseURL: '/pdfeasy/'
+  },
   modules: [
     'nuxt-pdfeasy',
     '@unocss/nuxt',

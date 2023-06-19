@@ -4,7 +4,7 @@
   "scripts": {
     "build": "nuxt build",
     "play:dev": "nuxt dev",
-    "play:deploy": "nuxt generate",
+    "play:deploy": "nuxt generate && gh-pages --dotfiles -d .output/public",
     "preview": "nuxt preview"
   },
   "dependencies": {
@@ -15,6 +15,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@types/node": "^18",
+    "gh-pages": "5.0.0",
     "nuxt": "^3.5.3"
   }
 }
