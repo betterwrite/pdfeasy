@@ -6,6 +6,7 @@
   "scripts": {
     "format": "lerna run format",
     "play:dev": "lerna run play:dev",
+    "play:deploy": "lerna run play:deploy",
     "build": "lerna run build",
     "build:prod": "lerna run build:prod",
     "test": "lerna run test",

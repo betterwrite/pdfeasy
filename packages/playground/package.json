@@ -4,9 +4,8 @@
   "scripts": {
     "build": "nuxt build",
     "play:dev": "nuxt dev",
-    "play:generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "play:deploy": "nuxt generate",
+    "preview": "nuxt preview"
   },
   "dependencies": {
     "@unocss/nuxt": "0.53.1",
