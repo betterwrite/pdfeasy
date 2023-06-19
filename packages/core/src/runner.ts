@@ -112,11 +112,20 @@ export class PDFEasy {
   }
 
   private posUpdateContent = (content: Content) => {
+    if (typeof content === 'string') {
+      this.globals.__LAST_CONTENT__ = { raw: content, text: {} }
+      this.globals.__LAST_POSITION__ = null
+
+      return
+    }
+
     this.globals.__LAST_CONTENT__ = content
     this.globals.__LAST_POSITION__ = content.position || null
   }
 
   private getType = (content: Content): ItemType => {
+    if (typeof content === 'string') return 'paragraph'
+
     if (content.checkbox) return 'checkbox'
     if (content.list) return 'list'
     if (content.lineBreak) return 'line-break'

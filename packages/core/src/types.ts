@@ -177,7 +177,7 @@ export interface InternalGlobals {
     __BACKGROUND_RAW__: string
   }
   __LAST_TYPE__: [ItemType, number]
-  __LAST_CONTENT__: Record<any, any>
+  __LAST_CONTENT__: Record<any, any> | string
   __LAST_POSITION__: { x: number; y: number } | null
 }
 
@@ -294,7 +294,7 @@ export interface ContentFormulary<T extends ContentFormularyType> {
     : never
 }
 
-export interface Content {
+export interface ContentObject {
   raw?: string
   position?: { x: number; y: number }
   stack?: Content[]
@@ -309,6 +309,8 @@ export interface Content {
   form?: ContentFormulary<ContentFormularyType>[]
   qrcode?: ContentQRCode
 }
+
+export type Content = ContentObject | string
 
 export interface PDFEasyDefaults {
   text: DefaultsText

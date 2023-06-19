@@ -51,6 +51,23 @@ export const resolveContent = async (
   globals: InternalGlobals,
   run: RunOptionsBase
 ) => {
+  const addOnlyStringText = async (str: string) => {
+    await app.text(str, {
+      indent: defaults.text.indent,
+      align: defaults.text.align,
+      paragraphGap: defaults.text.paragraphMargin,
+      lineGap: defaults.text.lineHeight,
+      destination: defaults.text.destination,
+      goTo: defaults.text.go,
+    })
+  }
+
+  if (typeof content === 'string') {
+    await addOnlyStringText(content)
+
+    return
+  }
+
   const possibleLastPos = globals.__LAST_POSITION__
 
   let position = content?.position
@@ -65,7 +82,13 @@ export const resolveContent = async (
   const addStack = async () => {
     const stack = content.stack as Content[]
 
-    await stack.forEach((entity) => {
+    await stack.forEach(async (entity) => {
+      if (typeof entity === 'string') {
+        await addOnlyStringText(entity)
+
+        return
+      }
+
       if (!entity.text || !entity.raw) return
 
       const isLast = stack.length - 1 === stack.indexOf(entity)
@@ -356,6 +379,25 @@ export const resolveContent = async (
     content.pageBreak
   ) {
     addSimpleText()
+    return
+  }
+
+  if (
+    !content.stack &&
+    !content.text &&
+    !content.image &&
+    !content.svg &&
+    !content.lineBreak &&
+    !content.pageBreak &&
+    !content.table &&
+    !content.form &&
+    !content.checkbox &&
+    !content.position &&
+    !content.qrcode &&
+    content.raw
+  ) {
+    addSimpleText()
+
     return
   }
 
