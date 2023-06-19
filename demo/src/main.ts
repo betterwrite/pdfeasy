@@ -59,12 +59,8 @@ pdfeasy.addFonts([
   }
 ])
 
-pdfeasy.run().then((blob: string) => {
-  const iframe = document.querySelector('#pdf') as HTMLIFrameElement
+pdfeasy.run({ clientEmit: 'open-link' }).then(() => {
 
-  iframe.src = blob
-  iframe.style.height = '80vh'
-  iframe.style.width = '50%'
 }).catch((err: any) => {
   console.error(err)
 })

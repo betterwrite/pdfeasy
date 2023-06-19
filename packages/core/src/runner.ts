@@ -382,10 +382,20 @@ export class PDFEasy {
         stream.on('finish', (): void => {
           switch (this.runOptions?.clientEmit) {
             case 'blob':
-              res(stream.toBlobURL('application/pdf') as string)
+              res(stream.toBlobURL('application/pdf'))
               break
             case 'save':
-              saveAs(stream.toBlob('application/pdf') as Blob)
+              saveAs(
+                stream.toBlob('application/pdf'),
+                `/${this.options?.exports?.name || 'New PDF'}.pdf`
+              )
+
+              res('done')
+              break
+            case 'open-link':
+              const url = stream.toBlobURL('application/pdf')
+
+              window.open(url, '_blank', 'noopener,noreferrer')
 
               res('done')
               break

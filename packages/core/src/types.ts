@@ -159,7 +159,7 @@ export type ItemType =
   | 'form'
   | 'qrcode'
 
-export type PDFRunEmitOption = 'save' | 'blob' | 'none'
+export type PDFRunEmitOption = 'save' | 'blob' | 'open-link' | 'none'
 
 export type TextAlign = 'start' | 'center' | 'end' | 'justify'
 
