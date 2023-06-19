@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
   app: {
     baseURL: '/pdfeasy/'
   },
@@ -22,6 +23,5 @@ export default defineNuxtConfig({
         'secondary': '#161616'
       },
     }
-  },
-  devtools: { enabled: true }
+  }
 })
