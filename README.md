@@ -114,6 +114,7 @@ pdfeasy.add([
   { lineBreak: {} }, // line break
   { raw: 'A checkbox!', checkbox: {} }, // checkbox
   { raw: 'A list!', list: { style: 'circle' } }, // list
+  { raw: 'https://link', qrcode: {} }, // use qrcode.js lib
   { table: { // table. Check pdfkit-table package for more explanations
     body: {
       title: "Title",
