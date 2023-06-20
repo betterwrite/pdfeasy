@@ -11,7 +11,7 @@
       </a>
     </header>
     <main class="flex flex-col md:flex-row w-full h-screen">
-      <MonacoEditor ref="editorRef" @load="onEditorLoad" :options="{ theme: 'vs-dark' }" class="flex-1 w-full" v-model="raw" lang="typescript" />
+      <MonacoEditor ref="editorRef" :options="{ theme: 'vs-dark' }" class="flex-1 w-full" v-model="raw" lang="typescript" />
       <iframe class="flex-1 w-full" id="pdf" />
     </main>
   </div>
