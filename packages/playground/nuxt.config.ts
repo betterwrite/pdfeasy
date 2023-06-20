@@ -9,6 +9,9 @@ export default defineNuxtConfig({
       language: 'en-US',
     }
   },
+  app: {
+    baseURL: '/pdfeasy/'
+  },
   extends: [
     'nuxt-seo-kit'
   ],
