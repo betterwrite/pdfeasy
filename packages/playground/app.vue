@@ -1,5 +1,6 @@
 <template>
   <div class="flex font-raleway flex-col w-full h-screen bg-primary">
+    <SeoKit />
     <header class="flex font-poppins text-lg gap-5 justify-between items-center bg-secondary p-2 font-bold text-white w-full">
       <div class="flex gap-2 items-center">
         <img class="w-6" src="/logo.png" />
@@ -10,8 +11,8 @@
       </a>
     </header>
     <main class="flex flex-col md:flex-row w-full h-screen">
-      <textarea v-model="raw" class="flex-1 tracking-wider p-5 bg-black text-white font-bold w-full" />
-      <iframe ref="el" class="flex-1 w-full" id="pdf" />
+      <MonacoEditor ref="editorRef" @load="onEditorLoad" :options="{ theme: 'vs-dark' }" class="flex-1 w-full" v-model="raw" lang="typescript" />
+      <iframe class="flex-1 w-full" id="pdf" />
     </main>
   </div>
 </template>
@@ -20,39 +21,38 @@
 import { useNuxtApp } from '#app';
 import IconGithub from './icons/IconGithub.vue';
 
-const raw = ref(`{ raw: 'Hello PDFEasy!' },
-{ stack: [
-  { raw: 'A ', text: {} },
-  { raw: 'Simple', text: { bold: true, italic: true } },
-  { raw: ' Stack!', text: {} },
-]},
-{ pageBreak: {} },
-{ lineBreak: {} },
-{ raw: 'A checkbox!', checkbox: {} }, 
-{ raw: 'A list!', list: { style: 'circle' } },
-{ table: {
-  body: {
-    title: "Title",
-    subtitle: "subtitle",
-    headers: [ "Item 1", "Item 2" ],
-    rows: [
-      [ "A", "100%" ],
-      [ "B", "50%" ],
-    ],
-  },
-  options: {}
-}}`)
-const el = ref(null)
+const raw = ref(`$pdf.add([
+  { raw: 'Hello PDFEasy!' },
+  { stack: [
+    { raw: 'A ', text: {} },
+    { raw: 'Simple', text: { bold: true, italic: true } },
+    { raw: ' Stack!', text: {} },
+  ]},
+  { pageBreak: {} },
+  { lineBreak: {} },
+  { raw: 'A checkbox!', checkbox: {} }, 
+  { raw: 'A list!', list: { style: 'circle' } },
+  { table: {
+    body: {
+      title: "Title",
+      subtitle: "subtitle",
+      headers: [ "Item 1", "Item 2" ],
+      rows: [
+        [ "A", "100%" ],
+        [ "B", "50%" ],
+      ],
+    },
+    options: {}
+  }}
+])`)
 
 onMounted(() => {
+  const { $pdf } = useNuxtApp()
+
   watchDebounced(raw, () => {
-    const template = `const { $pdf } = useNuxtApp()
+    const template = `$pdf.new()
 
-    $pdf.new()
-
-    $pdf.add([
-      ${raw.value}
-    ])
+    ${raw.value}
 
     $pdf.run({ type: 'client', clientEmit: 'blob' }).then(blob => {
       const iframe = document.querySelector('#pdf')
@@ -64,7 +64,5 @@ onMounted(() => {
       eval(template)
     } catch(e) {}
 }, { immediate: true, debounce: 500 })
-
- el.value?.addEventListener('paste', e => e.preventDefault());
 })
 </script>
