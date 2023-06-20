@@ -11,7 +11,7 @@
       </a>
     </header>
     <main class="flex flex-col md:flex-row w-full h-screen">
-      <MonacoEditor ref="editorRef" :options="{ theme: 'vs-dark' }" class="flex-1 w-full" v-model="raw" lang="typescript" />
+      <MonacoEditor :options="{ theme: 'vs-dark' }" class="flex-1 w-full" v-model="raw" lang="typescript" />
       <iframe class="flex-1 w-full" id="pdf" />
     </main>
   </div>
@@ -49,7 +49,8 @@ const raw = ref(`$pdf.add([
 onMounted(() => {
   const { $pdf } = useNuxtApp()
 
-  watchDebounced(raw, () => {
+  setTimeout(() => {
+    watchDebounced(raw, () => {
     const template = `$pdf.new()
 
     ${raw.value}
@@ -64,5 +65,6 @@ onMounted(() => {
       eval(template)
     } catch(e) {}
 }, { immediate: true, debounce: 500 })
+  }, 250)
 })
 </script>
