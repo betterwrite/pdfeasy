@@ -47,24 +47,22 @@ const raw = ref(`$pdf.add([
 ])`)
 
 onMounted(() => {
-  const { $pdf } = useNuxtApp()
+  watchDebounced(raw, () => {
+    const template = `const { $pdf } = useNuxtApp()
+    
+$pdf.new()
 
-  setTimeout(() => {
-    watchDebounced(raw, () => {
-    const template = `$pdf.new()
+${raw.value}
 
-    ${raw.value}
+$pdf.run({ type: 'client', clientEmit: 'blob' }).then(blob => {
+  const iframe = document.querySelector('#pdf')
 
-    $pdf.run({ type: 'client', clientEmit: 'blob' }).then(blob => {
-      const iframe = document.querySelector('#pdf')
-
-      iframe.src = blob
-    }).catch(() => {})`
+  iframe.src = blob
+}).catch(() => {})`
 
     try {
       eval(template)
     } catch(e) {}
 }, { immediate: true, debounce: 500 })
-  }, 250)
 })
 </script>

@@ -7,6 +7,7 @@
     "format": "lerna run format",
     "play:dev": "lerna run play:dev",
     "play:deploy": "lerna run play:deploy",
+    "play:preview": "lerna run play:preview",
     "build": "lerna run build",
     "build:prod": "lerna run build:prod",
     "test": "lerna run test",
