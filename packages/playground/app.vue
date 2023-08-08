@@ -21,8 +21,16 @@
 import { useNuxtApp } from '#app';
 import IconGithub from './icons/IconGithub.vue';
 
-const raw = ref(`$pdf.add([
-  { raw: 'Hello PDFEasy!' },
+const raw = ref(`$pdf.addFonts([{
+  name: 'Roboto',
+  normal: 'https://fonts.gstatic.com/s/roboto/v19/KFOmCnqEu92Fr1Mu4mxPKTU1Kg.ttf',
+  bold: 'https://fonts.gstatic.com/s/roboto/v19/KFOmCnqEu92Fr1Mu4mxPKTU1Kg.ttf',
+  italic: 'https://fonts.gstatic.com/s/roboto/v19/KFOmCnqEu92Fr1Mu4mxPKTU1Kg.ttf',
+  bolditalic: 'https://fonts.gstatic.com/s/roboto/v19/KFOmCnqEu92Fr1Mu4mxPKTU1Kg.ttf',
+}])
+
+$pdf.add([
+  { raw: 'Hello PDFEasy!', text: { font: 'Roboto' }},
   { stack: [
     { raw: 'A ', text: {} },
     { raw: 'Simple', text: { bold: true, italic: true } },
