@@ -99,11 +99,25 @@ $pdf.new()
 </script>
 ```
 
+## New
+
+```ts
+pdfeasy.new({ 
+  margins: { 
+    top: 10, 
+    bottom: 10, 
+    left: 10, 
+    right: 10 
+  }, 
+  size: "a5" 
+});
+```
+
 ## Content
 
 ```ts
 pdfeasy.add([
-  { raw: 'Hello PDFEasy!', text: { font: 'Roboto' } }, // text with custom font,
+  { raw: 'Hello PDFEasy!', text: {} }, // common text
   { raw: 'https://i.imgur.com/path.png', image: {} }, // external image
   { stack: [ // stack for paragraph's
     { raw: 'A ', text: {} },
