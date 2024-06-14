@@ -9,7 +9,7 @@ export default defineNuxtModule<ModuleOptions>({
     name: 'nuxt-pdfeasy',
     configKey: 'pdfeasy',
     compatibility: {
-      nuxt: '^3.0.0',
+      nuxt: '>=3.0.0',
     },
   },
   setup (options, nuxt) {
