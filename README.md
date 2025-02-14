@@ -245,9 +245,9 @@ pdfeasy.addFonts([
 
 See [source demo](./demo) for more explanations
 
-See [examples](./packages/pdfeasy/examples/) for .pdf results.
+See [examples](./packages/core/examples/) for .pdf results.
 
-See [scripts](./packages/pdfeasy/scripts/generate/) for server-side runner.
+See [scripts](./packages/core/scripts/generate/) for server-side runner.
 
 ## Bundles
 
