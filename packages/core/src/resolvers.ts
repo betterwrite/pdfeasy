@@ -73,6 +73,7 @@ export const resolveContent = async (
       lineGap: defaults.text.lineHeight,
       destination: defaults.text.destination,
       goTo: defaults.text.go,
+      features: ['rtla']
     })
   }
 
